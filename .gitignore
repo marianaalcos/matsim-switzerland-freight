@@ -56,3 +56,5 @@ __pycache__/
 /scenarios/03_matsim_input/v001/cargoTransitVehicles.xml.gz
 
 *.jar
+
+*.idea
