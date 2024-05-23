@@ -178,6 +178,8 @@ public final class Project {
         private static final String SUPPLY_INPUT_SHEET_KEY = "matsim.input.supply.sheet";
         private static final String SUPPLY_INPUT_TERMINALS_KEY = "matsim.input.supply.terminals";
         private static final String SUPPLY_INPUT_DISTANCES_KEY = "matsim.input.supply.distances";
+        private static final String SUPPLY_INPUT_HUBS_KEY = "matsim.input.supply.hubs";
+        private static final String SUPPLY_INPUT_DISTANCESCST_KEY = "matsim.input.supply.distancescst";
         private static final String SUPPLY_TRAIN_CAPACITY_KEY = "matsim.input.supply.train.capacity";
         private static final String SUPPLY_NETWORK_NIGHT_HGV_RESTRICTION_KEY = "matsim.input.supply.network.night.hgv.restriction";
 
@@ -191,6 +193,8 @@ public final class Project {
         private final String sheet;
         private final String distances;
         private final String terminals;
+        private final String distancescst;
+        private final String hubs;
         private final int trainCapacity;
         private final boolean networkNightHGVRestriction;
 
@@ -205,6 +209,8 @@ public final class Project {
             sheet = properties.getProperty(SUPPLY_INPUT_SHEET_KEY);
             distances = properties.getProperty(SUPPLY_INPUT_DISTANCES_KEY);
             terminals = properties.getProperty(SUPPLY_INPUT_TERMINALS_KEY);
+            distancescst = properties.getProperty(SUPPLY_INPUT_DISTANCESCST_KEY);
+            hubs = properties.getProperty(SUPPLY_INPUT_HUBS_KEY);
             trainCapacity = Integer.parseInt(properties.getProperty(SUPPLY_TRAIN_CAPACITY_KEY));
             networkNightHGVRestriction = Boolean.parseBoolean(
                     properties.getProperty(SUPPLY_NETWORK_NIGHT_HGV_RESTRICTION_KEY));
@@ -255,7 +261,13 @@ public final class Project {
         public String getTerminals() {
             return terminals;
         }
+        public String getDistancescst() {
+            return distancescst;
+        }
 
+        public String getHubs() {
+            return hubs;
+        }
         public int getTrainCapacity() {
             return trainCapacity;
         }

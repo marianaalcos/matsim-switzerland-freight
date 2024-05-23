@@ -15,25 +15,25 @@ import org.matsim.core.utils.collections.Tuple;
 
 /**
  * 
- * Reads the terminals file.
+ * Reads the hubs file.
  * 
- * @author ikaddoura
+ * @author mdealmeida
  *
  */
-public class TerminalsFileReader {
-    private static final Logger log = LogManager.getLogger(TerminalsFileReader.class);
+public class HubsFileReader {
+    private static final Logger log = LogManager.getLogger(HubsFileReader.class);
     
-    Map<String, Terminal> name2terminal = new HashMap<>();
+    Map<String, Hub> name2hub = new HashMap<>();
     
 	/**
-	 * Reads the terminals csv file.
+	 * Reads the cst_hubs csv file.
 	 * 
-	 * @param terminalFile
+	 * @param hubFile
 	 */
-	public TerminalsFileReader(String terminalFile) {
+	public HubsFileReader(String hubFile) {
 		
 		try {
-		    Reader reader = new FileReader(terminalFile);
+		    Reader reader = new FileReader(hubFile);
 			CSVParser parser = CSVParser.parse(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';').withAllowDuplicateHeaderNames(false));
 			
 			log.info("headers: " + parser.getHeaderMap().toString());
@@ -41,7 +41,7 @@ public class TerminalsFileReader {
 			int rowCounter = 0;
 			for (CSVRecord csvRecord : parser) {
 				
-				log.info("terminal: " + csvRecord.get("name"));
+				log.info("hub: " + csvRecord.get("name"));
 				
 				String[] modes = csvRecord.get("modes").split(",");
 				String[] capacities = csvRecord.get("capacities").split(",");
@@ -71,12 +71,12 @@ public class TerminalsFileReader {
 				log.info(shortName);
 				log.info(header);
 				
-				Terminal terminal = new Terminal(csvRecord.get("name"), shortName, header ,
+				Hub hub = new Hub(csvRecord.get("name"), shortName, header ,
 						new Coord(Double.parseDouble(csvRecord.get("x")), Double.parseDouble(csvRecord.get("y"))),
 						mode2capacity,
 						mode2openingClosingTime);	
 				
-	        	name2terminal.put(csvRecord.get("name"), terminal);
+	        	name2hub.put(csvRecord.get("name"), hub);
 	        	rowCounter++;
 			}
 			
@@ -88,13 +88,14 @@ public class TerminalsFileReader {
 			throw new RuntimeException();
 		}
 	}
-
-	public Map<String, Terminal> getName2terminal() {
-		return name2terminal;
+	// setter method: returns the name2hub map, which contains mappings from String keys to Hub values.
+	// other classes can use this method to retrieve the name2hub map
+	public Map<String, Hub> getName2hub() {
+		return name2hub;
 	}
-
-	public void setName2terminal(Map<String, Terminal> name2terminal) {
-		this.name2terminal = name2terminal;
+	// getter method: allows other classes to set (i.e., update or initialize) the name2hub map with a new Map<String, Hub> provided as an argument.
+	public void setName2hub(Map<String, Hub> name2hub) {
+		this.name2hub = name2hub;
 	}
 	
 	private String fixEncodingIssues(String route) {
@@ -104,7 +105,16 @@ public class TerminalsFileReader {
 			route = route.replaceAll("\\s+","");
 			log.warn(" --> " + route);
 		}
-		
+		if (route.contains("-")) {
+			log.warn("Replace - : " + route);
+			route = route.replaceAll("-","");
+			log.warn(" --> " + route);
+		}
+		if (route.contains("/")) {
+			log.warn("Replace / : " + route);
+			route = route.replaceAll("/","");
+			log.warn(" --> " + route);
+		}
 		if (route.contains("ä") || route.contains("ö") || route.contains("ü")) {
 			log.warn("Replace Umlaut: " + route);
 			route = route.replaceAll("ä","ae").replaceAll("ö", "oe").replaceAll("ü", "ue");
@@ -116,6 +126,11 @@ public class TerminalsFileReader {
 			route = route.replaceAll("Ä","AE").replaceAll("Ö", "OE").replaceAll("Ü", "UE");
 			log.warn(" --> " + route);
 		}
+	    if (route.contains("è")|| route.contains("é")) {
+	        log.warn("Replace è or é with e: " + route);
+	        route = route.replaceAll("è", "e").replaceAll("é", "e");
+	        log.warn(" --> " + route);
+	    }
 		return route;
 	}
 	

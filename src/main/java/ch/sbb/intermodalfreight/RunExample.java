@@ -2,10 +2,13 @@ package ch.sbb.intermodalfreight;
 
 import java.io.IOException;
 
+import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
+import org.matsim.api.core.v01.network.Node;
 import org.matsim.core.config.Config;
 import org.matsim.core.controler.Controler;
 import org.matsim.core.controler.OutputDirectoryHierarchy.OverwriteFileSetting;
+import org.matsim.core.network.NetworkUtils;
 
 import ch.sbb.intermodalfreight.prepare.supply.RunGenerateCargoSupply;
 import ch.sbb.intermodalfreight.simulate.IntermodalFreightConfigGroup;
@@ -52,7 +55,17 @@ public class RunExample {
                 .get(IntermodalFreightConfigGroup.GROUP_NAME);
         ifCfg.setTerminalCapacityApproach(TerminalCapacityApproach.WithCapacityReduction);
 
+       
+       
         Scenario scenario = RunIntermodalFreightScenario.prepareScenario(config);
+        /**
+        Add here code to add CST nodes and links 
+         
+         String s = reader
+         Node node = NetworkUtils.createNode(Id.createNodeId(s))
+         scenario.getNetwork().addNode(node);
+
+        */
         Controler controler = RunIntermodalFreightScenario.prepareControler(scenario);
         controler.run();
     }

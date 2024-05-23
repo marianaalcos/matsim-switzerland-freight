@@ -70,6 +70,7 @@ public class GenerateCargoSupply {
 	private final Scenario scenario;
 	private final Network carOnlyNetwork;
 	private final Map<String, Terminal> terminals = new HashMap<>();	
+	private final Map<String, Hub> hubs = new HashMap<>();	
 	private final TransitSchedule schedule;
 	private final Vehicles vehicles;
 	private final Network network;
@@ -86,6 +87,8 @@ public class GenerateCargoSupply {
 	 * @param craneTravelTime the free speed travel time to pass the terminal's crane links
 	 * @param simulatedDays the number of simulated days, e.g. three days in order to use the second day as the representative day
 	 */
+	
+	// Constructor to initialize the cargo supply generation
 	public GenerateCargoSupply(Scenario scenario, Network originalCarNetwork, double distanceTerminalCraneLinks, double craneTravelTime, int simulatedDays) {
 		this.scenario = scenario;
 		this.carOnlyNetwork = originalCarNetwork;
@@ -128,7 +131,7 @@ public class GenerateCargoSupply {
         
         return link;
 	}
-    
+	 // Method to retrieve the nearest node in the network based on coordinates
     private static Node getNearestNode(Network network, final Coord coord) {
         Node nearestNode = NetworkUtils.getNearestNode((network),coord);
         if ( nearestNode == null ) {
@@ -159,6 +162,7 @@ public class GenerateCargoSupply {
 	 * 
 	 * @param terminal
 	 */
+    // Method to add a terminal and connect it to the road network
 	public void addTerminalAndConnectToRoadNetwork(Terminal terminal) {
 		
         // create the terminal link: (t_IN)<#####>(t_OUT)

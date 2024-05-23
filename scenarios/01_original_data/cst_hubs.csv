@@ -1,0 +1,68 @@
+name;short_name;header;x;y;modes;capacities;opening_hour;closing_hour
+genève la praille;GP;Genève La Praille;1115812.548;2498683.086;cst;1000;1;23
+zimeysa-meyrin;MM;ZIMEYSA-Meyrin;1119797.184;2494071.043;cst;1000;1;23
+genève aéroport;GA;Genève Aéroport;1121486.355;2497444.985;cst;1000;1;23
+nyon;NY;Nyon;1137589.891;2507389.631;cst;1000;1;23
+gland;GL;Gland;1141877.846;2510236.749;cst;1000;1;23
+aubonne;AU;Aubonne;1149872.481;2519636.664;cst;1000;1;23
+tolochenaz-morges;TM;Tolochenaz-Morges;1150838.37;2525903.525;cst;1000;1;23
+lausanne-malley;LM;Lausanne-Malley;1152913.113;2536819.68;cst;1000;1;23
+crissier;CR;Crissier;1155986.412;2533716.921;cst;1000;1;23
+aclens;AC;Aclens;1157812.943;2528800.364;cst;1000;1;23
+daillens;DS;Daillens;1163639.581;2531823.397;cst;1000;1;23
+chavorney;CH;Chavorney;1173435.273;2533635.949;cst;1000;1;23
+yverdon;YV;Yverdon;1181121.625;2539099.032;cst;1000;1;23
+payerne;PA;Payerne;1185774.061;2561993.171;cst;1000;1;23
+avanches;AV;Avanches;1192241.092;2569820.294;cst;1000;1;23
+fribourg;FR;Fribourg;1183961.803;2578882.071;cst;1000;1;23
+kerzers;KE;Kerzers;1202675.599;2581494.745;cst;1000;1;23
+lyss;LY;Lyss;1213745.691;2590055.922;cst;1000;1;23
+biel/bienne;BB;Biel/Bienne;1220662.289;2585446.657;cst;1000;1;23
+schönbühl;SC;Schönbühl;1207726.506;2604644.731;cst;1000;1;23
+bern weyermannshaus;BW;Bern Weyermannshaus;1199610.524;2597456.124;cst;1000;1;23
+bern wankdorf;BE;Bern Wankdorf;1201273.535;2601971.386;cst;1000;1;23
+muri-gümligen;MG;Muri-Gümligen;1198219.545;2604556.746;cst;1000;1;23
+münsingen;MU;Münsingen;1191561.714;2609584.829;cst;1000;1;23
+heimberg-steffisburg;HS;Heimberg-Steffisburg;1181464.025;2612742.005;cst;1000;1;23
+gwatt;GW;Gwatt;1174660.709;2614094.468;cst;1000;1;23
+solothurn-zuchwil;SZ;Solothurn-Zuchwil;1228074.012;2609043.504;cst;1000;1;23
+niederbipp;NI;Niederbipp;1235665.519;2619076.078;cst;1000;1;23
+neuendorf;NE;Neuendorf;1238655.738;2627054.964;cst;1000;1;23
+härkingen;HA;Härkingen;1239675.84;2628763.643;cst;1000;1;23
+rickenbach-wangen;RW;Rickenbach-Wangen;1243407.818;2631511.896;cst;1000;1;23
+dulliken;DU;Dulliken;1244386.982;2638254.79;cst;1000;1;23
+sissach;SI;Sissach;1257134.787;2628050.832;cst;1000;1;23
+liestal;LI;Liestal;1259580.598;2622218.345;cst;1000;1;23
+pratteln west;PW;Pratteln West;1263094.927;2619083.952;cst;1000;1;23
+basel wolf;BA;Basel Wolf;1267664.688;2611286.038;cst;1000;1;23
+basel gateway nord;BG;Basel Gateway Nord;1269929.355;2612226.159;cst;1000;1;23
+oftringen-zofingen;OZ;Oftringen-Zofingen;1240342.135;2636387.664;cst;1000;1;23
+dagmersellen;DA;Dagmersellen;1229246.369;2641718.406;cst;1000;1;23
+sursee;SE;Sursee;1224720.509;2650984.133;cst;1000;1;23
+rothenburg;RO;Rothenburg;1216735.83;2663242.552;cst;1000;1;23
+emmenbrücke;EM;Emmenbrücke;1215662.116;2663361.44;cst;1000;1;23
+luzern allmend;LA;Luzern Allmend;1211382.044;2666157.417;cst;1000;1;23
+suhr;SU;Suhr;1246808.508;2648355.962;cst;1000;1;23
+schafisheim;SM;Schafisheim;1247625.424;2653173.897;cst;1000;1;23
+limmatstadt;LT;Limmatstadt;1253260.421;2669956.378;cst;1000;1;23
+urdorf;UR;Urdorf;1248894.511;2674152.343;cst;1000;1;23
+zürich aussersihl;ZA;Zürich Aussersihl;1247363.362;2682244.594;cst;1000;1;23
+zürich nord;ZN;Zürich Nord;1252037.31;2683532.211;cst;1000;1;23
+zürich flughafen;ZF;Zürich Flughafen;1257142.285;2683872.387;cst;1000;1;23
+wangen-dübendorf;WD;Wangen-Dübendorf;1251578.693;2690722.918;cst;1000;1;23
+winterthur;WI;Winterthur;1261688.505;2696824.498;cst;1000;1;23
+winterthur hegi;WH;Winterthur Hegi;1262369.133;2700570.152;cst;1000;1;23
+frauenfeld;FD;Frauenfeld;1268009.083;2709900.173;cst;1000;1;23
+wil;WL;Wil;1258239.811;2721246.347;cst;1000;1;23
+uzwil-oberbüren;UO;Uzwil-Oberbüren;1256348.165;2728485.259;cst;1000;1;23
+gossau;GO;Gossau;1253214.39;2736601.029;cst;1000;1;23
+st. gallen st. fiden;SS;St. Gallen St. Fiden;1255239.664;2746821.473;cst;1000;1;23
+val ombré;RVO;Val Ombré;1119755.938;2496893.82;cst;1000;1;23
+léman;RLE;Léman;1155392.875;2534029.34;cst;1000;1;23
+broye;RBR;Broye;1187577.037;2555271.925;cst;1000;1;23
+lyss ort;RLO;Lyss Ort;1213342.136;2590080.666;cst;1000;1;23
+bern;RBE;Bern;1199699.06;2600463.212;cst;1000;1;23
+dulliken süd;RDS;Dulliken Süd;1244391.979;2638265.475;cst;1000;1;23
+mayenfels;RMA;Mayenfels;1262803.587;2618378.58;cst;1000;1;23
+heitersberg;RHE;Heitersberg;1249480.006;2670075.47;cst;1000;1;23
+aegert;RAE;Aegert;1251950.796;2689260.967;cst;1000;1;23
