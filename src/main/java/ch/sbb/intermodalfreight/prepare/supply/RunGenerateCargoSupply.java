@@ -63,6 +63,8 @@ public class RunGenerateCargoSupply {
 		final String inputScheduleXLSX = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getSchedule();
 		final String inputTerminalsFile = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getTerminals();
 		final String inputDistancesCSV = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getDistances();
+		final String inputHubsFile = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getHubs();
+		final String inputDistancescstCSV = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getDistancescst();
 		
 	    final String sheetName = project.getMatsimInput().getSupply().getSheet();
 		final int cargoTrainCapacityTEU = project.getMatsimInput().getSupply().getTrainCapacity();
@@ -101,15 +103,25 @@ public class RunGenerateCargoSupply {
         
 		GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, distanceTerminalCraneLinks, craneTravelTime, simulatedDays);
 		
-        // first read and add the terminals		
+        // first read and add the terminals	and hubs	
 		Map<String,Terminal> terminals = new TerminalsFileReader(inputTerminalsFile).getName2terminal();
 		for (Terminal terminal : terminals.values()) {
 			supply.addTerminalAndConnectToRoadNetwork(terminal);
 		}
 		
+		Map<String,Hub> hubs = new HubsFileReader(inputHubsFile).getName2hub();
+		for (Hub hub : hubs.values()) {
+			supply.addHubAndConnectToRoadNetwork(hub);
+		}
+		
 		// then read the schedule xlsx and add the transit lines, routes and departures	
 		List<RouteInfo> routeInfos = new CargoScheduleReader(inputScheduleXLSX, sheetName, terminals, arrivalDepartureOffsetFirstStop).getRouteInfos();
 		Map<String, Integer> relation2distance = new TerminalDistanceReader().getTerminalDistances(inputDistancesCSV);
+		
+		// need to add schedule for CST
+		// List<RouteInfo> routeInfos = new CargoScheduleReader(inputScheduleXLSX, sheetName, terminals, arrivalDepartureOffsetFirstStop).getRouteInfos();
+		// Map<String, Integer> relation2distancecst = new HubDistanceReader().getHubDistances(inputDistancescstCSV);
+		
 		
 		int routeCounter = 0;
 		for (RouteInfo routeInfo : routeInfos) {
@@ -137,6 +149,7 @@ public class RunGenerateCargoSupply {
 				for (String mode : link.getAllowedModes()) {
 					modes.add(mode);
 					modes.add(KVModes.CAR_KV_CONTAINER);
+					modes.add(KVModes.CAR_KV_CST);
 				}
 				link.setAllowedModes(modes);
 			}

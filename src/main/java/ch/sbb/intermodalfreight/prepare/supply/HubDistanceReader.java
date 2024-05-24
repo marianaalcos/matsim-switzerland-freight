@@ -28,19 +28,19 @@ public class HubDistanceReader {
 	 * Reads the hubs distances csv file in which the distances are given in kilometers
 	 * and returns a map with distances in meters for each terminal pair.
 	 * 
-	 * @param inputDistancesCSV A file which provides the distances between all hubs. Uses a ';' as delimiter. Provides the distances in kilometers.
+	 * @param inputDistancescstCSV A file which provides the distances between all hubs. Uses a ';' as delimiter. Provides the distances in kilometers.
 	 * 
 	 * @return the distance of each hub pair in meters. Each hub pair is separated by an underscore.
 	 * 
 	 * @throws IOException
 	 */
-	public Map<String, Integer> getHubDistances(String inputDistancesCSV) throws IOException {
+	public Map<String, Integer> getHubDistances(String inputDistancescstCSV) throws IOException {
 
 	    log.info("Reading relation distances...");
 		Map<String, Integer> relation2distance = new HashMap<>();
 
-		Reader distancesCSVfile = new FileReader(new File(inputDistancesCSV));
-		CSVParser parser = CSVParser.parse(distancesCSVfile, CSVFormat.DEFAULT.withDelimiter(';'));
+		Reader distancescstCSVfile = new FileReader(new File(inputDistancescstCSV));
+		CSVParser parser = CSVParser.parse(distancescstCSVfile, CSVFormat.DEFAULT.withDelimiter(';'));
 		
 		int rowCounter = 0;
 		CSVRecord headers = null;

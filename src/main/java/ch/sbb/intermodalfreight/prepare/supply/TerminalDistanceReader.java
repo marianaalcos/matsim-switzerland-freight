@@ -39,7 +39,7 @@ public class TerminalDistanceReader {
 	    log.info("Reading relation distances...");
 		Map<String, Integer> relation2distance = new HashMap<>();
 
-		Reader distancesCSVfile = new FileReader(new File(inputDistancesCSV));
+		Reader distancesCSVfile = new FileReader(new File(inputDistancesCSV)); // see RunGenerateCargoSupply.java
 		CSVParser parser = CSVParser.parse(distancesCSVfile, CSVFormat.DEFAULT.withDelimiter(';'));
 		
 		int rowCounter = 0;
