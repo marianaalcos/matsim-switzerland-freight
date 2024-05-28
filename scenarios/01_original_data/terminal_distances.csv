@@ -1,6 +1,6 @@
-﻿;genf;gaeu;dietikon;gossau;sottoceneri
-genf;;211;265;345;458
-gaeu;211;;52;136;246
-dietikon;265;52;;83;234
-gossau;345;136;83;;323
-sottoceneri;458;246;234;323;
+;genf;gaeu;dietikon;gossau;sottoceneri
+genf;;211.0;265.0;345.0;458.0
+gaeu;211.0;;52.0;136.0;246.0
+dietikon;265.0;52.0;;83.0;234.0
+gossau;345.0;136.0;83.0;;323.0
+sottoceneri;458.0;246.0;234.0;323.0;

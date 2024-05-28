@@ -34,10 +34,11 @@ public class HubDistanceReader {
 	 * 
 	 * @throws IOException
 	 */
-	public Map<String, Integer> getHubDistances(String inputDistancescstCSV) throws IOException {
+	public Map<String, Double> getHubDistances(String inputDistancescstCSV) throws IOException {
 
 	    log.info("Reading relation distances...");
-		Map<String, Integer> relation2distance = new HashMap<>();
+	    Map<String, Double> relation2distance = new HashMap<>(); // Double distances
+		// Map<String, Integer> relation2distance = new HashMap<>();
 
 		Reader distancescstCSVfile = new FileReader(new File(inputDistancescstCSV));
 		CSVParser parser = CSVParser.parse(distancescstCSVfile, CSVFormat.DEFAULT.withDelimiter(';'));
@@ -58,7 +59,7 @@ public class HubDistanceReader {
 						String to = headers.get(columnCounter);
 						if (to.contains("_")) throw new RuntimeException("An underscore is not allowed as hub name: " + to);
 						if (!cell.equals("")) {
-							relation2distance.put(from + "_" + to, 1000 * Integer.valueOf(cell));
+							relation2distance.put(from + "_" + to, 1000 * Double.valueOf(cell));
 						}
 					}
 					columnCounter++;

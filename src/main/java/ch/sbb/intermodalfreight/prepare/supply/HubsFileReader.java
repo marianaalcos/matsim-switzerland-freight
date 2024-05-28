@@ -105,11 +105,6 @@ public class HubsFileReader {
 			route = route.replaceAll("\\s+","");
 			log.warn(" --> " + route);
 		}
-		if (route.contains("-")) {
-			log.warn("Replace - : " + route);
-			route = route.replaceAll("-","");
-			log.warn(" --> " + route);
-		}
 		if (route.contains("/")) {
 			log.warn("Replace / : " + route);
 			route = route.replaceAll("/","");

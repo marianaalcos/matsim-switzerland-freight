@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +62,7 @@ public class RunGenerateCargoSupply {
 		final String onlyCarNetwork = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getNetwork();
 		final String networkChangeEventsFile = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getNetworkChangeEvents();
 		final String inputScheduleXLSX = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getSchedule();
+		final String inputSchedulecstXLSX = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getSchedulecst();
 		final String inputTerminalsFile = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getTerminals();
 		final String inputDistancesCSV = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getDistances();
 		final String inputHubsFile = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getHubs();
@@ -115,26 +117,51 @@ public class RunGenerateCargoSupply {
 		}
 		
 		// then read the schedule xlsx and add the transit lines, routes and departures	
-		List<RouteInfo> routeInfos = new CargoScheduleReader(inputScheduleXLSX, sheetName, terminals, arrivalDepartureOffsetFirstStop).getRouteInfos();
-		Map<String, Integer> relation2distance = new TerminalDistanceReader().getTerminalDistances(inputDistancesCSV);
+		List<RouteInfo> terminalRouteInfos = new CargoScheduleReader(inputScheduleXLSX, sheetName, terminals, arrivalDepartureOffsetFirstStop).getRouteInfos();
+        Map<String, Double> terminalDistances = new TerminalDistanceReader().getTerminalDistances(inputDistancesCSV);
+
+        List<RouteInfo> hubRouteInfos = new CstScheduleReader(inputSchedulecstXLSX, sheetName, hubs, arrivalDepartureOffsetFirstStop).getRouteInfos();
+        Map<String, Double> hubDistances = new HubDistanceReader().getHubDistances(inputDistancescstCSV);
+
+        
+        // Combine terminal and hub distances into one map
+        Map<String, Double> relevantDistances = new HashMap<>();
+        relevantDistances.putAll(terminalDistances);
+        relevantDistances.putAll(hubDistances);
+        
+        // Combine the lists of route infos
+        List<RouteInfo> allRouteInfos = new ArrayList<>();
+        allRouteInfos.addAll(terminalRouteInfos);
+        allRouteInfos.addAll(hubRouteInfos);
+
 		
-		// need to add schedule for CST
-		// List<RouteInfo> routeInfos = new CargoScheduleReader(inputScheduleXLSX, sheetName, terminals, arrivalDepartureOffsetFirstStop).getRouteInfos();
-		// Map<String, Integer> relation2distancecst = new HubDistanceReader().getHubDistances(inputDistancescstCSV);
+		//int routeCounter = 0;
+		//for (RouteInfo routeInfo : routeInfos) {
+	    //	log.info("Route info: " + routeInfo.toString());
+	    //	
+	    //	String transitLine = routeInfo.getLine();
+	    //	String transitRoute = routeInfo.getRoute();
+		//	List<RouteStopInfo> routeStopInfos = routeInfo.getRouteStopInfos();
+	    //	
+		//	supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, cargoTrainCapacityTEU, relation2distance);
+		//	
+		//	routeCounter++;
+	    //}
 		
-		
-		int routeCounter = 0;
-		for (RouteInfo routeInfo : routeInfos) {
-	    	log.info("Route info: " + routeInfo.toString());
-	    	
-	    	String transitLine = routeInfo.getLine();
-	    	String transitRoute = routeInfo.getRoute();
-			List<RouteStopInfo> routeStopInfos = routeInfo.getRouteStopInfos();
-	    	
-			supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, cargoTrainCapacityTEU, relation2distance);
-			
-			routeCounter++;
-	    }
+		// Process all RouteInfo objects (handles terminals and hubs)
+        int routeCounter = 0;
+        for (RouteInfo routeInfo : allRouteInfos) {
+            log.info("Route info: " + routeInfo.toString());
+
+            String transitLine = routeInfo.getLine();
+            String transitRoute = routeInfo.getRoute();
+            List<RouteStopInfo> routeStopInfos = routeInfo.getRouteStopInfos();
+
+            //Map<String, Double> relevantDistances = (routeInfo.getRouteType() == RouteInfo.RouteType.TERMINAL) ? terminalDistances : hubDistances;
+            supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, cargoTrainCapacityTEU, relevantDistances);
+
+            routeCounter++;
+        }
 			
 		// see if we have to adjust the network
 		if (project.getMatsimInput().getSupply().isNetworkNightHGVRestriction()) {

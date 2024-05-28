@@ -34,10 +34,10 @@ public class TerminalDistanceReader {
 	 * 
 	 * @throws IOException
 	 */
-	public Map<String, Integer> getTerminalDistances(String inputDistancesCSV) throws IOException {
+	public Map<String, Double> getTerminalDistances(String inputDistancesCSV) throws IOException { //originally, it was Integer
 
 	    log.info("Reading relation distances...");
-		Map<String, Integer> relation2distance = new HashMap<>();
+		Map<String, Double> relation2distance = new HashMap<>(); //originally, it was Integer
 
 		Reader distancesCSVfile = new FileReader(new File(inputDistancesCSV)); // see RunGenerateCargoSupply.java
 		CSVParser parser = CSVParser.parse(distancesCSVfile, CSVFormat.DEFAULT.withDelimiter(';'));
@@ -58,7 +58,7 @@ public class TerminalDistanceReader {
 						String to = headers.get(columnCounter);
 						if (to.contains("_")) throw new RuntimeException("An underscore is not allowed as terminal name: " + to);
 						if (!cell.equals("")) {
-							relation2distance.put(from + "_" + to, 1000 * Integer.valueOf(cell));
+							relation2distance.put(from + "_" + to, 1000 * Double.valueOf(cell)); // originally Double.valueOf
 						}
 					}
 					columnCounter++;

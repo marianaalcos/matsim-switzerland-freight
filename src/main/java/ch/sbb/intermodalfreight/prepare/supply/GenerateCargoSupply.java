@@ -468,9 +468,9 @@ public class GenerateCargoSupply {
 	 * @param transitRoute name of the transit route, used to create IDs
 	 * @param routeInfos a correctly sorted list which contains the route stop infos
 	 * @param vehicleCapacity train capacity in number of containers that fit into the train
-	 * @param relation2distance (optional) a map which contains the distances between the terminals; if null the euclidean distance will be used
+	 * @param combinedDistances (optional) a map which contains the distances between the terminals; if null the euclidean distance will be used
 	 */
-	public TransitLine addCargoConnection(int routeCounter, String transitLine, String transitRoute, List<RouteStopInfo> routeInfos, int vehicleCapacity, Map<String, Integer> relation2distance) {
+	public TransitLine addCargoConnection(int routeCounter, String transitLine, String transitRoute, List<RouteStopInfo> routeInfos, int vehicleCapacity, Map<String, Double> combinedDistances) {
 		
 		if (routeInfos.size() < 2) throw new RuntimeException("At least two route stops required. Aborting...");
 		
@@ -487,7 +487,7 @@ public class GenerateCargoSupply {
 				// not the first terminal
 				// add connecting link
 				Link connectingLink = addLink(transitLine + "_" + transitRoute + "_" + routeCounter,
-						getDistance(relation2distance, previousStop, stop),
+						getDistance(combinedDistances, previousStop, stop),
 						previousStop.getLink().getToNode(),
 						stop.getLink().getFromNode(),
 						new HashSet<>(Arrays.asList("rail")),
@@ -584,7 +584,7 @@ public class GenerateCargoSupply {
         		
 	}
 	
-	private double getDistance(Map<String, Integer> relation2distance, RouteStopInfo previousStop, RouteStopInfo stop) {
+	private double getDistance(Map<String, Double> relation2distance, RouteStopInfo previousStop, RouteStopInfo stop) {
 		if (relation2distance == null) {
 			return NetworkUtils.getEuclideanDistance(previousStop.getTransitStop().getCoord(), stop.getTransitStop().getCoord());
 		} else {

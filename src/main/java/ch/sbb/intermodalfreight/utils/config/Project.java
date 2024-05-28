@@ -175,6 +175,7 @@ public final class Project {
         private static final String SUPPLY_INPUT_LINKS_TO_REMOVE_FROM_NETWORK_KEY = "matsim.input.supply.links.to.remove.from.network";
         private static final String SUPPLY_INPUT_NETWORK_CHANGE_EVENTS_KEY = "matsim.input.supply.network.change.events";
         private static final String SUPPLY_INPUT_SCHEDULE_KEY = "matsim.input.supply.schedule";
+        private static final String SUPPLY_INPUT_SCHEDULECST_KEY = "matsim.input.supply.schedulecst";
         private static final String SUPPLY_INPUT_SHEET_KEY = "matsim.input.supply.sheet";
         private static final String SUPPLY_INPUT_TERMINALS_KEY = "matsim.input.supply.terminals";
         private static final String SUPPLY_INPUT_DISTANCES_KEY = "matsim.input.supply.distances";
@@ -190,6 +191,7 @@ public final class Project {
         private final String linksToRemoveFromNetwork;
         private final String networkChangeEvents;
         private final String schedule;
+        private final String schedulecst;
         private final String sheet;
         private final String distances;
         private final String terminals;
@@ -206,6 +208,7 @@ public final class Project {
             linksToRemoveFromNetwork = properties.getProperty(SUPPLY_INPUT_LINKS_TO_REMOVE_FROM_NETWORK_KEY);
             networkChangeEvents = properties.getProperty(SUPPLY_INPUT_NETWORK_CHANGE_EVENTS_KEY);
             schedule = properties.getProperty(SUPPLY_INPUT_SCHEDULE_KEY);
+            schedulecst = properties.getProperty(SUPPLY_INPUT_SCHEDULECST_KEY);
             sheet = properties.getProperty(SUPPLY_INPUT_SHEET_KEY);
             distances = properties.getProperty(SUPPLY_INPUT_DISTANCES_KEY);
             terminals = properties.getProperty(SUPPLY_INPUT_TERMINALS_KEY);
@@ -249,7 +252,10 @@ public final class Project {
         public String getSchedule() {
             return schedule;
         }
-
+        
+        public String getSchedulecst() {
+            return schedulecst;
+        }
         public String getSheet() {
             return sheet;
         }

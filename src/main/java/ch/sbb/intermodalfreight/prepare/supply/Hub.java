@@ -56,8 +56,8 @@ public class Hub {
 		}
 	}
 
-	public Link getTerminalLink() {
-		if (hubLink == null) throw new RuntimeException("Trying to access the terminal before connecting the terminals to the network. Aborting...");
+	public Link getHubLink() {
+		if (hubLink == null) throw new RuntimeException("Trying to access the hub before connecting the hubs to the network. Aborting...");
 		return hubLink;
 	}
 
