@@ -250,7 +250,7 @@ public class CargoScheduleReader {
 	    			}
 	    		}
 	    		
-	    		RouteStopInfo stop = new RouteStopInfo(terminal.getTerminalLink(), terminal.getStop(), terminalArrival, terminalDeparture);
+	    		RouteStopInfo stop = new RouteStopInfo(terminal.getTerminalLink(), terminal.getStop(), terminalArrival, terminalDeparture, routeInfo.getRouteType());
 				routeStopInfos.add(stop);
 				
 				terminalCounter++;

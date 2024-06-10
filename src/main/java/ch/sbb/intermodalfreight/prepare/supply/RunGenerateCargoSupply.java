@@ -169,7 +169,7 @@ public class RunGenerateCargoSupply {
 			supply.addHGVnightRestriction();
 		}
 		
-		// Allow rail access/egress mode wherever the car mode is allowed.
+		// Allow rail/cst access/egress mode wherever the car mode is allowed.
 		for (Link link : scenario.getNetwork().getLinks().values()) {
 			if (link.getAllowedModes().contains("car")) {
 				Set<String> modes = new HashSet<>();

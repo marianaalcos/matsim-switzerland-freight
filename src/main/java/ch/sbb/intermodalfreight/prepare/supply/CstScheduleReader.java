@@ -259,7 +259,7 @@ public class CstScheduleReader {
 	    			}
 	    		}
 	    		
-	    		RouteStopInfo stop = new RouteStopInfo(hub.getHubLink(), hub.getStop(), hubArrival, hubDeparture);
+	    		RouteStopInfo stop = new RouteStopInfo(hub.getHubLink(), hub.getStop(), hubArrival, hubDeparture, routeInfo.getRouteType());
 				routeStopInfos.add(stop);
 				
 				hubCounter++;
