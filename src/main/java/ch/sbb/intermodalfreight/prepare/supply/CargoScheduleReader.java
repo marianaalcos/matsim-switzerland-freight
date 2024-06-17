@@ -81,7 +81,7 @@ public class CargoScheduleReader {
 		    		
 		    		String line = null;
 			    	String route = null;
-			    	Map<String,List<Double>> terminalFromHeader2Times = new HashMap<>();
+			    	Map<String,List<Double>> times = new HashMap<>();
 			    			        
 			        for (Cell cell : row) {
 			        	
@@ -113,19 +113,19 @@ public class CargoScheduleReader {
 			        	} else {
 			        		// this should be a terminal name
 			        		
-			        		if (terminalFromHeader2Times.get(headerOfCurrentCell) == null) {
-				        		terminalFromHeader2Times.put(headerOfCurrentCell, new ArrayList<>());
+			        		if (times.get(headerOfCurrentCell) == null) {
+			        			times.put(headerOfCurrentCell, new ArrayList<>());
 			        		}
 			        				        				        		
 			        		if (cell.getCellType() == CellType.NUMERIC) {
 			        			Date date = cell.getDateCellValue();
 			            		double time = date.getHours() * 3600. + date.getMinutes() * 60 + date.getSeconds();
-			            		terminalFromHeader2Times.get(headerOfCurrentCell).add(time);
+			            		times.get(headerOfCurrentCell).add(time);
 			            		
 			        		} else if (cell.getCellType() == CellType.FORMULA && cell.getCachedFormulaResultType() == CellType.NUMERIC) {
 			        			Date date = cell.getDateCellValue();
 			            		double time = date.getHours() * 3600. + date.getMinutes() * 60 + date.getSeconds();
-			            		terminalFromHeader2Times.get(headerOfCurrentCell).add(time);
+			            		times.get(headerOfCurrentCell).add(time);
 			            		
 			        		} else {
 			        			throw new RuntimeException("Expecting the An/Ab column as Numeric or Formula/Numeric format. Aborting... cellType: " + cell.getCellType() + " / " + cell.getStringCellValue());
@@ -133,7 +133,7 @@ public class CargoScheduleReader {
 			        	}
 			        }
 			        
-			        RouteInfo routeInfo = new RouteInfo(line, route, terminalFromHeader2Times,  RouteInfo.RouteType.TERMINAL);
+			        RouteInfo routeInfo = new RouteInfo(line, route, times,  RouteInfo.RouteType.TERMINAL);
 			        if (line != null && route != null) routeInfos.add(routeInfo);
 		    	}
 		        rowCounter++;

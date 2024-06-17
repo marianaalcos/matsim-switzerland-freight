@@ -89,8 +89,14 @@ public class TerminalQueueDeactivationEventHandler implements
 	private final Set<Id<Person>> transitDrivers;
 	private final Map<Id<Vehicle>, Id<TransitRoute>> train2route;
 	private final Map<Id<TransitStopFacility>, Set<Id<Person>>> terminal2waitingPersons;
+	// when a person arrives at a terminal, add their ID to the appropriate set terminal2waitingPersons
 	private final Map<Id<TransitStopFacility>, Set<Id<Vehicle>>> terminal2trains;
+	// when a train arrives at a terminal, add its ID to the appropriate set terminal2trains
 	private final Map<Id<Vehicle>, Id<TransitStopFacility>> train2terminal;
+	// and update train2terminal
+	private final Map<Id<TransitStopFacility>, Set<Id<Person>>> hub2waitingPersons;
+	private final Map<Id<TransitStopFacility>, Set<Id<Vehicle>>> hub2trains;
+	private final Map<Id<Vehicle>, Id<TransitStopFacility>> train2hub;
 	private final Map<Id<Vehicle>, Set<Id<Person>>> train2passengers;
 	private final Map<Id<Person>, Integer> person2legCounter;
 	private final Map<Id<Person>, Id<Link>> person2destinationStopLink;
@@ -98,10 +104,16 @@ public class TerminalQueueDeactivationEventHandler implements
 	private final Map<Id<Link>, Set<Id<Vehicle>>> link2vehicles;
 	private final Map<Id<Vehicle>, Id<Person>> vehicle2person;	
 	private final Map<Id<TransitStopFacility>, QueueStatus> terminal2queueStatus;
+	private final Map<Id<TransitStopFacility>, QueueStatus> hub2queueStatus;
+	
 	
 	private final Set<Id<Link>> relevantLinks;
 	private final Map<Id<TransitStopFacility>, Set<Link>> terminal2queueLinks;
 	private final Map<Id<TransitStopFacility>, Set<Link>> terminal2stackLinks;
+	//
+	private final Map<Id<TransitStopFacility>, Set<Link>> hub2queueLinks;
+	private final Map<Id<TransitStopFacility>, Set<Link>> hub2stackLinks;
+	//
 	private final Map<Id<Vehicle>, Integer> train2capacity;	
 
 
@@ -117,6 +129,10 @@ public class TerminalQueueDeactivationEventHandler implements
 		relevantLinks = new HashSet<>();
 		terminal2queueLinks = new HashMap<>();
 		terminal2stackLinks = new HashMap<>();
+		// adding cst hub maps
+		hub2queueLinks = new HashMap<>();
+		hub2stackLinks = new HashMap<>();
+		//
 		queueLink2signal = new HashMap<>();
 		transitVehicles = new HashSet<>();
 		transitDrivers = new HashSet<>();
@@ -126,6 +142,11 @@ public class TerminalQueueDeactivationEventHandler implements
 		terminal2waitingPersons = new HashMap<>();
 		terminal2trains = new HashMap<>();
 		train2terminal = new HashMap<>();
+		// adding cst hub maps
+		hub2waitingPersons = new HashMap<>();
+		hub2trains = new HashMap<>();
+		train2hub = new HashMap<>();
+		//
 		train2passengers = new HashMap<>();
 		person2legCounter = new HashMap<>();
 		person2destinationStopLink = new HashMap<>();
@@ -133,6 +154,8 @@ public class TerminalQueueDeactivationEventHandler implements
 		link2vehicles = new HashMap<>();
 		vehicle2person = new HashMap<>();	
 		terminal2queueStatus = new HashMap<>();
+		hub2queueStatus = new HashMap<>();
+		
 		
 		for (Id<Vehicle> vehicleId : this.scenario.getTransitVehicles().getVehicles().keySet()) {
 			Vehicle vehicle = this.scenario.getTransitVehicles().getVehicles().get(vehicleId);
@@ -142,23 +165,41 @@ public class TerminalQueueDeactivationEventHandler implements
 			train2capacity.put(vehicleId, standingRoom + seats);
 		}
 				
-		for (TransitStopFacility terminal : this.scenario.getTransitSchedule().getFacilities().values()) {
-			
-			// initialize queue links
-			Set<Link> queueLinks = getQueueLinks(terminal.getId());
-			this.terminal2queueLinks.put(terminal.getId(), queueLinks);
-			
-			// initialize stack links
-			Set<Link> stackLinks = getStackLinks(terminal.getId());
-			this.terminal2stackLinks.put(terminal.getId(), stackLinks);
-			
-			// initialize relevant links
-			for (Link link : queueLinks) {
-				this.relevantLinks.add(link.getId());
-			}
-			for (Link link : stackLinks) {
-				this.relevantLinks.add(link.getId());
-			}
+		for (TransitStopFacility facility : this.scenario.getTransitSchedule().getFacilities().values()) {
+			String type = (String) facility.getAttributes().getAttribute("type");
+		    if ("terminal".equals(type)) {
+		    	// initialize queue links
+				Set<Link> queueLinks = getQueueLinks(facility.getId());
+				this.terminal2queueLinks.put(facility.getId(), queueLinks);
+				
+				// initialize stack links
+				Set<Link> stackLinks = getStackLinks(facility.getId());
+				this.terminal2stackLinks.put(facility.getId(), stackLinks);
+				
+				// initialize relevant links
+				for (Link link : queueLinks) {
+					this.relevantLinks.add(link.getId());
+				}
+				for (Link link : stackLinks) {
+					this.relevantLinks.add(link.getId());
+				}
+		    } else if ("cst_hub".equals(type)) {
+		    	// initialize queue links
+				Set<Link> queueLinks = getQueueLinks(facility.getId());
+				this.hub2queueLinks.put(facility.getId(), queueLinks);
+				
+				// initialize stack links
+				Set<Link> stackLinks = getStackLinks(facility.getId());
+				this.hub2stackLinks.put(facility.getId(), stackLinks);
+				
+				// initialize relevant links
+				for (Link link : queueLinks) {
+					this.relevantLinks.add(link.getId());
+				}
+				for (Link link : stackLinks) {
+					this.relevantLinks.add(link.getId());
+				}
+		    }
 		}
 	}
 	
@@ -174,6 +215,11 @@ public class TerminalQueueDeactivationEventHandler implements
 		terminal2waitingPersons.clear();
 		terminal2trains.clear();
 		train2terminal.clear();
+		//
+		hub2waitingPersons.clear();
+		hub2trains.clear();
+		train2hub.clear();
+		//
 		train2passengers.clear();
 		person2legCounter.clear();
 		person2destinationStopLink.clear();
@@ -181,48 +227,85 @@ public class TerminalQueueDeactivationEventHandler implements
 		link2vehicles.clear();
 		vehicle2person.clear();	
 		terminal2queueStatus.clear();
+		hub2queueStatus.clear();
+		
 		
 		// initialize queue status
-		for (TransitStopFacility terminal : this.scenario.getTransitSchedule().getFacilities().values()) {
-			this.terminal2queueStatus.put(terminal.getId(), QueueStatus.Active);
+		for (TransitStopFacility facility : this.scenario.getTransitSchedule().getFacilities().values()) {
+			String type = (String) facility.getAttributes().getAttribute("type");
+		    if ("terminal".equals(type)) {
+		    	this.terminal2queueStatus.put(facility.getId(), QueueStatus.Active);
+		    } else if ("cst_hub".equals(type)) {
+		    	this.hub2queueStatus.put(facility.getId(), QueueStatus.Active);
+		    }
 		}
-		
 	}
 
 	@Override
 	public void notifyMobsimInitialized(MobsimInitializedEvent e) {
 		Netsim mobsim = (Netsim) e.getQueueSimulation() ;
 		for (Id<TransitStopFacility> stopId : scenario.getTransitSchedule().getFacilities().keySet()) {
-			for (Link link : this.terminal2queueLinks.get(stopId)) {
-				SignalizeableItem signalLink = (SignalizeableItem) mobsim.getNetsimNetwork().getNetsimLink(link.getId()) ;
-				signalLink.setSignalized(true);
-				signalLink.setSignalStateAllTurningMoves(SignalGroupState.GREEN);
-				this.queueLink2signal.put(link.getId(), signalLink);
-			}
-		}
+			TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(stopId);
+	        String stopType = (String) stop.getAttributes().getAttribute("type");
+	        if ("terminal".equals(stopType)) {
+	            // Handle terminal stops
+	            for (Link link : this.terminal2queueLinks.get(stopId)) {
+	                SignalizeableItem signalLink = (SignalizeableItem) mobsim.getNetsimNetwork().getNetsimLink(link.getId());
+	                signalLink.setSignalized(true);
+	                signalLink.setSignalStateAllTurningMoves(SignalGroupState.GREEN);
+	                this.queueLink2signal.put(link.getId(), signalLink);
+	            }
+	        } else if ("cst_hub".equals(stopType)) {
+	            // Handle hub stops
+	            for (Link link : this.hub2queueLinks.get(stopId)) {
+	                SignalizeableItem signalLink = (SignalizeableItem) mobsim.getNetsimNetwork().getNetsimLink(link.getId());
+	                signalLink.setSignalized(true);
+	                signalLink.setSignalStateAllTurningMoves(SignalGroupState.GREEN);
+	                this.queueLink2signal.put(link.getId(), signalLink);
+	            }
+	        }
+	    }
 	}
+	
 	
 	@Override
 	public void notifyMobsimBeforeSimStep(MobsimBeforeSimStepEvent event) {
-		for (Id<TransitStopFacility> stopFacilityId : this.terminal2trains.keySet()) {
-			
-			if (this.terminal2trains.get(stopFacilityId).isEmpty()) {
-				activateQueue(stopFacilityId, event.getSimulationTime());
-				
-			} else {
-				
-				// check if there is an agent who wants to get out	
-				// check if there is an agent in the stack who wants to get into the train				
-				if (isThereATrainWithAlightingAgents(stopFacilityId) || isTheStackWithBoardingAgents(stopFacilityId)) {
-					// deactivate the queue			
-					deactivateQueue(stopFacilityId, event.getSimulationTime());
-					
-				} else {
-					// activate the queue		
-					activateQueue(stopFacilityId, event.getSimulationTime());
-				}			
-			}
-		}
+	    for (Id<TransitStopFacility> stopFacilityId : scenario.getTransitSchedule().getFacilities().keySet()) {
+	        TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(stopFacilityId);
+	        String stopType = (String) stop.getAttributes().getAttribute("type");
+
+	        if ("terminal".equals(stopType)) {
+	            // Handle terminal stops
+	            if (this.terminal2trains.get(stopFacilityId).isEmpty()) {
+	                activateQueue(stopFacilityId, event.getSimulationTime());
+	            } else {
+	                // Check if there is an agent who wants to get out
+	                // Check if there is an agent in the stack who wants to get into the train
+	                if (isThereATrainWithAlightingAgents(stopFacilityId) || isTheStackWithBoardingAgents(stopFacilityId)) {
+	                    // Deactivate the queue
+	                    deactivateQueue(stopFacilityId, event.getSimulationTime());
+	                } else {
+	                    // Activate the queue
+	                    activateQueue(stopFacilityId, event.getSimulationTime());
+	                }
+	            }
+	        } else if ("cst_hub".equals(stopType)) {
+	            // Handle hub stops
+	            if (this.hub2trains.get(stopFacilityId).isEmpty()) {
+	                activateQueue(stopFacilityId, event.getSimulationTime());
+	            } else {
+	                // Check if there is an agent who wants to get out
+	                // Check if there is an agent in the stack who wants to get into the train
+	                if (isThereATrainWithAlightingAgents(stopFacilityId) || isTheStackWithBoardingAgents(stopFacilityId)) {
+	                    // Deactivate the queue
+	                    deactivateQueue(stopFacilityId, event.getSimulationTime());
+	                } else {
+	                    // Activate the queue
+	                    activateQueue(stopFacilityId, event.getSimulationTime());
+	                }
+	            }
+	        }
+	    }
 	}
 
 	@Override
@@ -234,51 +317,96 @@ public class TerminalQueueDeactivationEventHandler implements
 		// initialize
 		this.train2passengers.put(event.getVehicleId(), new HashSet<>());
 	}
-
+	
 	@Override
 	public void handleEvent(VehicleArrivesAtFacilityEvent event) {
-		if (transitVehicles.contains(event.getVehicleId())) {
-			// transit vehicle arrives at a facility
-			
-			this.train2terminal.put(event.getVehicleId(), event.getFacilityId());
-						
-			// update the information about which train is at which terminal
-			if (this.terminal2trains.get(event.getFacilityId()) == null) {
-				this.terminal2trains.put(event.getFacilityId(), new HashSet<>());
-			}
-			this.terminal2trains.get(event.getFacilityId()).add(event.getVehicleId());
-			
-			// check if we have to update the queue
-			int trainsAtTerminal = terminal2trains.get(event.getFacilityId()).size();
-			
-			if (trainsAtTerminal == 1) {
-				// everything OK				
-						
-			} else {
-				log.info("There are " + trainsAtTerminal + " trains at terminal " + event.getFacilityId().toString() +
-						" at time " + Time.writeTime(event.getTime(), Time.TIMEFORMAT_HHMMSS));			
-			}				
-		}
+	    if (transitVehicles.contains(event.getVehicleId())) {
+	        // Transit vehicle arrives at a facility
+	        TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(event.getFacilityId());
+	        String stopType = (String) stop.getAttributes().getAttribute("type");
+
+	        
+	        if ("terminal".equals(stopType)) {
+	            // Handle terminal stops
+	        	
+	        	this.train2terminal.put(event.getVehicleId(), event.getFacilityId());
+	        	// update the information about which train is at which terminal
+	            if (this.terminal2trains.get(event.getFacilityId()) == null) {
+	                this.terminal2trains.put(event.getFacilityId(), new HashSet<>());
+	            }
+	            this.terminal2trains.get(event.getFacilityId()).add(event.getVehicleId());
+
+	            // Check if we have to update the queue
+	            int trainsAtTerminal = terminal2trains.get(event.getFacilityId()).size();
+
+	            if (trainsAtTerminal == 1) {
+	                // Everything OK
+	            } else {
+	                log.info("There are " + trainsAtTerminal + " trains at terminal " + event.getFacilityId().toString() +
+	                        " at time " + Time.writeTime(event.getTime(), Time.TIMEFORMAT_HHMMSS));
+	            }
+
+	        } else if ("cst_hub".equals(stopType)) {
+	        	
+	        	this.train2hub.put(event.getVehicleId(), event.getFacilityId());
+	            // Handle hub stops
+	            if (this.hub2trains.get(event.getFacilityId()) == null) {
+	                this.hub2trains.put(event.getFacilityId(), new HashSet<>());
+	            }
+	            this.hub2trains.get(event.getFacilityId()).add(event.getVehicleId());
+
+	            // Check if we have to update the queue
+	            int trainsAtHub = hub2trains.get(event.getFacilityId()).size();
+
+	            if (trainsAtHub == 1) {
+	                // Everything OK
+	            } else {
+	                log.info("There are " + trainsAtHub + " cst vehicles at hub " + event.getFacilityId().toString() +
+	                        " at time " + Time.writeTime(event.getTime(), Time.TIMEFORMAT_HHMMSS));
+	            }
+	        }
+	    }
 	}
+
 
 	@Override
 	public void handleEvent(VehicleDepartsAtFacilityEvent event) {
 		if (transitVehicles.contains(event.getVehicleId())) {
-			// transit vehicle departs at a facility
 			
-			this.train2terminal.remove(event.getVehicleId());
-			
-			// update the information about which train is at which terminal
-			if (this.terminal2trains.get(event.getFacilityId()) == null) {
-				throw new RuntimeException("Train departs without arriving. Aborting...");
-			}
-			this.terminal2trains.get(event.getFacilityId()).remove(event.getVehicleId());
-			
-			// TODO: check if the train has departed too late
+			// transit vehicle departs at a facility			
+	        TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(event.getFacilityId());
+	        String stopType = (String) stop.getAttributes().getAttribute("type");
 
+	        
+	        if ("terminal".equals(stopType)) {
+	            // Handle terminal stops
+	        	
+	        	this.train2terminal.remove(event.getVehicleId());
+			
+	        	// update the information about which train is at which terminal
+				if (this.terminal2trains.get(event.getFacilityId()) == null) {
+					throw new RuntimeException("Train departs without arriving. Aborting...");
+				}
+				this.terminal2trains.get(event.getFacilityId()).remove(event.getVehicleId());
+				
+				// TODO: check if the train has departed too late
+	
+	        } else if ("cst_hub".equals(stopType)) {
+	        	
+	        	this.train2hub.remove(event.getVehicleId());
+				
+	        	// update the information about which train is at which terminal
+				if (this.hub2trains.get(event.getFacilityId()) == null) {
+					throw new RuntimeException("CST vehicle departs without arriving. Aborting...");
+				}
+				this.hub2trains.get(event.getFacilityId()).remove(event.getVehicleId());
+				
+				// TODO: check if the train has departed too late        	
+	        	
+	        }
 		}
 	}
-	
+		
 	@Override
 	public void handleEvent(VehicleLeavesTrafficEvent event) {
 		vehicleLeavesLink(event.getVehicleId(), event.getLinkId());
@@ -404,149 +532,223 @@ public class TerminalQueueDeactivationEventHandler implements
 		}
 	}
 
+		
+	
+	
 	@Override
 	public void handleEvent(AgentWaitingForPtEvent event) {
-		if (this.terminal2waitingPersons.get(event.getWaitingAtStopId()) == null) {
-			this.terminal2waitingPersons.put(event.getWaitingAtStopId(), new HashSet<>());
-		}
-		this.terminal2waitingPersons.get(event.getWaitingAtStopId()).add(event.getPersonId());
+	    TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(event.getWaitingAtStopId());
+	    String stopType = (String) stop.getAttributes().getAttribute("type");
+
+	    if ("terminal".equals(stopType)) {
+	        if (this.terminal2waitingPersons.get(event.getWaitingAtStopId()) == null) {
+	            this.terminal2waitingPersons.put(event.getWaitingAtStopId(), new HashSet<>());
+	        }
+	        this.terminal2waitingPersons.get(event.getWaitingAtStopId()).add(event.getPersonId());
+	    } else if ("cst_hub".equals(stopType)) {
+	        if (this.hub2waitingPersons.get(event.getWaitingAtStopId()) == null) {
+	            this.hub2waitingPersons.put(event.getWaitingAtStopId(), new HashSet<>());
+	        }
+	        this.hub2waitingPersons.get(event.getWaitingAtStopId()).add(event.getPersonId());
+	    }
 	}
 	
 	private void activateQueue(Id<TransitStopFacility> facilityId, double time) {
-		if (this.terminal2queueStatus.get(facilityId) == QueueStatus.Active) {
-			// nothing to do
-			
-		} else {
-			this.terminal2queueStatus.put(facilityId, QueueStatus.Active);
+	    TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(facilityId);
+	    String stopType = (String) stop.getAttributes().getAttribute("type");
 
-			// log.debug("++++ Activate queue for " + facilityId + " at time " + Time.writeTime(time, Time.TIMEFORMAT_HHMMSS) + ": " + time);
-			
-			for (Link link : this.terminal2queueLinks.get(facilityId)) {
-				
-				this.queueLink2signal.get(link.getId()).setSignalStateAllTurningMoves(SignalGroupState.GREEN);
-			}			
-		}	
+	    if ("terminal".equals(stopType)) {
+	        if (this.terminal2queueStatus.get(facilityId) == QueueStatus.Active) {
+	            // nothing to do
+	        } else {
+	            this.terminal2queueStatus.put(facilityId, QueueStatus.Active);
+	            for (Link link : this.terminal2queueLinks.get(facilityId)) {
+	                this.queueLink2signal.get(link.getId()).setSignalStateAllTurningMoves(SignalGroupState.GREEN);
+	            }
+	        }
+	    } else if ("cst_hub".equals(stopType)) {
+	        if (this.hub2queueStatus.get(facilityId) == QueueStatus.Active) {
+	            // nothing to do
+	        } else {
+	            this.hub2queueStatus.put(facilityId, QueueStatus.Active);
+	            for (Link link : this.hub2queueLinks.get(facilityId)) {
+	                this.queueLink2signal.get(link.getId()).setSignalStateAllTurningMoves(SignalGroupState.GREEN);
+	            }
+	        }
+	    }
 	}
+
 	
+	
+
 	private void deactivateQueue(Id<TransitStopFacility> facilityId, double time) {
-		
-		if (this.terminal2queueStatus.get(facilityId) == QueueStatus.Deactive) {
-			// nothing to do
-			
-		} else {
-			this.terminal2queueStatus.put(facilityId, QueueStatus.Deactive);
-			
-			// log.debug("---- Deactivate queue for " + facilityId + " at time " + Time.writeTime(time, Time.TIMEFORMAT_HHMMSS) + ": " + time);
-						
-			for (Link link : this.terminal2queueLinks.get(facilityId)) {
-				
-				this.queueLink2signal.get(link.getId()).setSignalStateAllTurningMoves(SignalGroupState.RED);					
-			}	
-		}
-	}
-	
-	
+	    TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(facilityId);
+	    String stopType = (String) stop.getAttributes().getAttribute("type");
 
+	    if ("terminal".equals(stopType)) {
+	        if (this.terminal2queueStatus.get(facilityId) == QueueStatus.Deactive) {
+	            // nothing to do
+	        } else {
+	            this.terminal2queueStatus.put(facilityId, QueueStatus.Deactive);
+	         // log.debug("---- Deactivate queue for " + facilityId + " at time " + Time.writeTime(time, Time.TIMEFORMAT_HHMMSS) + ": " + time);
+				
+	            for (Link link : this.terminal2queueLinks.get(facilityId)) {
+	                this.queueLink2signal.get(link.getId()).setSignalStateAllTurningMoves(SignalGroupState.RED);
+	            }
+	        }
+	    } else if ("cst_hub".equals(stopType)) {
+	        if (this.hub2queueStatus.get(facilityId) == QueueStatus.Deactive) {
+	            // nothing to do
+	        } else {
+	            this.hub2queueStatus.put(facilityId, QueueStatus.Deactive);
+	            for (Link link : this.hub2queueLinks.get(facilityId)) {
+	                this.queueLink2signal.get(link.getId()).setSignalStateAllTurningMoves(SignalGroupState.RED);
+	            }
+	        }
+	    }
+	}
+
+
+	
 	private boolean isTheStackWithBoardingAgents(Id<TransitStopFacility> stopFacilityId) {
-		
-		// (1) check the vehicles/persons on the links
-		Set<Link> stackLinks = this.terminal2stackLinks.get(stopFacilityId);			
-		for (Link link : stackLinks) {
-			if (this.link2vehicles.get(link.getId()) == null) {
-				// no information for that link
-			} else {
-				// there are vehicles on that link we need to check
-				
-				for (Id<Vehicle> vehicleId : this.link2vehicles.get(link.getId())) {
-					Id<Person> personId = this.vehicle2person.get(vehicleId);
-					if (agentWantsToBoardATrainWhichIsCurrentlyAtTheStop(stopFacilityId, personId)) {
-						// This agent who is in the stack, in particular on one of the links between the queue and the transit stop,
-						// wants to board one of the trains which is currently at the terminal.
-						
-						return true;
-					}
-				}
-			}
-		}
-		
-		// (2) also check the agents who have left the link and are still waiting to board the train
-		if (this.terminal2waitingPersons.get(stopFacilityId) == null) {
-			// no agent is waiting a the terminal
-			
-		} else {
-			// there are agents waiting at the terminal we have to check
-			
-			for (Id<Person> personId : this.terminal2waitingPersons.get(stopFacilityId)) {
-				if (agentWantsToBoardATrainWhichIsCurrentlyAtTheStop(stopFacilityId, personId)) {
-					// This agent who is in the stack, in particular on one of the links between the queue and the transit stop,
-					// wants to board one of the trains which is currently at the terminal.
-					
-					return true;
-				}
-			}
-		}
-		
-		return false;
+	    TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(stopFacilityId);
+	    String stopType = (String) stop.getAttributes().getAttribute("type");
+
+	    Set<Link> stackLinks;
+	    if ("terminal".equals(stopType)) {
+	        stackLinks = this.terminal2stackLinks.get(stopFacilityId);
+	    } else if ("cst_hub".equals(stopType)) {
+	        stackLinks = this.hub2stackLinks.get(stopFacilityId);
+	    } else {
+	        throw new RuntimeException("Unknown stop type: " + stopType);
+	    }
+
+	    // (1) Check the vehicles/persons on the links
+	    for (Link link : stackLinks) {
+	        if (this.link2vehicles.get(link.getId()) == null) {
+	            // no information for that link
+	        } else {
+	            // there are vehicles on that link we need to check
+	            for (Id<Vehicle> vehicleId : this.link2vehicles.get(link.getId())) {
+	                Id<Person> personId = this.vehicle2person.get(vehicleId);
+	                if (agentWantsToBoardATrainWhichIsCurrentlyAtTheStop(stopFacilityId, personId)) {
+	                    // This agent who is in the stack, in particular on one of the links between the queue and the transit stop,
+	                    // wants to board one of the trains which is currently at the terminal/hub.
+	                    return true;
+	                }
+	            }
+	        }
+	    }
+
+	    // (2) Also check the agents who have left the link and are still waiting to board the train
+	    if ("terminal".equals(stopType)) {
+	        if (this.terminal2waitingPersons.get(stopFacilityId) == null) {
+	            // no agent is waiting at the terminal
+	        } else {
+	            // there are agents waiting at the terminal we have to check
+	            for (Id<Person> personId : this.terminal2waitingPersons.get(stopFacilityId)) {
+	                if (agentWantsToBoardATrainWhichIsCurrentlyAtTheStop(stopFacilityId, personId)) {
+	                    // This agent who is in the stack, in particular on one of the links between the queue and the transit stop,
+	                    // wants to board one of the trains which is currently at the terminal.
+	                    return true;
+	                }
+	            }
+	        }
+	    } else if ("cst_hub".equals(stopType)) {
+	        if (this.hub2waitingPersons.get(stopFacilityId) == null) {
+	            // no agent is waiting at the hub
+	        } else {
+	            // there are agents waiting at the hub we have to check
+	            for (Id<Person> personId : this.hub2waitingPersons.get(stopFacilityId)) {
+	                if (agentWantsToBoardATrainWhichIsCurrentlyAtTheStop(stopFacilityId, personId)) {
+	                    // This agent who is in the stack, in particular on one of the links between the queue and the transit stop,
+	                    // wants to board one of the trains which is currently at the hub.
+	                    return true;
+	                }
+	            }
+	        }
+	    }
+
+	    return false;
 	}
-
+	
+	
+	
 	private boolean agentWantsToBoardATrainWhichIsCurrentlyAtTheStop(Id<TransitStopFacility> stopFacilityId, Id<Person> personId) {
-		
-		for (Id<Vehicle> train : this.terminal2trains.get(stopFacilityId)) {
-			Id<TransitRoute> trainRouteId = this.train2route.get(train);
-			String nextTrainRouteDescription = this.person2nextTrainRouteDescription.get(personId);
-			
-			if (nextTrainRouteDescription == null) {
-				log.debug("There is no information for agent " + personId);
-				
-			} else {
-				
-				log.debug("Agent " + personId + " has a next leg.");
-				
-				if (nextTrainRouteDescription.contains("\"" + trainRouteId.toString() + "\"")) {
-					// The agent wants to board one of the trains which is currently at the terminal.
-					
-					// check if the agent is able to board the train --> check if the train has available capacities
-					if (this.train2passengers.get(train).size() == this.train2capacity.get(train)) {
-						log.debug("The agent cannot board train " + train + " at stop " + stopFacilityId);
-						
-					} else {
-						log.debug("The agent is about to board train " + train + " at stop " + stopFacilityId);
-						return true;
-					}
-					
-				} else {
-					log.debug("The agent does not want to board train " + train + " at stop " + stopFacilityId);
-				}
-			}
-		}
+	    TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(stopFacilityId);
+	    String stopType = (String) stop.getAttributes().getAttribute("type");
 
-		return false;
+	    Set<Id<Vehicle>> trainsAtStop;
+	    if ("terminal".equals(stopType)) {
+	        trainsAtStop = this.terminal2trains.get(stopFacilityId);
+	    } else if ("cst_hub".equals(stopType)) {
+	        trainsAtStop = this.hub2trains.get(stopFacilityId);
+	    } else {
+	        throw new RuntimeException("Unknown stop type: " + stopType);
+	    }
+
+	    for (Id<Vehicle> train : trainsAtStop) {
+	        Id<TransitRoute> trainRouteId = this.train2route.get(train);
+	        String nextTrainRouteDescription = this.person2nextTrainRouteDescription.get(personId);
+
+	        if (nextTrainRouteDescription == null) {
+	            log.debug("There is no information for agent " + personId);
+	        } else {
+	            log.debug("Agent " + personId + " has a next leg.");
+
+	            if (nextTrainRouteDescription.contains("\"" + trainRouteId.toString() + "\"")) {
+	                // The agent wants to board one of the trains which is currently at the stop.
+
+	                // Check if the agent is able to board the train --> check if the train has available capacities
+	                if (this.train2passengers.get(train).size() == this.train2capacity.get(train)) {
+	                    log.debug("The agent cannot board train " + train + " at stop " + stopFacilityId);
+	                } else {
+	                    log.debug("The agent is about to board train " + train + " at stop " + stopFacilityId);
+	                    return true;
+	                }
+	            } else {
+	                log.debug("The agent does not want to board train " + train + " at stop " + stopFacilityId);
+	            }
+	        }
+	    }
+
+	    return false;
 	}
 
 	private boolean isThereATrainWithAlightingAgents(Id<TransitStopFacility> stopFacilityId) {
-		Id<Link> stopFacilityLink = this.scenario.getTransitSchedule().getFacilities().get(stopFacilityId).getLinkId();
-		
-		for (Id<Vehicle> train : this.terminal2trains.get(stopFacilityId)) {
-			for (Id<Person> person : this.train2passengers.get(train)) {
-				Id<Link> destinationStopLinkOfThatPerson = this.person2destinationStopLink.get(person);
-				
-				if (stopFacilityLink.toString().equals(destinationStopLinkOfThatPerson.toString())) {
-					// This agent who is on the train wants to alight at the current transit stop.
-					
-					return true;
-				}
-			}
+	    Id<Link> stopFacilityLink = this.scenario.getTransitSchedule().getFacilities().get(stopFacilityId).getLinkId();
+	    TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(stopFacilityId);
+	    String stopType = (String) stop.getAttributes().getAttribute("type");
 
-		}
-		return false;
+	    Set<Id<Vehicle>> trainsAtStop;
+	    if ("terminal".equals(stopType)) {
+	        trainsAtStop = this.terminal2trains.get(stopFacilityId);
+	    } else if ("cst_hub".equals(stopType)) {
+	        trainsAtStop = this.hub2trains.get(stopFacilityId);
+	    } else {
+	        throw new RuntimeException("Unknown stop type: " + stopType);
+	    }
+
+	    for (Id<Vehicle> train : trainsAtStop) {
+	        for (Id<Person> person : this.train2passengers.get(train)) {
+	            Id<Link> destinationStopLinkOfThatPerson = this.person2destinationStopLink.get(person);
+
+	            if (stopFacilityLink.toString().equals(destinationStopLinkOfThatPerson.toString())) {
+	                // This agent who is on the train wants to alight at the current transit stop.
+	                return true;
+	            }
+	        }
+	    }
+	    return false;
 	}
-	
+
 	private Set<Link> getQueueLinks(Id<TransitStopFacility> facilityId) {
 		
 		Set<Link> links = new HashSet<>();
 		
 		// This is hard-coded and should be changed if the naming syntax changes.
 		String idPrefix = facilityId + "_" + facilityId + "_IN1_carKV_";
+				
 		
 		for (Link link : this.scenario.getNetwork().getLinks().values()) {
 			if (link.getId().toString().startsWith(idPrefix)) {
@@ -554,7 +756,7 @@ public class TerminalQueueDeactivationEventHandler implements
 			}
 		}
 		
-		if (links.isEmpty()) throw new RuntimeException("Could not find the truck-stack queue for terminal " + facilityId.toString());
+		if (links.isEmpty()) throw new RuntimeException("Could not find the truck-stack queue for terminal/hub " + facilityId.toString());
 		
 		return links;
 	}
@@ -584,13 +786,17 @@ public class TerminalQueueDeactivationEventHandler implements
 		}
 		
 		if (links.isEmpty() || links.size() < 2) throw new RuntimeException("Expecting 2 stack links. "
-				+ "Could not find all stack links for terminal " + facilityId.toString());
+				+ "Could not find all stack links for terminal/hub " + facilityId.toString());
 		
 		return links;
 	}
 	
 	public Map<Id<TransitStopFacility>, Set<Id<Vehicle>>> getTerminal2trains() {
 		return terminal2trains;
+	}
+	
+	public Map<Id<TransitStopFacility>, Set<Id<Vehicle>>> getHub2trains() {
+	    return hub2trains;
 	}
 
 }

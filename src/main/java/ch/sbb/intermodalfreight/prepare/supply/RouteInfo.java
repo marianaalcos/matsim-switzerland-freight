@@ -22,7 +22,6 @@ public class RouteInfo {
 	
 	private final String line;
 	private final String route;
-	// private final Map<String, List<Double>> terminalFromHeader2Times;
 	private final Map<String, List<Double>> times;
 	private List<RouteStopInfo> routeStopInfos;
 	private final RouteType routeType;
@@ -32,7 +31,6 @@ public class RouteInfo {
 		this.route = route;
 		this.times = times;
 	    this.routeType = routeType;
-		// this.terminalFromHeader2Times = terminal2Times;
 	}
 
 	/**

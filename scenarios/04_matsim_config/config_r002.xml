@@ -57,7 +57,7 @@
 		<param name="endTime" value="72:00:00" />		
 	
 		<param name="snapshotperiod" value = "00:00:00"/>
-		<param name="mainMode" value="car,carKV_container" />
+		<param name="mainMode" value="car,carKV_container,carKV_cst" />
 		
 		<param name="stuckTime" value="999999.0" />
 		
@@ -121,6 +121,15 @@
 			<param name="monetaryDistanceRate" value="-0.0070"/>
 		</parameterset>
 		<parameterset type="modeParams">
+			<param name="constant" value="-5.0"/>
+			<param name="dailyMonetaryConstant" value="0.0"/>
+			<param name="dailyUtilityConstant" value="0.0"/>
+			<param name="marginalUtilityOfDistance_util_m" value="0.0"/>
+			<param name="marginalUtilityOfTraveling_util_hr" value="0.0"/>
+			<param name="mode" value="carKV_cst"/>
+			<param name="monetaryDistanceRate" value="-0.0070"/>
+		</parameterset>
+		<parameterset type="modeParams">
 			<param name="constant" value="0.0"/>
 			<param name="dailyMonetaryConstant" value="0.0"/>
 			<param name="dailyUtilityConstant" value="0.0"/>
@@ -134,7 +143,7 @@
 	<module name="planscalcroute" >
 		<param name="accessEgressType" value="none" />
 		<param name="clearDefaultTeleportedModeParams" value="true" />
-		<param name="networkModes" value="car,carKV_container" />
+		<param name="networkModes" value="car,carKV_container,carKV_cst" />
 		<param name="routingRandomness" value="3.0" />
 		<parameterset type="teleportedModeParameters" >
 			<param name="beelineDistanceFactor" value="1." />
@@ -294,6 +303,18 @@
 			<param name="searchExtensionRadius" value="10000.0" />
 			<param name="shareTripSearchRadius" value="0.5" />
 			<param name="stopFilterAttribute" value="accessible_carKV_container" />
+			<param name="stopFilterValue" value="1" />
+		</parameterset>
+		<parameterset type="intermodalAccessEgress" >
+			<param name="initialSearchRadius" value="20000.0" />
+			<param name="linkIdAttribute" value="null" />
+			<param name="maxRadius" value="100000.0" />
+			<param name="mode" value="carKV_cst" />
+			<param name="personFilterAttribute" value="null" />
+			<param name="personFilterValue" value="null" />
+			<param name="searchExtensionRadius" value="10000.0" />
+			<param name="shareTripSearchRadius" value="0.5" />
+			<param name="stopFilterAttribute" value="accessible_carKV_cst" />
 			<param name="stopFilterValue" value="1" />
 		</parameterset>
 	</module>

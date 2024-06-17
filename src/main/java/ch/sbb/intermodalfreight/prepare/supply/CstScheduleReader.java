@@ -81,7 +81,7 @@ public class CstScheduleReader {
 		    		
 		    		String line = null;
 			    	String route = null;
-			    	Map<String,List<Double>> hubFromHeader2Times = new HashMap<>();
+			    	Map<String,List<Double>> times = new HashMap<>();
 			    			        
 			        for (Cell cell : row) {
 			        	
@@ -113,19 +113,19 @@ public class CstScheduleReader {
 			        	} else {
 			        		// this should be a hub name
 			        		
-			        		if (hubFromHeader2Times.get(headerOfCurrentCell) == null) {
-				        		hubFromHeader2Times.put(headerOfCurrentCell, new ArrayList<>());
+			        		if (times.get(headerOfCurrentCell) == null) {
+			        			times.put(headerOfCurrentCell, new ArrayList<>());
 			        		}
 			        				        				        		
 			        		if (cell.getCellType() == CellType.NUMERIC) {
 			        			Date date = cell.getDateCellValue();
 			            		double time = date.getHours() * 3600. + date.getMinutes() * 60 + date.getSeconds();
-			            		hubFromHeader2Times.get(headerOfCurrentCell).add(time);
+			            		times.get(headerOfCurrentCell).add(time);
 			            		
 			        		} else if (cell.getCellType() == CellType.FORMULA && cell.getCachedFormulaResultType() == CellType.NUMERIC) {
 			        			Date date = cell.getDateCellValue();
 			            		double time = date.getHours() * 3600. + date.getMinutes() * 60 + date.getSeconds();
-			            		hubFromHeader2Times.get(headerOfCurrentCell).add(time);
+			            		times.get(headerOfCurrentCell).add(time);
 			            		
 			        		} else {
 			        			throw new RuntimeException("Expecting the An/Ab column as Numeric or Formula/Numeric format. Aborting... cellType: " + cell.getCellType() + " / " + cell.getStringCellValue());
@@ -133,7 +133,7 @@ public class CstScheduleReader {
 			        	}
 			        }
 			        // add RouteType and set it to HUB
-			        RouteInfo routeInfo = new RouteInfo(line, route, hubFromHeader2Times, RouteInfo.RouteType.HUB);
+			        RouteInfo routeInfo = new RouteInfo(line, route, times, RouteInfo.RouteType.HUB);
 			        if (line != null && route != null) routeInfos.add(routeInfo);
 		    	}
 		        rowCounter++;

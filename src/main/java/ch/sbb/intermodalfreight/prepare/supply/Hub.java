@@ -32,7 +32,7 @@ public class Hub {
 	 * @param shortName the short name used in the cargo line description in each row of the xlsx schedule file
 	 * @param header the name used in the column headers in the xlsx schedule file
 	 * @param coord x and y coordinates from this location, the hub will be connected to the (nearest) link of the road network
-	 * @param mode2hubCapacity flow capacity (containers per hour) for each mode (during the time when the terminal is open)
+	 * @param mode2hubCapacity flow capacity (containers per hour) for each mode (during the time when the hub is open)
 	 * @param mode2operatingTimes operation times for each mode for the 24h period, will be the same on the following day(s) if a supply is generated for multiple days
 	 */
 	public Hub(String name, String shortName, String header, Coord coord, Map<String, Double> mode2hubCapacity, Map<String, Tuple<Double, Double>> mode2operatingTimes) {
@@ -46,12 +46,12 @@ public class Hub {
 		// check data consistency
 		for (String mode : this.mode2hubCapacity.keySet()) {
 			if (this.mode2operatingTimes.get(mode) == null) {
-				throw new RuntimeException("Missing information for mode " + mode + " at terminal " + name + ". Aborting...");
+				throw new RuntimeException("Missing information for mode " + mode + " at hub " + name + ". Aborting...");
 			}
 		}
 		for (String mode : this.mode2operatingTimes.keySet()) {
 			if (this.mode2hubCapacity.get(mode) == null) {
-				throw new RuntimeException("Missing information for mode " + mode + " at terminal " + name + ". Aborting...");
+				throw new RuntimeException("Missing information for mode " + mode + " at hub " + name + ". Aborting...");
 			}
 		}
 	}

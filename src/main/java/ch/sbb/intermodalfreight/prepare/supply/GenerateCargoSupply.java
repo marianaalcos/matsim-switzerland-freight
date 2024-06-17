@@ -335,7 +335,7 @@ public class GenerateCargoSupply {
 
 		
 		// Determine if the carModeKV indicates a CSTHub
-	    boolean isCSTHub = carModeKV.contains("CST");
+	    boolean isCSTHub = carModeKV.contains("cst");
 	    
 		double distance = isCSTHub ? distanceEachHubLink : distanceEachTerminalLink;
 	    // If isCSTHub is true, then distance is set to distanceEachHubLink, else distanceEachTerminalLink
@@ -419,7 +419,7 @@ public class GenerateCargoSupply {
 			} else {
 				// not the first terminal
 				// determine the mode based on the routeType
-				String mode = (stop.getRouteType() == RouteInfo.RouteType.HUB) ? "cst" : "rail";
+				String mode = (stop.getRouteType() == RouteInfo.RouteType.HUB) ? "carKV_cst" : "rail";
 		        // add connecting link
 	            Link connectingLink = addLink(transitLine + "_" + transitRoute + "_" + routeCounter,
 		                    getDistance(combinedDistances, previousStop, stop),
@@ -498,7 +498,7 @@ public class GenerateCargoSupply {
 		NetworkRoute networkRoute = RouteUtils.createLinkNetworkRouteImpl(railLinks.get(0), railLinks.subList(1, railLinks.size() - 1), railLinks.get(railLinks.size() - 1));
         
         // Determine the TransitRoute mode based on the route type
-	    String mode = (routeInfos.get(0).getRouteType() == RouteInfo.RouteType.HUB) ? "cst" : "rail";
+	    String mode = (routeInfos.get(0).getRouteType() == RouteInfo.RouteType.HUB) ? "carKV_cst" : "rail";
 	       
         // TransitRoute route = sf.createTransitRoute(Id.create(transitLine + "_" + transitRoute + "_" + routeCounter, TransitRoute.class), networkRoute, stops, "rail");
         TransitRoute route = sf.createTransitRoute(Id.create(transitLine + "_" + transitRoute + "_" + routeCounter, TransitRoute.class), networkRoute, stops, mode);

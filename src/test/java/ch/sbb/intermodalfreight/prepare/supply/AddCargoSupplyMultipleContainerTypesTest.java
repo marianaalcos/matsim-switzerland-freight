@@ -188,6 +188,7 @@ public class AddCargoSupplyMultipleContainerTypesTest {
 			double t3Arrival = 12 * 3600.;
 			double t3Departure = Double.NaN;
 			
+			
 			List<RouteStopInfo> routeInfos = new ArrayList<>();
 			RouteStopInfo stop1 = new RouteStopInfo(terminals.get(t1).getTerminalLink(), terminals.get(t1).getStop(), t1Arrival, t1Departure);
 			RouteStopInfo stop2 = new RouteStopInfo(terminals.get(t2).getTerminalLink(), terminals.get(t2).getStop(), t2Arrival, t2Departure);
