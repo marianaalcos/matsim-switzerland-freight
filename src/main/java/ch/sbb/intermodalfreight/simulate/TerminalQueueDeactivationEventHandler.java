@@ -129,7 +129,7 @@ public class TerminalQueueDeactivationEventHandler implements
 		relevantLinks = new HashSet<>();
 		terminal2queueLinks = new HashMap<>();
 		terminal2stackLinks = new HashMap<>();
-		// adding cst hub maps
+		// adding cst hub 
 		hub2queueLinks = new HashMap<>();
 		hub2stackLinks = new HashMap<>();
 		//
@@ -142,7 +142,7 @@ public class TerminalQueueDeactivationEventHandler implements
 		terminal2waitingPersons = new HashMap<>();
 		terminal2trains = new HashMap<>();
 		train2terminal = new HashMap<>();
-		// adding cst hub maps
+		// adding cst hub 
 		hub2waitingPersons = new HashMap<>();
 		hub2trains = new HashMap<>();
 		train2hub = new HashMap<>();
@@ -242,7 +242,7 @@ public class TerminalQueueDeactivationEventHandler implements
 	}
 
 	@Override
-	public void notifyMobsimInitialized(MobsimInitializedEvent e) {
+	public void notifyMobsimInitialized(MobsimInitializedEvent e) { //sets the signals for queue links 
 		Netsim mobsim = (Netsim) e.getQueueSimulation() ;
 		for (Id<TransitStopFacility> stopId : scenario.getTransitSchedule().getFacilities().keySet()) {
 			TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(stopId);
@@ -269,7 +269,7 @@ public class TerminalQueueDeactivationEventHandler implements
 	
 	
 	@Override
-	public void notifyMobsimBeforeSimStep(MobsimBeforeSimStepEvent event) {
+	public void notifyMobsimBeforeSimStep(MobsimBeforeSimStepEvent event) { // updates the queue status 
 	    for (Id<TransitStopFacility> stopFacilityId : scenario.getTransitSchedule().getFacilities().keySet()) {
 	        TransitStopFacility stop = scenario.getTransitSchedule().getFacilities().get(stopFacilityId);
 	        String stopType = (String) stop.getAttributes().getAttribute("type");
@@ -486,16 +486,34 @@ public class TerminalQueueDeactivationEventHandler implements
 				Id<Link> destinationLink = currentLeg.getRoute().getEndLinkId();
 				this.person2destinationStopLink.put(event.getPersonId(), destinationLink);
 				
-				// a person entering a transit vehicle is no longer waiting, update this information
-				Id<TransitStopFacility> stopId = this.train2terminal.get(event.getVehicleId());
-				this.terminal2waitingPersons.get(stopId).remove(event.getPersonId());
-			}
-		} else {
-			// carKV mode etc.
-			vehicle2person.put(event.getVehicleId(), event.getPersonId());
-		}
-	}
+				// Determine the stop ID and type
+	            Id<TransitStopFacility> stopId = this.train2terminal.get(event.getVehicleId());
+	            String stopType = null;
+	            if (stopId != null) {
+	                stopType = (String) this.scenario.getTransitSchedule().getFacilities().get(stopId).getAttributes().getAttribute("type");
+	            } else {
+	                stopId = this.train2hub.get(event.getVehicleId());
+	                if (stopId != null) {
+	                    stopType = (String) this.scenario.getTransitSchedule().getFacilities().get(stopId).getAttributes().getAttribute("type");
+	                }
+	            }
 
+	            // a person entering a transit vehicle is no longer waiting, update this information
+	            if ("terminal".equals(stopType)) {
+	                this.terminal2waitingPersons.get(stopId).remove(event.getPersonId());
+	            } else if ("cst_hub".equals(stopType)) {
+	                this.hub2waitingPersons.get(stopId).remove(event.getPersonId());
+	            }
+	        }
+	    } else {
+	        // carKV mode etc.
+	        vehicle2person.put(event.getVehicleId(), event.getPersonId());
+	    }
+	}			 
+					
+				
+		
+	
 	@Override
 	public void handleEvent(PersonDepartureEvent event) {
 		if (this.person2legCounter.get(event.getPersonId()) == null) {
