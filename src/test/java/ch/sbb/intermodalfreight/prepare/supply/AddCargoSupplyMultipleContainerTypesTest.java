@@ -190,9 +190,9 @@ public class AddCargoSupplyMultipleContainerTypesTest {
 			
 			
 			List<RouteStopInfo> routeInfos = new ArrayList<>();
-			RouteStopInfo stop1 = new RouteStopInfo(terminals.get(t1).getTerminalLink(), terminals.get(t1).getStop(), t1Arrival, t1Departure);
-			RouteStopInfo stop2 = new RouteStopInfo(terminals.get(t2).getTerminalLink(), terminals.get(t2).getStop(), t2Arrival, t2Departure);
-			RouteStopInfo stop3 = new RouteStopInfo(terminals.get(t3).getTerminalLink(), terminals.get(t3).getStop(), t3Arrival, t3Departure);
+			RouteStopInfo stop1 = new RouteStopInfo(terminals.get(t1).getTerminalLink(), terminals.get(t1).getStop(), t1Arrival, t1Departure,"terminal");
+			RouteStopInfo stop2 = new RouteStopInfo(terminals.get(t2).getTerminalLink(), terminals.get(t2).getStop(), t2Arrival, t2Departure,"terminal");
+			RouteStopInfo stop3 = new RouteStopInfo(terminals.get(t3).getTerminalLink(), terminals.get(t3).getStop(), t3Arrival, t3Departure,"terminal");
 
 			routeInfos.add(stop1);
 			routeInfos.add(stop2);
@@ -219,9 +219,9 @@ public class AddCargoSupplyMultipleContainerTypesTest {
 			double t3Departure = Double.NaN;
 			
 			List<RouteStopInfo> routeInfos = new ArrayList<>();
-			RouteStopInfo stop1 = new RouteStopInfo(terminals.get(t1).getTerminalLink(), terminals.get(t1).getStop(), t1Arrival, t1Departure);
-			RouteStopInfo stop2 = new RouteStopInfo(terminals.get(t2).getTerminalLink(), terminals.get(t2).getStop(), t2Arrival, t2Departure);
-			RouteStopInfo stop3 = new RouteStopInfo(terminals.get(t3).getTerminalLink(), terminals.get(t3).getStop(), t3Arrival, t3Departure);
+			RouteStopInfo stop1 = new RouteStopInfo(terminals.get(t1).getTerminalLink(), terminals.get(t1).getStop(), t1Arrival, t1Departure,"terminal");
+			RouteStopInfo stop2 = new RouteStopInfo(terminals.get(t2).getTerminalLink(), terminals.get(t2).getStop(), t2Arrival, t2Departure,"terminal");
+			RouteStopInfo stop3 = new RouteStopInfo(terminals.get(t3).getTerminalLink(), terminals.get(t3).getStop(), t3Arrival, t3Departure,"terminal");
 
 			routeInfos.add(stop1);
 			routeInfos.add(stop2);

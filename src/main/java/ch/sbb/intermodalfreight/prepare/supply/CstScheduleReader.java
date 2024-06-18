@@ -133,7 +133,7 @@ public class CstScheduleReader {
 			        	}
 			        }
 			        // add RouteType and set it to HUB
-			        RouteInfo routeInfo = new RouteInfo(line, route, times, RouteInfo.RouteType.HUB);
+			        RouteInfo routeInfo = new RouteInfo(line, route, times, "cst");
 			        if (line != null && route != null) routeInfos.add(routeInfo);
 		    	}
 		        rowCounter++;

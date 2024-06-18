@@ -133,7 +133,7 @@ public class CargoScheduleReader {
 			        	}
 			        }
 			        
-			        RouteInfo routeInfo = new RouteInfo(line, route, times,  RouteInfo.RouteType.TERMINAL);
+			        RouteInfo routeInfo = new RouteInfo(line, route, times,  "terminal");
 			        if (line != null && route != null) routeInfos.add(routeInfo);
 		    	}
 		        rowCounter++;

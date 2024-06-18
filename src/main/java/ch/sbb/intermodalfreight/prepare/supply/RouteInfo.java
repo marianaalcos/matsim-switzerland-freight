@@ -15,18 +15,19 @@ import java.util.Map;
  */
 public class RouteInfo {
 
+	/**
 	public enum RouteType {
         TERMINAL,
         HUB
     }
-	
+	*/
 	private final String line;
 	private final String route;
 	private final Map<String, List<Double>> times;
 	private List<RouteStopInfo> routeStopInfos;
-	private final RouteType routeType;
+	private final String routeType;
 
-	public RouteInfo(String line, String route, Map<String, List<Double>> times, RouteType routeType) {
+	public RouteInfo(String line, String route, Map<String, List<Double>> times, String routeType) {
 		this.line = line;
 		this.route = route;
 		this.times = times;
@@ -50,7 +51,7 @@ public class RouteInfo {
 	/**
      * @return the route type
      */
-    public RouteType getRouteType() {
+    public String getRouteType() {
         return routeType;
     }
     /**
