@@ -58,14 +58,6 @@ public class RunExample {
        
        
         Scenario scenario = RunIntermodalFreightScenario.prepareScenario(config);
-        /**
-        Add here code to add CST nodes and links 
-         
-         String s = reader
-         Node node = NetworkUtils.createNode(Id.createNodeId(s))
-         scenario.getNetwork().addNode(node);
-
-        */
         Controler controler = RunIntermodalFreightScenario.prepareControler(scenario);
         controler.run();
     }

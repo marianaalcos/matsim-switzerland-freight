@@ -157,7 +157,6 @@ public class RunGenerateCargoSupply {
             String transitRoute = routeInfo.getRoute();
             List<RouteStopInfo> routeStopInfos = routeInfo.getRouteStopInfos();
 
-            //Map<String, Double> relevantDistances = (routeInfo.getRouteType() == RouteInfo.RouteType.TERMINAL) ? terminalDistances : hubDistances;
             supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, cargoTrainCapacityTEU, relevantDistances);
 
             routeCounter++;

@@ -15,12 +15,7 @@ import java.util.Map;
  */
 public class RouteInfo {
 
-	/**
-	public enum RouteType {
-        TERMINAL,
-        HUB
-    }
-	*/
+	
 	private final String line;
 	private final String route;
 	private final Map<String, List<Double>> times;
@@ -64,14 +59,7 @@ public class RouteInfo {
 	/**
 	 * @return the terminal2Times
 	 */
-	//public Map<String, List<Double>> getTerminalFromHeader2Times() {
-	//	return terminalFromHeader2Times;
-	//}
-
-	//@Override
-	//public String toString() {
-	//	return "RouteInfo [line=" + line + ", route=" + route + ", terminalFromHeader2Times=" + terminalFromHeader2Times + "]";
-	//}
+	
 	@Override
 	public String toString() {
         return "RouteInfo [line=" + line + ", route=" + route + ", times=" + times + ", routeType=" + routeType + "]";

@@ -324,7 +324,7 @@
 				"useful for visualization or analysis purposes. Defaults to 0. `0' disables the creation of events completely. -->
 		<param name="createLinkEventsInterval" value="1"/>
 		<!-- Leg modes used by the created transit drivers that should be simulated strictly according to the schedule. -->
-		<param name="deterministicServiceModes" value="rail"/>
+		<param name="deterministicServiceModes" value="rail,cst"/>
 	</module>
 	
 </config>
