@@ -2,13 +2,10 @@ package ch.sbb.intermodalfreight;
 
 import java.io.IOException;
 
-import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
-import org.matsim.api.core.v01.network.Node;
 import org.matsim.core.config.Config;
 import org.matsim.core.controler.Controler;
 import org.matsim.core.controler.OutputDirectoryHierarchy.OverwriteFileSetting;
-import org.matsim.core.network.NetworkUtils;
 
 import ch.sbb.intermodalfreight.prepare.supply.RunGenerateCargoSupply;
 import ch.sbb.intermodalfreight.simulate.IntermodalFreightConfigGroup;
