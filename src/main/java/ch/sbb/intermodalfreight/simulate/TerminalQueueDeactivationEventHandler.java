@@ -83,6 +83,7 @@ public class TerminalQueueDeactivationEventHandler implements
 	private static final Logger log = LogManager.getLogger(TerminalQueueDeactivationEventHandler.class);
 	
 	private final String carKVLegPrefix = "carKV_";
+	private final String carCSTLegPrefix = "carCST_";
 
 	private final Map<Id<Link>, SignalizeableItem> queueLink2signal;
 	private final Set<Id<Vehicle>> transitVehicles;
@@ -185,11 +186,11 @@ public class TerminalQueueDeactivationEventHandler implements
 				}
 		    } else if ("cst_hub".equals(type)) {
 		    	// initialize queue links
-				Set<Link> queueLinks = getQueueLinks(facility.getId());
+				Set<Link> queueLinks = getQueueLinksCST(facility.getId());
 				this.hub2queueLinks.put(facility.getId(), queueLinks);
 				
 				// initialize stack links
-				Set<Link> stackLinks = getStackLinks(facility.getId());
+				Set<Link> stackLinks = getStackLinksCST(facility.getId());
 				this.hub2stackLinks.put(facility.getId(), stackLinks);
 				
 				// initialize relevant links
@@ -276,8 +277,12 @@ public class TerminalQueueDeactivationEventHandler implements
 
 	        if ("terminal".equals(stopType)) {
 	            // Handle terminal stops
-	            if (this.terminal2trains.get(stopFacilityId).isEmpty()) {
+	        	if (this.terminal2trains.get(stopFacilityId) == null) {
+	        		// do nothing, this is a stop for which there are no transit routes
+	        		
+	        	} else if (this.terminal2trains.get(stopFacilityId).isEmpty()) {
 	                activateQueue(stopFacilityId, event.getSimulationTime());
+	                
 	            } else {
 	                // Check if there is an agent who wants to get out
 	                // Check if there is an agent in the stack who wants to get into the train
@@ -291,8 +296,12 @@ public class TerminalQueueDeactivationEventHandler implements
 	            }
 	        } else if ("cst_hub".equals(stopType)) {
 	            // Handle hub stops
-	            if (this.hub2trains.get(stopFacilityId).isEmpty()) {
+	        	if (this.hub2trains.get(stopFacilityId) == null) {
+	        		// do nothing, this is a stop for which there are no transit routes.
+	        		
+	        	} else if (this.hub2trains.get(stopFacilityId).isEmpty()) {
 	                activateQueue(stopFacilityId, event.getSimulationTime());
+	                
 	            } else {
 	                // Check if there is an agent who wants to get out
 	                // Check if there is an agent in the stack who wants to get into the train
@@ -304,6 +313,8 @@ public class TerminalQueueDeactivationEventHandler implements
 	                    activateQueue(stopFacilityId, event.getSimulationTime());
 	                }
 	            }
+	        } else {
+	        	throw new RuntimeException("Unknown stop type: " + stopType);
 	        }
 	    }
 	}
@@ -523,7 +534,7 @@ public class TerminalQueueDeactivationEventHandler implements
 			this.person2legCounter.put(event.getPersonId(), legCount + 1);
 		}
 		
-		if (event.getLegMode().startsWith(carKVLegPrefix)) {
+		if (event.getLegMode().startsWith(carKVLegPrefix) || event.getLegMode().startsWith(carCSTLegPrefix)) {
 			int currentLegNr = this.person2legCounter.get(event.getPersonId());
 			Plan selectedPlan = this.scenario.getPopulation().getPersons().get(event.getPersonId()).getSelectedPlan();
 			List<Leg> legs = TripStructureUtils.getLegs(selectedPlan);
@@ -537,7 +548,7 @@ public class TerminalQueueDeactivationEventHandler implements
 				if (nextLeg.getMode().equals(TransportMode.pt)) {
 					this.person2nextTrainRouteDescription.put(event.getPersonId(), nextLeg.getRoute().getRouteDescription());
 				} else {
-					log.warn("A leg with mode " + carKVLegPrefix + "... is expected to be followed by a pt leg. "
+					log.warn("A leg with mode " + carKVLegPrefix + "... or " + carCSTLegPrefix + "... is expected to be followed by a pt leg. "
 							+ "Agent " + event.getPersonId() + " - Leg nr. " + currentLegNr + " nextLeg: " + nextLeg.toString());
 					log.warn("Needs to be checked!!");
 				}
@@ -779,12 +790,61 @@ public class TerminalQueueDeactivationEventHandler implements
 		return links;
 	}
 	
+	private Set<Link> getQueueLinksCST(Id<TransitStopFacility> facilityId) {
+		
+		Set<Link> links = new HashSet<>();
+		
+		// This is hard-coded and should be changed if the naming syntax changes.
+		String idPrefix = facilityId + "_" + facilityId + "_IN1_carCST_";
+				
+		
+		for (Link link : this.scenario.getNetwork().getLinks().values()) {
+			if (link.getId().toString().startsWith(idPrefix)) {
+				links.add(link);
+			}
+		}
+		
+		if (links.isEmpty()) throw new RuntimeException("Could not find the truck-stack queue for terminal/hub " + facilityId.toString());
+		
+		return links;
+	}
+	
 	private Set<Link> getStackLinks(Id<TransitStopFacility> facilityId) {
 		
 		Set<Link> links = new HashSet<>();
 		
 		// This is hard-coded and should be changed if the naming syntax changes.
 		String idPrefix1 = facilityId + "_" + facilityId + "_OUT1_carKV_";
+		String idSuffix1 = "-" + facilityId + "_IN";
+		
+		for (Link link : this.scenario.getNetwork().getLinks().values()) {
+			if (link.getId().toString().startsWith(idPrefix1) &&
+					link.getId().toString().endsWith(idSuffix1)) {
+				links.add(link);
+			}
+		}
+		
+		// This is hard-coded and should be changed if the naming syntax changes.
+		String id2 = facilityId + "_" + facilityId + "_IN-" + facilityId + "_OUT";
+		
+		for (Link link : this.scenario.getNetwork().getLinks().values()) {
+			if (link.getId().toString().equals(id2)) {
+				links.add(link);
+			}
+		}
+		
+		if (links.isEmpty() || links.size() < 2) throw new RuntimeException("Expecting 2 stack links. "
+				+ "Could not find all stack links for terminal/hub " + facilityId.toString());
+		
+		return links;
+	}
+	
+	private Set<Link> getStackLinksCST(Id<TransitStopFacility> facilityId) {
+		
+		Set<Link> links = new HashSet<>();
+		
+		// This is hard-coded and should be changed if the naming syntax changes.
+		String idPrefix1 = facilityId + "_" + facilityId + "_OUT1_carCST_";
 		String idSuffix1 = "-" + facilityId + "_IN";
 		
 		for (Link link : this.scenario.getNetwork().getLinks().values()) {

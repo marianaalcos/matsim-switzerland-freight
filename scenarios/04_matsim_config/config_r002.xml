@@ -57,7 +57,7 @@
 		<param name="endTime" value="72:00:00" />		
 	
 		<param name="snapshotperiod" value = "00:00:00"/>
-		<param name="mainMode" value="car,carKV_container,carKV_cst" />
+		<param name="mainMode" value="car,carKV_container,carCST_container" />
 		
 		<param name="stuckTime" value="999999.0" />
 		
@@ -126,7 +126,7 @@
 			<param name="dailyUtilityConstant" value="0.0"/>
 			<param name="marginalUtilityOfDistance_util_m" value="0.0"/>
 			<param name="marginalUtilityOfTraveling_util_hr" value="0.0"/>
-			<param name="mode" value="carKV_cst"/>
+			<param name="mode" value="carCST_container"/>
 			<param name="monetaryDistanceRate" value="-0.0070"/>
 		</parameterset>
 		<parameterset type="modeParams">
@@ -143,7 +143,7 @@
 	<module name="planscalcroute" >
 		<param name="accessEgressType" value="none" />
 		<param name="clearDefaultTeleportedModeParams" value="true" />
-		<param name="networkModes" value="car,carKV_container,carKV_cst" />
+		<param name="networkModes" value="car,carKV_container,carCST_container" />
 		<param name="routingRandomness" value="3.0" />
 		<parameterset type="teleportedModeParameters" >
 			<param name="beelineDistanceFactor" value="1." />
@@ -309,12 +309,12 @@
 			<param name="initialSearchRadius" value="20000.0" />
 			<param name="linkIdAttribute" value="null" />
 			<param name="maxRadius" value="100000.0" />
-			<param name="mode" value="carKV_cst" />
+			<param name="mode" value="carCST_container" />
 			<param name="personFilterAttribute" value="null" />
 			<param name="personFilterValue" value="null" />
 			<param name="searchExtensionRadius" value="10000.0" />
 			<param name="shareTripSearchRadius" value="0.5" />
-			<param name="stopFilterAttribute" value="accessible_carKV_cst" />
+			<param name="stopFilterAttribute" value="accessible_carCST_container" />
 			<param name="stopFilterValue" value="1" />
 		</parameterset>
 	</module>

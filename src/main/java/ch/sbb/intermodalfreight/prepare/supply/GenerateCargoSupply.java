@@ -337,7 +337,7 @@ public class GenerateCargoSupply {
 
 		
 		// Determine if the carModeKV indicates a CSTHub
-	    boolean isCSTHub = carModeKV.contains("cst");
+	    boolean isCSTHub = carModeKV.contains("carCST_container");
 	    
 		double distance = isCSTHub ? distanceEachHubLink : distanceEachTerminalLink;
 	    // If isCSTHub is true, then distance is set to distanceEachHubLink, else distanceEachTerminalLink
@@ -421,7 +421,7 @@ public class GenerateCargoSupply {
 			} else {
 				// not the first terminal
 				// determine the mode based on the routeType
-				String mode = (stop.getRouteType().toString().equalsIgnoreCase("cst") ) ? "cst" : "rail";
+				String mode = (stop.getRouteType().toString().equalsIgnoreCase("cst_hub") ) ? "cst" : "rail";
 		        // add connecting link
 	            Link connectingLink = addLink(transitLine + "_" + transitRoute + "_" + routeCounter,
 		                    getDistance(combinedDistances, previousStop, stop),
@@ -491,7 +491,7 @@ public class GenerateCargoSupply {
 		
 	    // Determine the vehicle type based on RouteType of the first stop
 		String routeType = routeInfos.get(0).getRouteType();
-		String vehicleType = routeType.equalsIgnoreCase("cst") ? "cstVehicle" : "cargoTrain";
+		String vehicleType = routeType.equalsIgnoreCase("cst_hub") ? "cstVehicle" : "cargoTrain";
 	   
 
 		// VehicleType vehType = addVehicleType("cargoTrain_" + transitLine + "_" + transitRoute + "_" + routeCounter, vehicleCapacity);
@@ -500,7 +500,7 @@ public class GenerateCargoSupply {
 		NetworkRoute networkRoute = RouteUtils.createLinkNetworkRouteImpl(railLinks.get(0), railLinks.subList(1, railLinks.size() - 1), railLinks.get(railLinks.size() - 1));
         
         // Determine the TransitRoute mode based on the route type
-		String mode = routeType.equalsIgnoreCase("cst") ? "cst" : "rail";
+		String mode = routeType.equalsIgnoreCase("cst_hub") ? "cst" : "rail";
 	       
         // TransitRoute route = sf.createTransitRoute(Id.create(transitLine + "_" + transitRoute + "_" + routeCounter, TransitRoute.class), networkRoute, stops, "rail");
         TransitRoute route = sf.createTransitRoute(Id.create(transitLine + "_" + transitRoute + "_" + routeCounter, TransitRoute.class), networkRoute, stops, mode);
