@@ -70,6 +70,7 @@ public class RunGenerateCargoSupply {
 		
 	    final String sheetName = project.getMatsimInput().getSupply().getSheet();
 		final int cargoTrainCapacityTEU = project.getMatsimInput().getSupply().getTrainCapacity();
+		final int cstVehicleCapacity = project.getMatsimInput().getSupply().getCSTVehicleCapacity();
 		final double distanceTerminalCraneLinks = project.getMatsimInput().getSupply().getCraneLinkLength();
 		final double craneTravelTime = project.getMatsimInput().getSupply().getCraneTravelTime();
 		final int simulatedDays = project.getMatsimInput().getSimulatedDays();
@@ -156,12 +157,18 @@ public class RunGenerateCargoSupply {
             String transitLine = routeInfo.getLine();
             String transitRoute = routeInfo.getRoute();
             List<RouteStopInfo> routeStopInfos = routeInfo.getRouteStopInfos();
+            
+            String routeType = routeStopInfos.get(0).getRouteType().toString(); //routeType from first stop
+            int vehicleCapacity = routeType.equalsIgnoreCase("cst_hub") ? cstVehicleCapacity : cargoTrainCapacityTEU;
 
-            supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, cargoTrainCapacityTEU, relevantDistances);
+            supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, vehicleCapacity, relevantDistances);
 
             routeCounter++;
         }
 			
+        
+      
+	   
 		// see if we have to adjust the network
 		if (project.getMatsimInput().getSupply().isNetworkNightHGVRestriction()) {
 			log.info("Creating network change events to account for the night ban of HGV.");

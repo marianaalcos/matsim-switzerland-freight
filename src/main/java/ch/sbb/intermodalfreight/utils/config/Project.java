@@ -182,7 +182,9 @@ public final class Project {
         private static final String SUPPLY_INPUT_HUBS_KEY = "matsim.input.supply.hubs";
         private static final String SUPPLY_INPUT_DISTANCESCST_KEY = "matsim.input.supply.distancescst";
         private static final String SUPPLY_TRAIN_CAPACITY_KEY = "matsim.input.supply.train.capacity";
+        private static final String SUPPLY_CSTVEHICLE_CAPACITY_KEY = "matsim.input.supply.cstvehicle.capacity";
         private static final String SUPPLY_NETWORK_NIGHT_HGV_RESTRICTION_KEY = "matsim.input.supply.network.night.hgv.restriction";
+
 
         private final double craneLinkLength;
         private final double craneTravelTime;
@@ -198,6 +200,7 @@ public final class Project {
         private final String distancescst;
         private final String hubs;
         private final int trainCapacity;
+        private final int CSTVehicleCapacity;
         private final boolean networkNightHGVRestriction;
 
         private Supply() {
@@ -215,6 +218,7 @@ public final class Project {
             distancescst = properties.getProperty(SUPPLY_INPUT_DISTANCESCST_KEY);
             hubs = properties.getProperty(SUPPLY_INPUT_HUBS_KEY);
             trainCapacity = Integer.parseInt(properties.getProperty(SUPPLY_TRAIN_CAPACITY_KEY));
+            CSTVehicleCapacity = Integer.parseInt(properties.getProperty(SUPPLY_CSTVEHICLE_CAPACITY_KEY));
             networkNightHGVRestriction = Boolean.parseBoolean(
                     properties.getProperty(SUPPLY_NETWORK_NIGHT_HGV_RESTRICTION_KEY));
 
@@ -277,6 +281,10 @@ public final class Project {
         public int getTrainCapacity() {
             return trainCapacity;
         }
+        public int getCSTVehicleCapacity() {
+            return CSTVehicleCapacity;
+        }
+
 
         public boolean isNetworkNightHGVRestriction() {
             return networkNightHGVRestriction;

@@ -422,6 +422,8 @@ public class GenerateCargoSupply {
 				// not the first terminal
 				// determine the mode based on the routeType
 				String mode = (stop.getRouteType().toString().equalsIgnoreCase("cst_hub") ) ? "cst" : "rail";
+				double speed = (stop.getRouteType().toString().equalsIgnoreCase("cst_hub")) ? 8.3334 : 13.8889;
+	            int lanes = (stop.getRouteType().toString().equalsIgnoreCase("cst_hub")) ? 2 : 1;
 		        // add connecting link
 	            Link connectingLink = addLink(transitLine + "_" + transitRoute + "_" + routeCounter,
 		                    getDistance(combinedDistances, previousStop, stop),
@@ -429,8 +431,8 @@ public class GenerateCargoSupply {
 		                    stop.getLink().getFromNode(),
 		                    new HashSet<>(Arrays.asList(mode)),
 		                    largeLinkCapacity,
-		                    13.8889,
-		                    1);
+		                    speed,
+		                    lanes);
 				railLinks.add(connectingLink.getId());
 				// add terminal
 				railLinks.add(stop.getLink().getId());
@@ -555,6 +557,14 @@ public class GenerateCargoSupply {
         VehicleCapacity vehCapacity = vehType.getCapacity();
         vehCapacity.setSeats(vehicleCapacity);
         VehicleUtils.setDoorOperationMode(vehType, DoorOperationMode.serial);
+        
+        
+        // Set the vehicle length based on the vehicle type 
+        if (vehicleType.equals("cstVehicle")) {
+            vehType.getAttributes().putAttribute("artificialLength", 175.0);  // Set length to 175 meters for CST vehicles (block of 5)
+        } else {
+            vehType.getAttributes().putAttribute("artificialLength", 7.5);  // Default length or other specific length for rail 
+        }
         
         // Add the type attribute to distinguish between "cargoTrain" and "cstVehicle"
         vehType.getAttributes().putAttribute("vehicleType", vehicleType);
