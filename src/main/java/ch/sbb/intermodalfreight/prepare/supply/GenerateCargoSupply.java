@@ -556,15 +556,7 @@ public class GenerateCargoSupply {
 		VehicleType vehType = vf.createVehicleType(Id.create(name, VehicleType.class));
         VehicleCapacity vehCapacity = vehType.getCapacity();
         vehCapacity.setSeats(vehicleCapacity);
-        VehicleUtils.setDoorOperationMode(vehType, DoorOperationMode.serial);
-        
-        
-        // Set the vehicle length based on the vehicle type 
-        if (vehicleType.equals("cstVehicle")) {
-            vehType.getAttributes().putAttribute("artificialLength", 175.0);  // Set length to 175 meters for CST vehicles (block of 5)
-        } else {
-            vehType.getAttributes().putAttribute("artificialLength", 7.5);  // Default length or other specific length for rail 
-        }
+        VehicleUtils.setDoorOperationMode(vehType, DoorOperationMode.serial);        
         
         // Add the type attribute to distinguish between "cargoTrain" and "cstVehicle"
         vehType.getAttributes().putAttribute("vehicleType", vehicleType);
