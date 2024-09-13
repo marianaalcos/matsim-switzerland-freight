@@ -66,6 +66,11 @@ public class GenerateCargoSupply {
 	private final double linksPerTerminal = 3.;
 	private final double xCoordGapHubInOut = 100.;
 
+	
+	// Add variables for cargo capacities
+	private final int cargoTrainCapacityTEU;
+	private final int cstVehicleCapacity;
+		
 	private final int simulatedDays;
 	private final double distanceEachTerminalLink;
 	private final double speedEachTerminalLink;
@@ -82,7 +87,6 @@ public class GenerateCargoSupply {
 	private final TransitScheduleFactory sf;
 	private final VehiclesFactory vf;
     private final NetworkFactory nf;
-    
 	private final List<NetworkChangeEvent> networkChangeEvents = new ArrayList<>();
 
 	/**
@@ -94,10 +98,11 @@ public class GenerateCargoSupply {
 	 */
 	
 	// Constructor to initialize the cargo supply generation
-	public GenerateCargoSupply(Scenario scenario, Network originalCarNetwork, double distanceTerminalCraneLinks, double craneTravelTime, int simulatedDays) {
+	public GenerateCargoSupply(Scenario scenario, Network originalCarNetwork, double distanceTerminalCraneLinks, double craneTravelTime, int simulatedDays,int cargoTrainCapacityTEU, int cstVehicleCapacity) {
 		this.scenario = scenario;
 		this.carOnlyNetwork = originalCarNetwork;
 		this.simulatedDays = simulatedDays;
+		
 		
 		// compute distance and speed for each terminal link
 		this.distanceEachTerminalLink = distanceTerminalCraneLinks / linksPerTerminal;
@@ -106,6 +111,10 @@ public class GenerateCargoSupply {
 		// compute distance and speed for each hub link
 		this.distanceEachHubLink = 100.0; //meter
 		this.speedEachHubLink = 8.33; // m/s
+		
+		// Initialize cargo capacities
+		this.cargoTrainCapacityTEU = cargoTrainCapacityTEU;
+		this.cstVehicleCapacity = cstVehicleCapacity;
 		
 		schedule = scenario.getTransitSchedule();
         vehicles = scenario.getTransitVehicles();
@@ -405,11 +414,12 @@ public class GenerateCargoSupply {
 	 * @param vehicleCapacity train capacity in number of containers that fit into the train
 	 * @param combinedDistances (optional) a map which contains the distances between the terminals; if null the euclidean distance will be used
 	 */
-	public TransitLine addCargoConnection(int routeCounter, String transitLine, String transitRoute, List<RouteStopInfo> routeInfos, int vehicleCapacity, Map<String, Double> combinedDistances) {
+	public TransitLine addCargoConnection(int routeCounter, String transitLine, String transitRoute, List<RouteStopInfo> routeInfos,  Map<String, Double> combinedDistances) {
 		
 		if (routeInfos.size() < 2) throw new RuntimeException("At least two route stops required. Aborting...");
 		
 		log.info("Adding cargo connection...");
+		
 		
 		List<Id<Link>> railLinks = new ArrayList<>();     
 		RouteStopInfo previousStop = null;
@@ -490,12 +500,16 @@ public class GenerateCargoSupply {
 			stopCounter++;
 		}
 		
+		// Determine vehicle capacity based on route type (train or CST)
+		int vehicleCapacity = "cst".equalsIgnoreCase(routeInfos.get(0).getRouteType()) || routeInfos.get(0).getRouteType().equalsIgnoreCase("cst_hub")
+			    ? cstVehicleCapacity
+			    : cargoTrainCapacityTEU;
+
 		
 	    // Determine the vehicle type based on RouteType of the first stop
 		String routeType = routeInfos.get(0).getRouteType();
 		String vehicleType = routeType.equalsIgnoreCase("cst_hub") ? "cstVehicle" : "cargoTrain";
 	   
-
 		// VehicleType vehType = addVehicleType("cargoTrain_" + transitLine + "_" + transitRoute + "_" + routeCounter, vehicleCapacity);
         VehicleType vehType = addVehicleType(transitLine + "_" + transitRoute + "_" + routeCounter, vehicleCapacity, vehicleType);
         

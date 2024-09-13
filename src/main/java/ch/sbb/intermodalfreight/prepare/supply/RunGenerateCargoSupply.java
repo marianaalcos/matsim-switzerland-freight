@@ -104,7 +104,7 @@ public class RunGenerateCargoSupply {
 		Scenario scenario = ScenarioUtils.loadScenario(config);		
         Network originalCarNetwork = ScenarioUtils.loadScenario(config).getNetwork();
         
-		GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, distanceTerminalCraneLinks, craneTravelTime, simulatedDays);
+		GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, distanceTerminalCraneLinks, craneTravelTime, simulatedDays, cargoTrainCapacityTEU, cstVehicleCapacity);
 		
         // first read and add the terminals	and hubs	
 		Map<String,Terminal> terminals = new TerminalsFileReader(inputTerminalsFile).getName2terminal();
@@ -161,7 +161,7 @@ public class RunGenerateCargoSupply {
             String routeType = routeStopInfos.get(0).getRouteType().toString(); //routeType from first stop
             int vehicleCapacity = routeType.equalsIgnoreCase("cst_hub") ? cstVehicleCapacity : cargoTrainCapacityTEU;
 
-            supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, vehicleCapacity, relevantDistances);
+            supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos,  relevantDistances);
 
             routeCounter++;
         }

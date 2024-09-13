@@ -1,0 +1,1552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE transitSchedule SYSTEM "http://www.matsim.org/files/dtd/transitSchedule_v2.dtd">
+
+<transitSchedule>
+
+	<transitStops>
+		<stopFacility id="aclens" x="2528800.364" y="1157812.943" linkRefId="aclens_aclens_IN-aclens_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="aegert" x="2689260.967" y="1251950.796" linkRefId="aegert_aegert_IN-aegert_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="aubonne" x="2519636.664" y="1149872.481" linkRefId="aubonne_aubonne_IN-aubonne_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="avanches" x="2569820.294" y="1192241.092" linkRefId="avanches_avanches_IN-avanches_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="basel" x="2611209.0" y="1269891.0" linkRefId="basel_basel_IN-basel_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">40.0</attribute>
+				<attribute name="accessible_carKV_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">40.0</attribute>
+				<attribute name="type" class="java.lang.String">terminal</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="basel-gateway-nord" x="2612226.159" y="1269929.355" linkRefId="basel-gateway-nord_basel-gateway-nord_IN-basel-gateway-nord_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="basel-wolf" x="2611286.038" y="1267664.688" linkRefId="basel-wolf_basel-wolf_IN-basel-wolf_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="bern" x="2600463.212" y="1199699.06" linkRefId="bern_bern_IN-bern_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="bern-wankdorf" x="2601971.386" y="1201273.535" linkRefId="bern-wankdorf_bern-wankdorf_IN-bern-wankdorf_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="bern-weyermannshaus" x="2597456.124" y="1199610.524" linkRefId="bern-weyermannshaus_bern-weyermannshaus_IN-bern-weyermannshaus_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="biel/bienne" x="2585446.657" y="1220662.289" linkRefId="biel/bienne_biel/bienne_IN-biel/bienne_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="broye" x="2555271.925" y="1187577.037" linkRefId="broye_broye_IN-broye_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="chavorney" x="2533635.949" y="1173435.273" linkRefId="chavorney_chavorney_IN-chavorney_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="crissier" x="2533716.921" y="1155986.412" linkRefId="crissier_crissier_IN-crissier_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="dagmersellen" x="2641718.406" y="1229246.369" linkRefId="dagmersellen_dagmersellen_IN-dagmersellen_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="daillens" x="2531823.397" y="1163639.581" linkRefId="daillens_daillens_IN-daillens_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="dietikon" x="2671585.0" y="1252374.0" linkRefId="dietikon_dietikon_IN-dietikon_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">40.0</attribute>
+				<attribute name="accessible_carKV_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">40.0</attribute>
+				<attribute name="type" class="java.lang.String">terminal</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="dulliken" x="2638254.79" y="1244386.982" linkRefId="dulliken_dulliken_IN-dulliken_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="dulliken-sud" x="2638265.475" y="1244391.979" linkRefId="dulliken-sud_dulliken-sud_IN-dulliken-sud_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="emmenbrucke" x="2663361.44" y="1215662.116" linkRefId="emmenbrucke_emmenbrucke_IN-emmenbrucke_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="frauenfeld" x="2709900.173" y="1268009.083" linkRefId="frauenfeld_frauenfeld_IN-frauenfeld_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="fribourg" x="2578882.071" y="1183961.803" linkRefId="fribourg_fribourg_IN-fribourg_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="gaeu" x="2628483.0" y="1241238.0" linkRefId="gaeu_gaeu_IN-gaeu_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">40.0</attribute>
+				<attribute name="accessible_carKV_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">40.0</attribute>
+				<attribute name="type" class="java.lang.String">terminal</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="geneve-aeroport" x="2497444.985" y="1121486.355" linkRefId="geneve-aeroport_geneve-aeroport_IN-geneve-aeroport_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="geneve-la-praille" x="2498683.086" y="1115812.548" linkRefId="geneve-la-praille_geneve-la-praille_IN-geneve-la-praille_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="genf" x="2499965.0" y="1119074.0" linkRefId="genf_genf_IN-genf_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">60.0</attribute>
+				<attribute name="accessible_carKV_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">60.0</attribute>
+				<attribute name="type" class="java.lang.String">terminal</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="gland" x="2510236.749" y="1141877.846" linkRefId="gland_gland_IN-gland_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="gossau" x="2738284.0" y="1252820.0" linkRefId="gossau_gossau_IN-gossau_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">60.0</attribute>
+				<attribute name="accessible_carKV_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">60.0</attribute>
+				<attribute name="type" class="java.lang.String">terminal</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="gossaucst" x="2736601.029" y="1253214.39" linkRefId="gossaucst_gossaucst_IN-gossaucst_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="gwatt" x="2614094.468" y="1174660.709" linkRefId="gwatt_gwatt_IN-gwatt_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="harkingen" x="2628763.643" y="1239675.84" linkRefId="harkingen_harkingen_IN-harkingen_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="heimberg-steffisburg" x="2612742.005" y="1181464.025" linkRefId="heimberg-steffisburg_heimberg-steffisburg_IN-heimberg-steffisburg_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="heitersberg" x="2670075.47" y="1249480.006" linkRefId="heitersberg_heitersberg_IN-heitersberg_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="kerzers" x="2581494.745" y="1202675.599" linkRefId="kerzers_kerzers_IN-kerzers_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="lausanne" x="2530505.0" y="1153159.0" linkRefId="lausanne_lausanne_IN-lausanne_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">60.0</attribute>
+				<attribute name="accessible_carKV_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">60.0</attribute>
+				<attribute name="type" class="java.lang.String">terminal</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="lausanne-malley" x="2536819.68" y="1152913.113" linkRefId="lausanne-malley_lausanne-malley_IN-lausanne-malley_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="leman" x="2534029.34" y="1155392.875" linkRefId="leman_leman_IN-leman_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="liestal" x="2622218.345" y="1259580.598" linkRefId="liestal_liestal_IN-liestal_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="limmatstadt" x="2669956.378" y="1253260.421" linkRefId="limmatstadt_limmatstadt_IN-limmatstadt_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="luzern-allmend" x="2666157.417" y="1211382.044" linkRefId="luzern-allmend_luzern-allmend_IN-luzern-allmend_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="lyss" x="2590055.922" y="1213745.691" linkRefId="lyss_lyss_IN-lyss_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="lyss-ort" x="2590080.666" y="1213342.136" linkRefId="lyss-ort_lyss-ort_IN-lyss-ort_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="mayenfels" x="2618378.58" y="1262803.587" linkRefId="mayenfels_mayenfels_IN-mayenfels_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="munsingen" x="2609584.829" y="1191561.714" linkRefId="munsingen_munsingen_IN-munsingen_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="muri-gumligen" x="2604556.746" y="1198219.545" linkRefId="muri-gumligen_muri-gumligen_IN-muri-gumligen_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="neuendorf" x="2627054.964" y="1238655.738" linkRefId="neuendorf_neuendorf_IN-neuendorf_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="niederbipp" x="2619076.078" y="1235665.519" linkRefId="niederbipp_niederbipp_IN-niederbipp_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="nyon" x="2507389.631" y="1137589.891" linkRefId="nyon_nyon_IN-nyon_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="oftringen-zofingen" x="2636387.664" y="1240342.135" linkRefId="oftringen-zofingen_oftringen-zofingen_IN-oftringen-zofingen_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="payerne" x="2561993.171" y="1185774.061" linkRefId="payerne_payerne_IN-payerne_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="pratteln-west" x="2619083.952" y="1263094.927" linkRefId="pratteln-west_pratteln-west_IN-pratteln-west_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="rickenbach-wangen" x="2631511.896" y="1243407.818" linkRefId="rickenbach-wangen_rickenbach-wangen_IN-rickenbach-wangen_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="rothenburg" x="2663242.552" y="1216735.83" linkRefId="rothenburg_rothenburg_IN-rothenburg_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="schafisheim" x="2653173.897" y="1247625.424" linkRefId="schafisheim_schafisheim_IN-schafisheim_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="schonbuhl" x="2604644.731" y="1207726.506" linkRefId="schonbuhl_schonbuhl_IN-schonbuhl_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="sissach" x="2628050.832" y="1257134.787" linkRefId="sissach_sissach_IN-sissach_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="solothurn-zuchwil" x="2609043.504" y="1228074.012" linkRefId="solothurn-zuchwil_solothurn-zuchwil_IN-solothurn-zuchwil_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="sottoceneri" x="2717260.0" y="1079050.0" linkRefId="sottoceneri_sottoceneri_IN-sottoceneri_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">60.0</attribute>
+				<attribute name="accessible_carKV_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">60.0</attribute>
+				<attribute name="type" class="java.lang.String">terminal</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="st.-gallen-st.-fiden" x="2746821.473" y="1255239.664" linkRefId="st.-gallen-st.-fiden_st.-gallen-st.-fiden_IN-st.-gallen-st.-fiden_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="suhr" x="2648355.962" y="1246808.508" linkRefId="suhr_suhr_IN-suhr_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="sursee" x="2650984.133" y="1224720.509" linkRefId="sursee_sursee_IN-sursee_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="tolochenaz-morges" x="2525903.525" y="1150838.37" linkRefId="tolochenaz-morges_tolochenaz-morges_IN-tolochenaz-morges_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="urdorf" x="2674152.343" y="1248894.511" linkRefId="urdorf_urdorf_IN-urdorf_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="uzwil-oberburen" x="2728485.259" y="1256348.165" linkRefId="uzwil-oberburen_uzwil-oberburen_IN-uzwil-oberburen_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="val-ombre" x="2496893.82" y="1119755.938" linkRefId="val-ombre_val-ombre_IN-val-ombre_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="wangen-dubendorf" x="2690722.918" y="1251578.693" linkRefId="wangen-dubendorf_wangen-dubendorf_IN-wangen-dubendorf_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="wil" x="2721246.347" y="1258239.811" linkRefId="wil_wil_IN-wil_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="winterthur" x="2696824.498" y="1261688.505" linkRefId="winterthur_winterthur_IN-winterthur_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="winterthur-hegi" x="2700570.152" y="1262369.133" linkRefId="winterthur-hegi_winterthur-hegi_IN-winterthur-hegi_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="yverdon" x="2539099.032" y="1181121.625" linkRefId="yverdon_yverdon_IN-yverdon_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="zimeysa-meyrin" x="2494071.043" y="1119797.184" linkRefId="zimeysa-meyrin_zimeysa-meyrin_IN-zimeysa-meyrin_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="zurich-aussersihl" x="2682244.594" y="1247363.362" linkRefId="zurich-aussersihl_zurich-aussersihl_IN-zurich-aussersihl_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="zurich-flughafen" x="2683872.387" y="1257142.285" linkRefId="zurich-flughafen_zurich-flughafen_IN-zurich-flughafen_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+		<stopFacility id="zurich-nord" x="2683532.211" y="1252037.31" linkRefId="zurich-nord_zurich-nord_IN-zurich-nord_OUT" isBlocking="false">
+			<attributes>
+				<attribute name="accessTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="accessible_carCST_container" class="java.lang.Integer">1</attribute>
+				<attribute name="egressTime" class="java.lang.Double">36.0</attribute>
+				<attribute name="type" class="java.lang.String">cst_hub</attribute>
+			</attributes>
+
+		</stopFacility>
+	</transitStops>
+	<transitLine id="C1">
+		<transitRoute id="C1_GE-LAUS-GAEU-DT-GSS_0">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="genf" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="04:00:00" departureOffset="04:30:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="06:30:00" departureOffset="07:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="07:45:00" departureOffset="08:15:00" awaitDeparture="false"/>
+				<stop refId="gossau" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="genf_genf_IN-genf_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_0_genf_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_0_lausanne_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_0_gaeu_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_0_dietikon_OUT-gossau_IN"/>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="06:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_0_0"/>
+				<departure id="1" departureTime="30:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_0_1"/>
+				<departure id="2" departureTime="54:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_0_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GSS-DT-GAEU-LAUS-GE_1">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gossau" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="04:15:00" departureOffset="04:45:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:30:00" departureOffset="06:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="08:00:00" departureOffset="08:30:00" awaitDeparture="false"/>
+				<stop refId="genf" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_1_gossau_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_1_dietikon_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_1_gaeu_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_1_lausanne_OUT-genf_IN"/>
+				<link refId="genf_genf_IN-genf_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="05:45:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_1_0"/>
+				<departure id="1" departureTime="29:45:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_1_1"/>
+				<departure id="2" departureTime="53:45:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_1_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GE-LAUS-GAEU-DT-GSS_2">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="genf" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="04:00:00" departureOffset="04:30:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="06:30:00" departureOffset="07:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="07:45:00" departureOffset="08:15:00" awaitDeparture="false"/>
+				<stop refId="gossau" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="genf_genf_IN-genf_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_2_genf_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_2_lausanne_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_2_gaeu_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_2_dietikon_OUT-gossau_IN"/>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="10:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_2_0"/>
+				<departure id="1" departureTime="34:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_2_1"/>
+				<departure id="2" departureTime="58:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_2_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GSS-DT-GAEU-LAUS-GE_3">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gossau" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="04:15:00" departureOffset="04:45:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:30:00" departureOffset="06:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="08:00:00" departureOffset="08:30:00" awaitDeparture="false"/>
+				<stop refId="genf" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_3_gossau_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_3_dietikon_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_3_gaeu_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_3_lausanne_OUT-genf_IN"/>
+				<link refId="genf_genf_IN-genf_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="14:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_3_0"/>
+				<departure id="1" departureTime="38:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_3_1"/>
+				<departure id="2" departureTime="62:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_3_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GE-LAUS-GAEU-DT-GSS_4">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="genf" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="04:00:00" departureOffset="04:30:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="06:30:00" departureOffset="07:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="07:45:00" departureOffset="08:15:00" awaitDeparture="false"/>
+				<stop refId="gossau" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="genf_genf_IN-genf_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_4_genf_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_4_lausanne_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_4_gaeu_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_4_dietikon_OUT-gossau_IN"/>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="15:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_4_0"/>
+				<departure id="1" departureTime="39:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_4_1"/>
+				<departure id="2" departureTime="63:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_4_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GSS-DT-GAEU-LAUS-GE_5">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gossau" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="04:15:00" departureOffset="04:45:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:30:00" departureOffset="06:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="08:00:00" departureOffset="08:30:00" awaitDeparture="false"/>
+				<stop refId="genf" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_5_gossau_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_5_dietikon_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_5_gaeu_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_5_lausanne_OUT-genf_IN"/>
+				<link refId="genf_genf_IN-genf_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="18:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_5_0"/>
+				<departure id="1" departureTime="42:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_5_1"/>
+				<departure id="2" departureTime="66:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_5_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GE-LAUS-GAEU-DT-GSS_6">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="genf" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="04:00:00" departureOffset="04:30:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="06:30:00" departureOffset="07:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="07:45:00" departureOffset="08:15:00" awaitDeparture="false"/>
+				<stop refId="gossau" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="genf_genf_IN-genf_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_6_genf_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_6_lausanne_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_6_gaeu_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_6_dietikon_OUT-gossau_IN"/>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="-02:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_6_0"/>
+				<departure id="1" departureTime="22:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_6_1"/>
+				<departure id="2" departureTime="46:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_6_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GSS-DT-GAEU-LAUS-GE_7">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gossau" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="04:15:00" departureOffset="04:45:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:30:00" departureOffset="06:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="08:00:00" departureOffset="08:30:00" awaitDeparture="false"/>
+				<stop refId="genf" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_7_gossau_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_7_dietikon_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_7_gaeu_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_7_lausanne_OUT-genf_IN"/>
+				<link refId="genf_genf_IN-genf_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="12:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_7_0"/>
+				<departure id="1" departureTime="36:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_7_1"/>
+				<departure id="2" departureTime="60:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_7_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GE-LAUS-GAEU-DT-GSS_8">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="genf" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="04:00:00" departureOffset="04:30:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="06:30:00" departureOffset="07:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="07:45:00" departureOffset="08:15:00" awaitDeparture="false"/>
+				<stop refId="gossau" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="genf_genf_IN-genf_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_8_genf_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_8_lausanne_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_8_gaeu_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_8_dietikon_OUT-gossau_IN"/>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="08:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_8_0"/>
+				<departure id="1" departureTime="32:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_8_1"/>
+				<departure id="2" departureTime="56:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_8_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GSS-DT-GAEU-LAUS-GE_9">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gossau" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="04:15:00" departureOffset="04:45:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:30:00" departureOffset="06:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="08:00:00" departureOffset="08:30:00" awaitDeparture="false"/>
+				<stop refId="genf" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_9_gossau_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_9_dietikon_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_9_gaeu_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_9_lausanne_OUT-genf_IN"/>
+				<link refId="genf_genf_IN-genf_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="07:45:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_9_0"/>
+				<departure id="1" departureTime="31:45:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_9_1"/>
+				<departure id="2" departureTime="55:45:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_9_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GE-LAUS-GAEU-DT-GSS_10">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="genf" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="04:00:00" departureOffset="04:30:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="06:30:00" departureOffset="07:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="07:45:00" departureOffset="08:15:00" awaitDeparture="false"/>
+				<stop refId="gossau" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="genf_genf_IN-genf_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_10_genf_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_10_lausanne_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_10_gaeu_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_10_dietikon_OUT-gossau_IN"/>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="12:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_10_0"/>
+				<departure id="1" departureTime="36:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_10_1"/>
+				<departure id="2" departureTime="60:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_10_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GSS-DT-GAEU-LAUS-GE_11">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gossau" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="04:15:00" departureOffset="04:45:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:30:00" departureOffset="06:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="08:00:00" departureOffset="08:30:00" awaitDeparture="false"/>
+				<stop refId="genf" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_11_gossau_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_11_dietikon_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_11_gaeu_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_11_lausanne_OUT-genf_IN"/>
+				<link refId="genf_genf_IN-genf_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="10:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_11_0"/>
+				<departure id="1" departureTime="34:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_11_1"/>
+				<departure id="2" departureTime="58:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_11_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GE-LAUS-GAEU-DT-GSS_12">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="genf" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="04:00:00" departureOffset="04:30:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="06:30:00" departureOffset="07:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="07:45:00" departureOffset="08:15:00" awaitDeparture="false"/>
+				<stop refId="gossau" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="genf_genf_IN-genf_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_12_genf_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_12_lausanne_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_12_gaeu_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_12_dietikon_OUT-gossau_IN"/>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="18:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_12_0"/>
+				<departure id="1" departureTime="42:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_12_1"/>
+				<departure id="2" departureTime="66:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_12_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GSS-DT-GAEU-LAUS-GE_13">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gossau" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="04:15:00" departureOffset="04:45:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:30:00" departureOffset="06:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="08:00:00" departureOffset="08:30:00" awaitDeparture="false"/>
+				<stop refId="genf" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_13_gossau_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_13_dietikon_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_13_gaeu_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_13_lausanne_OUT-genf_IN"/>
+				<link refId="genf_genf_IN-genf_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="02:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_13_0"/>
+				<departure id="1" departureTime="26:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_13_1"/>
+				<departure id="2" departureTime="50:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_13_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GE-LAUS-GAEU-DT-GSS_14">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="genf" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="04:00:00" departureOffset="04:30:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="06:30:00" departureOffset="07:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="07:45:00" departureOffset="08:15:00" awaitDeparture="false"/>
+				<stop refId="gossau" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="genf_genf_IN-genf_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_14_genf_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_14_lausanne_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_14_gaeu_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GE-LAUS-GAEU-DT-GSS_14_dietikon_OUT-gossau_IN"/>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="02:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_14_0"/>
+				<departure id="1" departureTime="26:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_14_1"/>
+				<departure id="2" departureTime="50:00:00" vehicleRefId="C1_GE-LAUS-GAEU-DT-GSS_14_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C1_GSS-DT-GAEU-LAUS-GE_15">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gossau" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="04:15:00" departureOffset="04:45:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:30:00" departureOffset="06:00:00" awaitDeparture="false"/>
+				<stop refId="lausanne" arrivalOffset="08:00:00" departureOffset="08:30:00" awaitDeparture="false"/>
+				<stop refId="genf" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gossau_gossau_IN-gossau_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_15_gossau_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_15_dietikon_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_15_gaeu_OUT-lausanne_IN"/>
+				<link refId="lausanne_lausanne_IN-lausanne_OUT"/>
+				<link refId="C1_GSS-DT-GAEU-LAUS-GE_15_lausanne_OUT-genf_IN"/>
+				<link refId="genf_genf_IN-genf_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="20:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_15_0"/>
+				<departure id="1" departureTime="44:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_15_1"/>
+				<departure id="2" departureTime="68:00:00" vehicleRefId="C1_GSS-DT-GAEU-LAUS-GE_15_2"/>
+			</departures>
+		</transitRoute>
+	</transitLine>
+	<transitLine id="C2">
+		<transitRoute id="C2_SC-DT_16">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="sottoceneri" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+				<link refId="C2_SC-DT_16_sottoceneri_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="06:00:00" vehicleRefId="C2_SC-DT_16_0"/>
+				<departure id="1" departureTime="30:00:00" vehicleRefId="C2_SC-DT_16_1"/>
+				<departure id="2" departureTime="54:00:00" vehicleRefId="C2_SC-DT_16_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_DT-SC_17">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="dietikon" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="sottoceneri" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C2_DT-SC_17_dietikon_OUT-sottoceneri_IN"/>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="12:00:00" vehicleRefId="C2_DT-SC_17_0"/>
+				<departure id="1" departureTime="36:00:00" vehicleRefId="C2_DT-SC_17_1"/>
+				<departure id="2" departureTime="60:00:00" vehicleRefId="C2_DT-SC_17_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_SC-DT_18">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="sottoceneri" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+				<link refId="C2_SC-DT_18_sottoceneri_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="18:00:00" vehicleRefId="C2_SC-DT_18_0"/>
+				<departure id="1" departureTime="42:00:00" vehicleRefId="C2_SC-DT_18_1"/>
+				<departure id="2" departureTime="66:00:00" vehicleRefId="C2_SC-DT_18_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_DT-SC_19">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="dietikon" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="sottoceneri" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C2_DT-SC_19_dietikon_OUT-sottoceneri_IN"/>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="00:00:00" vehicleRefId="C2_DT-SC_19_0"/>
+				<departure id="1" departureTime="24:00:00" vehicleRefId="C2_DT-SC_19_1"/>
+				<departure id="2" departureTime="48:00:00" vehicleRefId="C2_DT-SC_19_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_SC-DT_20">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="sottoceneri" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+				<link refId="C2_SC-DT_20_sottoceneri_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="09:00:00" vehicleRefId="C2_SC-DT_20_0"/>
+				<departure id="1" departureTime="33:00:00" vehicleRefId="C2_SC-DT_20_1"/>
+				<departure id="2" departureTime="57:00:00" vehicleRefId="C2_SC-DT_20_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_DT-SC_21">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="dietikon" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="sottoceneri" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C2_DT-SC_21_dietikon_OUT-sottoceneri_IN"/>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="03:00:00" vehicleRefId="C2_DT-SC_21_0"/>
+				<departure id="1" departureTime="27:00:00" vehicleRefId="C2_DT-SC_21_1"/>
+				<departure id="2" departureTime="51:00:00" vehicleRefId="C2_DT-SC_21_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_SC-DT_22">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="sottoceneri" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+				<link refId="C2_SC-DT_22_sottoceneri_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="-02:00:00" vehicleRefId="C2_SC-DT_22_0"/>
+				<departure id="1" departureTime="22:00:00" vehicleRefId="C2_SC-DT_22_1"/>
+				<departure id="2" departureTime="46:00:00" vehicleRefId="C2_SC-DT_22_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_DT-SC_23">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="dietikon" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="sottoceneri" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C2_DT-SC_23_dietikon_OUT-sottoceneri_IN"/>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="07:00:00" vehicleRefId="C2_DT-SC_23_0"/>
+				<departure id="1" departureTime="31:00:00" vehicleRefId="C2_DT-SC_23_1"/>
+				<departure id="2" departureTime="55:00:00" vehicleRefId="C2_DT-SC_23_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_SC-DT_24">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="sottoceneri" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+				<link refId="C2_SC-DT_24_sottoceneri_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="02:00:00" vehicleRefId="C2_SC-DT_24_0"/>
+				<departure id="1" departureTime="26:00:00" vehicleRefId="C2_SC-DT_24_1"/>
+				<departure id="2" departureTime="50:00:00" vehicleRefId="C2_SC-DT_24_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_DT-SC_25">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="dietikon" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="sottoceneri" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C2_DT-SC_25_dietikon_OUT-sottoceneri_IN"/>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="09:30:00" vehicleRefId="C2_DT-SC_25_0"/>
+				<departure id="1" departureTime="33:30:00" vehicleRefId="C2_DT-SC_25_1"/>
+				<departure id="2" departureTime="57:30:00" vehicleRefId="C2_DT-SC_25_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_SC-DT_26">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="sottoceneri" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="dietikon" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+				<link refId="C2_SC-DT_26_sottoceneri_OUT-dietikon_IN"/>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="14:00:00" vehicleRefId="C2_SC-DT_26_0"/>
+				<departure id="1" departureTime="38:00:00" vehicleRefId="C2_SC-DT_26_1"/>
+				<departure id="2" departureTime="62:00:00" vehicleRefId="C2_SC-DT_26_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C2_DT-SC_27">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="dietikon" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="sottoceneri" arrivalOffset="06:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="dietikon_dietikon_IN-dietikon_OUT"/>
+				<link refId="C2_DT-SC_27_dietikon_OUT-sottoceneri_IN"/>
+				<link refId="sottoceneri_sottoceneri_IN-sottoceneri_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="17:30:00" vehicleRefId="C2_DT-SC_27_0"/>
+				<departure id="1" departureTime="41:30:00" vehicleRefId="C2_DT-SC_27_1"/>
+				<departure id="2" departureTime="65:30:00" vehicleRefId="C2_DT-SC_27_2"/>
+			</departures>
+		</transitRoute>
+	</transitLine>
+	<transitLine id="C3">
+		<transitRoute id="C3_GAEU-BAS_28">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gaeu" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="basel" arrivalOffset="04:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C3_GAEU-BAS_28_gaeu_OUT-basel_IN"/>
+				<link refId="basel_basel_IN-basel_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="06:00:00" vehicleRefId="C3_GAEU-BAS_28_0"/>
+				<departure id="1" departureTime="30:00:00" vehicleRefId="C3_GAEU-BAS_28_1"/>
+				<departure id="2" departureTime="54:00:00" vehicleRefId="C3_GAEU-BAS_28_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_BAS-GAEU_29">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="basel" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="04:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="basel_basel_IN-basel_OUT"/>
+				<link refId="C3_BAS-GAEU_29_basel_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="10:00:00" vehicleRefId="C3_BAS-GAEU_29_0"/>
+				<departure id="1" departureTime="34:00:00" vehicleRefId="C3_BAS-GAEU_29_1"/>
+				<departure id="2" departureTime="58:00:00" vehicleRefId="C3_BAS-GAEU_29_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_GAEU-BAS_30">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gaeu" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="basel" arrivalOffset="04:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C3_GAEU-BAS_30_gaeu_OUT-basel_IN"/>
+				<link refId="basel_basel_IN-basel_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="18:00:00" vehicleRefId="C3_GAEU-BAS_30_0"/>
+				<departure id="1" departureTime="42:00:00" vehicleRefId="C3_GAEU-BAS_30_1"/>
+				<departure id="2" departureTime="66:00:00" vehicleRefId="C3_GAEU-BAS_30_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_BAS-GAEU_31">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="basel" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="04:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="basel_basel_IN-basel_OUT"/>
+				<link refId="C3_BAS-GAEU_31_basel_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="-02:00:00" vehicleRefId="C3_BAS-GAEU_31_0"/>
+				<departure id="1" departureTime="22:00:00" vehicleRefId="C3_BAS-GAEU_31_1"/>
+				<departure id="2" departureTime="46:00:00" vehicleRefId="C3_BAS-GAEU_31_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_GAEU-BAS_32">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gaeu" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="basel" arrivalOffset="05:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C3_GAEU-BAS_32_gaeu_OUT-basel_IN"/>
+				<link refId="basel_basel_IN-basel_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="09:00:00" vehicleRefId="C3_GAEU-BAS_32_0"/>
+				<departure id="1" departureTime="33:00:00" vehicleRefId="C3_GAEU-BAS_32_1"/>
+				<departure id="2" departureTime="57:00:00" vehicleRefId="C3_GAEU-BAS_32_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_BAS-GAEU_33">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="basel" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="basel_basel_IN-basel_OUT"/>
+				<link refId="C3_BAS-GAEU_33_basel_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="04:00:00" vehicleRefId="C3_BAS-GAEU_33_0"/>
+				<departure id="1" departureTime="28:00:00" vehicleRefId="C3_BAS-GAEU_33_1"/>
+				<departure id="2" departureTime="52:00:00" vehicleRefId="C3_BAS-GAEU_33_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_GAEU-BAS_34">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gaeu" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="basel" arrivalOffset="05:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C3_GAEU-BAS_34_gaeu_OUT-basel_IN"/>
+				<link refId="basel_basel_IN-basel_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="12:00:00" vehicleRefId="C3_GAEU-BAS_34_0"/>
+				<departure id="1" departureTime="36:00:00" vehicleRefId="C3_GAEU-BAS_34_1"/>
+				<departure id="2" departureTime="60:00:00" vehicleRefId="C3_GAEU-BAS_34_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_BAS-GAEU_35">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="basel" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="basel_basel_IN-basel_OUT"/>
+				<link refId="C3_BAS-GAEU_35_basel_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="08:00:00" vehicleRefId="C3_BAS-GAEU_35_0"/>
+				<departure id="1" departureTime="32:00:00" vehicleRefId="C3_BAS-GAEU_35_1"/>
+				<departure id="2" departureTime="56:00:00" vehicleRefId="C3_BAS-GAEU_35_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_GAEU-BAS_36">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gaeu" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="basel" arrivalOffset="05:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C3_GAEU-BAS_36_gaeu_OUT-basel_IN"/>
+				<link refId="basel_basel_IN-basel_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="15:00:00" vehicleRefId="C3_GAEU-BAS_36_0"/>
+				<departure id="1" departureTime="39:00:00" vehicleRefId="C3_GAEU-BAS_36_1"/>
+				<departure id="2" departureTime="63:00:00" vehicleRefId="C3_GAEU-BAS_36_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_BAS-GAEU_37">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="basel" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="basel_basel_IN-basel_OUT"/>
+				<link refId="C3_BAS-GAEU_37_basel_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="14:30:00" vehicleRefId="C3_BAS-GAEU_37_0"/>
+				<departure id="1" departureTime="38:30:00" vehicleRefId="C3_BAS-GAEU_37_1"/>
+				<departure id="2" departureTime="62:30:00" vehicleRefId="C3_BAS-GAEU_37_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_GAEU-BAS_38">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="gaeu" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="basel" arrivalOffset="05:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+				<link refId="C3_GAEU-BAS_38_gaeu_OUT-basel_IN"/>
+				<link refId="basel_basel_IN-basel_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="00:00:00" vehicleRefId="C3_GAEU-BAS_38_0"/>
+				<departure id="1" departureTime="24:00:00" vehicleRefId="C3_GAEU-BAS_38_1"/>
+				<departure id="2" departureTime="48:00:00" vehicleRefId="C3_GAEU-BAS_38_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="C3_BAS-GAEU_39">
+			<transportMode>rail</transportMode>
+			<routeProfile>
+				<stop refId="basel" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="gaeu" arrivalOffset="05:00:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="basel_basel_IN-basel_OUT"/>
+				<link refId="C3_BAS-GAEU_39_basel_OUT-gaeu_IN"/>
+				<link refId="gaeu_gaeu_IN-gaeu_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="18:30:00" vehicleRefId="C3_BAS-GAEU_39_0"/>
+				<departure id="1" departureTime="42:30:00" vehicleRefId="C3_BAS-GAEU_39_1"/>
+				<departure id="2" departureTime="66:30:00" vehicleRefId="C3_BAS-GAEU_39_2"/>
+			</departures>
+		</transitRoute>
+	</transitLine>
+	<transitLine id="CST">
+		<transitRoute id="CST_GP-GA-NY-GL_40">
+			<transportMode>cst</transportMode>
+			<routeProfile>
+				<stop refId="geneve-la-praille" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="geneve-aeroport" arrivalOffset="06:30:00" departureOffset="07:00:00" awaitDeparture="false"/>
+				<stop refId="nyon" arrivalOffset="07:45:00" departureOffset="08:15:00" awaitDeparture="false"/>
+				<stop refId="gland" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="geneve-la-praille_geneve-la-praille_IN-geneve-la-praille_OUT"/>
+				<link refId="CST_GP-GA-NY-GL_40_geneve-la-praille_OUT-geneve-aeroport_IN"/>
+				<link refId="geneve-aeroport_geneve-aeroport_IN-geneve-aeroport_OUT"/>
+				<link refId="CST_GP-GA-NY-GL_40_geneve-aeroport_OUT-nyon_IN"/>
+				<link refId="nyon_nyon_IN-nyon_OUT"/>
+				<link refId="CST_GP-GA-NY-GL_40_nyon_OUT-gland_IN"/>
+				<link refId="gland_gland_IN-gland_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="06:00:00" vehicleRefId="CST_GP-GA-NY-GL_40_0"/>
+				<departure id="1" departureTime="30:00:00" vehicleRefId="CST_GP-GA-NY-GL_40_1"/>
+				<departure id="2" departureTime="54:00:00" vehicleRefId="CST_GP-GA-NY-GL_40_2"/>
+			</departures>
+		</transitRoute>
+		<transitRoute id="CST_GL-NY-GA-GP_41">
+			<transportMode>cst</transportMode>
+			<routeProfile>
+				<stop refId="gland" arrivalOffset="00:00:00" departureOffset="03:00:00" awaitDeparture="false"/>
+				<stop refId="nyon" arrivalOffset="04:15:00" departureOffset="04:45:00" awaitDeparture="false"/>
+				<stop refId="geneve-aeroport" arrivalOffset="05:30:00" departureOffset="06:00:00" awaitDeparture="false"/>
+				<stop refId="geneve-la-praille" arrivalOffset="09:30:00" awaitDeparture="false"/>
+			</routeProfile>
+			<route>
+				<link refId="gland_gland_IN-gland_OUT"/>
+				<link refId="CST_GL-NY-GA-GP_41_gland_OUT-nyon_IN"/>
+				<link refId="nyon_nyon_IN-nyon_OUT"/>
+				<link refId="CST_GL-NY-GA-GP_41_nyon_OUT-geneve-aeroport_IN"/>
+				<link refId="geneve-aeroport_geneve-aeroport_IN-geneve-aeroport_OUT"/>
+				<link refId="CST_GL-NY-GA-GP_41_geneve-aeroport_OUT-geneve-la-praille_IN"/>
+				<link refId="geneve-la-praille_geneve-la-praille_IN-geneve-la-praille_OUT"/>
+			</route>
+			<departures>
+				<departure id="0" departureTime="05:45:00" vehicleRefId="CST_GL-NY-GA-GP_41_0"/>
+				<departure id="1" departureTime="29:45:00" vehicleRefId="CST_GL-NY-GA-GP_41_1"/>
+				<departure id="2" departureTime="53:45:00" vehicleRefId="CST_GL-NY-GA-GP_41_2"/>
+			</departures>
+		</transitRoute>
+	</transitLine>
+</transitSchedule>
