@@ -81,7 +81,7 @@ public class CargoScheduleReader {
 		    		
 		    		String line = null;
 			    	String route = null;
-			    	Map<String,List<Double>> terminalFromHeader2Times = new HashMap<>();
+			    	Map<String,List<Double>> times = new HashMap<>();
 			    			        
 			        for (Cell cell : row) {
 			        	
@@ -113,19 +113,19 @@ public class CargoScheduleReader {
 			        	} else {
 			        		// this should be a terminal name
 			        		
-			        		if (terminalFromHeader2Times.get(headerOfCurrentCell) == null) {
-				        		terminalFromHeader2Times.put(headerOfCurrentCell, new ArrayList<>());
+			        		if (times.get(headerOfCurrentCell) == null) {
+			        			times.put(headerOfCurrentCell, new ArrayList<>());
 			        		}
 			        				        				        		
 			        		if (cell.getCellType() == CellType.NUMERIC) {
 			        			Date date = cell.getDateCellValue();
 			            		double time = date.getHours() * 3600. + date.getMinutes() * 60 + date.getSeconds();
-			            		terminalFromHeader2Times.get(headerOfCurrentCell).add(time);
+			            		times.get(headerOfCurrentCell).add(time);
 			            		
 			        		} else if (cell.getCellType() == CellType.FORMULA && cell.getCachedFormulaResultType() == CellType.NUMERIC) {
 			        			Date date = cell.getDateCellValue();
 			            		double time = date.getHours() * 3600. + date.getMinutes() * 60 + date.getSeconds();
-			            		terminalFromHeader2Times.get(headerOfCurrentCell).add(time);
+			            		times.get(headerOfCurrentCell).add(time);
 			            		
 			        		} else {
 			        			throw new RuntimeException("Expecting the An/Ab column as Numeric or Formula/Numeric format. Aborting... cellType: " + cell.getCellType() + " / " + cell.getStringCellValue());
@@ -133,7 +133,7 @@ public class CargoScheduleReader {
 			        	}
 			        }
 			        
-			        RouteInfo routeInfo = new RouteInfo(line, route, terminalFromHeader2Times);
+			        RouteInfo routeInfo = new RouteInfo(line, route, times,  "terminal");
 			        if (line != null && route != null) routeInfos.add(routeInfo);
 		    	}
 		        rowCounter++;
@@ -200,15 +200,15 @@ public class CargoScheduleReader {
 				
 	    		if (terminalCounter == 0) {
 	    			// first terminal
-	    			if (routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader) == null) {
+	    			if (routeInfo.getTimes().get(terminalFromHeader) == null) {
 	    				throw new RuntimeException("No times found for terminal. Aborting... Terminal: " + terminal.getName() + " / Route: " + routeInfo);
 	    			}
 	    			
-	    			if (routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader).size() != 1) {
+	    			if (routeInfo.getTimes().get(terminalFromHeader).size() != 1) {
 	    				throw new RuntimeException("Expecting only one time information. Aborting... Terminal: " + terminal.getName() + " / Route: " + routeInfo);
 	    			}
 	    			
-	    			terminalDeparture = routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader).get(0);
+	    			terminalDeparture = routeInfo.getTimes().get(terminalFromHeader).get(0);
 	    			
 	    			// we also want the vehicle to arrive some time before the departure, was NaN in the previous version...
 	    			terminalArrival = terminalDeparture - arrivalDepartureOffsetFirstStop;
@@ -216,27 +216,27 @@ public class CargoScheduleReader {
 	    			
 	    		} else if (terminalCounter == terminalArray.length - 1) {
 	    			// last terminal
-	    			if (routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader).size() != 1) {
+	    			if (routeInfo.getTimes().get(terminalFromHeader).size() != 1) {
 	    				throw new RuntimeException("Expecting only one time information. Aborting..." + terminal.getName());
 	    			}
-	    			terminalArrival = routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader).get(0);
+	    			terminalArrival = routeInfo.getTimes().get(terminalFromHeader).get(0);
 	    			terminalDeparture = Double.NaN;
 	    			
 	    		} else {
 	    			// intermediate terminals
 	    			double time1;
 	    			double time2;
-	    			if (routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader).size() != 3) {
+	    			if (routeInfo.getTimes().get(terminalFromHeader).size() != 3) {
 	    				log.warn("Expecting arrival, departure and haltezeit for intermediate stops. " + terminal.getName() + " - " + transitRoute);
 	    				log.warn("Assuming that the given time is the arrival time and assuming a fallback stop time of 30 minutes.");
-	    				time1 = routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader).get(0);
+	    				time1 = routeInfo.getTimes().get(terminalFromHeader).get(0);
 	    				time2 = time1 + 1800.;
 	    			} else {
-	    				time1 = routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader).get(0);
-		    			time2 = routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader).get(2);
+	    				time1 = routeInfo.getTimes().get(terminalFromHeader).get(0);
+		    			time2 = routeInfo.getTimes().get(terminalFromHeader).get(2);
 	    			}
 	    			
-	    			double haltezeit = routeInfo.getTerminalFromHeader2Times().get(terminalFromHeader).get(1);
+	    			double haltezeit = routeInfo.getTimes().get(terminalFromHeader).get(1);
 	    			
 	    			if (time1 - time2 == haltezeit ||
 	    					time1 - time2 == haltezeit - 24 * 3600.) {
@@ -250,7 +250,7 @@ public class CargoScheduleReader {
 	    			}
 	    		}
 	    		
-	    		RouteStopInfo stop = new RouteStopInfo(terminal.getTerminalLink(), terminal.getStop(), terminalArrival, terminalDeparture);
+	    		RouteStopInfo stop = new RouteStopInfo(terminal.getTerminalLink(), terminal.getStop(), terminalArrival, terminalDeparture, routeInfo.getRouteType());
 				routeStopInfos.add(stop);
 				
 				terminalCounter++;

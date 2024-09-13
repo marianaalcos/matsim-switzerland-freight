@@ -10,4 +10,7 @@ public class KVModes {
 	// for simulation experiments with a single container type
 	public static final String CAR_KV_CONTAINER = "carKV_container";
 	
+	// adding cst 
+	public static final String CAR_KV_CST = "carCST_container";
+	
 }

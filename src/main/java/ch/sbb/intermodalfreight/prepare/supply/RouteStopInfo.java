@@ -19,12 +19,14 @@ public class RouteStopInfo {
 	private final double tArrival;
 	private final double tDeparture;
 	private final TransitStopFacility transitStop;
+	private final String routeType;
 
-	public RouteStopInfo(Link link, TransitStopFacility transitStopFacility, double tArrival, double tDeparture) {
+	public RouteStopInfo(Link link, TransitStopFacility transitStopFacility, double tArrival, double tDeparture, String routeType) {
 		this.link = link;
 		this.tArrival = tArrival;
 		this.tDeparture = tDeparture;
 		this.transitStop = transitStopFacility;
+		this.routeType = routeType;
 	}
 
 	/**
@@ -55,5 +57,8 @@ public class RouteStopInfo {
 		return transitStop;
 	}
 
+	public String getRouteType() {
+        return routeType;
+    }
 	
 }

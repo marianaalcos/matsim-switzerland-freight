@@ -27,10 +27,10 @@ import org.matsim.vehicles.Vehicle;
 import com.google.inject.Inject;
 
 public class ContainerTransitStopHandlerFactory implements TransitStopHandlerFactory {
-	
+	// creates instances of ContainerTransitStopHandler
 	@Inject
 	private TerminalQueueDeactivationEventHandler queueEventHandler;
-	
+	// instance of TerminalQueueDeactivationEventHandler. This handler is responsible for managing events related to terminal queue deactivation.
 	@Inject
 	private Scenario scenario;
 

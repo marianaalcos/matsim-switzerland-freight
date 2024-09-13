@@ -13,6 +13,8 @@ import ch.sbb.intermodalfreight.simulate.IntermodalFreightConfigGroup.TerminalCa
 import ch.sbb.intermodalfreight.simulate.RunIntermodalFreightScenario;
 import ch.sbb.intermodalfreight.utils.config.Project;
 
+
+
 /**
  * An example how to generate the cargo supply and run the simulation.
  *
@@ -29,15 +31,18 @@ public class RunExample {
         example.run(project);
     }
 
+    
     /**
      * An example how to generate the supply input files and start a simulation run.
      *
      * @param project the project configuration.
      * @throws IOException
      */
+    
+    
     public void run(Project project) throws IOException {
 
-        // Generate the cargo supply input files
+    	// Generate the cargo supply input files
         RunGenerateCargoSupply runGenerateCargoSupply = new RunGenerateCargoSupply();
         runGenerateCargoSupply.run(project);
 
@@ -52,6 +57,8 @@ public class RunExample {
                 .get(IntermodalFreightConfigGroup.GROUP_NAME);
         ifCfg.setTerminalCapacityApproach(TerminalCapacityApproach.WithCapacityReduction);
 
+       
+       
         Scenario scenario = RunIntermodalFreightScenario.prepareScenario(config);
         Controler controler = RunIntermodalFreightScenario.prepareControler(scenario);
         controler.run();

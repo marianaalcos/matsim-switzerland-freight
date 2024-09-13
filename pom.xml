@@ -33,7 +33,8 @@
             <name>Geotools repository</name>
             <!--<url>http://download.osgeo.org/webdav/geotools</url>-->
             <url>https://repo.osgeo.org/repository/release/</url>
-        </repository>
+        </repository>       
+        
     </repositories>
 
     <dependencies>
@@ -135,8 +136,7 @@
 		    <groupId>commons-io</groupId>
 		    <artifactId>commons-io</artifactId>
 		    <version>2.11.0</version>
-		</dependency>
-
+		</dependency>				
     </dependencies>
     
     <build>

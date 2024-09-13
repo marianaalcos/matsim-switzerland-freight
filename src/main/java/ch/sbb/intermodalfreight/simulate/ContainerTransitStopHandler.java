@@ -55,12 +55,16 @@ public class ContainerTransitStopHandler implements TransitStopHandler {
 	private TerminalQueueDeactivationEventHandler queueEventHandler;
 	private IntermodalFreightConfigGroup ifCfg;
 	
+	
+	// constructor initializes the handler with the vehicle's door operation mode, a queue event handler, and the intermodal freight config.
 	ContainerTransitStopHandler(Vehicle vehicle, TerminalQueueDeactivationEventHandler queueEventHandler, Scenario scenario) {
 		this.doorOperationMode = VehicleUtils.getDoorOperationMode(vehicle.getType());
 		this.queueEventHandler = queueEventHandler;
 		this.ifCfg = (IntermodalFreightConfigGroup) scenario.getConfig().getModules().get(IntermodalFreightConfigGroup.GROUP_NAME);
 	}
-
+	
+	
+	// method handles a transit stop, checking the door operation mode and delegating to handleSerialStop for serial door operations
 	@Override
 	public double handleTransitStop(TransitStopFacility stop, double now, List<PTPassengerAgent> leavingPassengers,
 			List<PTPassengerAgent> enteringPassengers, PassengerAccessEgress handler, MobsimVehicle vehicle) {
@@ -90,7 +94,7 @@ public class ContainerTransitStopHandler implements TransitStopHandler {
 		} else {
 						
 			double accessEgreesTimeFactor = 1.;
-			
+			// Adjusts the time factors based on terminal capacity approach (with or without capacity reduction).
 			if (ifCfg.getTerminalCapacityApproach() == TerminalCapacityApproach.WithCapacityReduction) {
 				Set<Id<Vehicle>> trainsAtTerminal = queueEventHandler.getTerminal2trains().get(stop.getId());	
 				if (trainsAtTerminal != null && trainsAtTerminal.size() > 0) {

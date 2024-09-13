@@ -1,0 +1,68 @@
+name;short_name;header;x;y;modes;capacities;opening_hour;closing_hour
+geneve-la-praille;GP;Geneve La Praille;2498683.086;1115812.548;carCST_container;100;0;24
+zimeysa-meyrin;MM;ZIMEYSA-Meyrin;2494071.043;1119797.184;carCST_container;100;0;24
+geneve-aeroport;GA;Geneve Aeroport;2497444.985;1121486.355;carCST_container;100;0;24
+nyon;NY;Nyon;2507389.631;1137589.891;carCST_container;100;0;24
+gland;GL;Gland;2510236.749;1141877.846;carCST_container;100;0;24
+aubonne;AU;Aubonne;2519636.664;1149872.481;carCST_container;100;0;24
+tolochenaz-morges;TM;Tolochenaz-Morges;2525903.525;1150838.37;carCST_container;100;0;24
+lausanne-malley;LM;Lausanne-Malley;2536819.68;1152913.113;carCST_container;100;0;24
+crissier;CR;Crissier;2533716.921;1155986.412;carCST_container;100;0;24
+aclens;AC;Aclens;2528800.364;1157812.943;carCST_container;100;0;24
+daillens;DS;Daillens;2531823.397;1163639.581;carCST_container;100;0;24
+chavorney;CH;Chavorney;2533635.949;1173435.273;carCST_container;100;0;24
+yverdon;YV;Yverdon;2539099.032;1181121.625;carCST_container;100;0;24
+payerne;PA;Payerne;2561993.171;1185774.061;carCST_container;100;0;24
+avanches;AV;Avanches;2569820.294;1192241.092;carCST_container;100;0;24
+fribourg;FR;Fribourg;2578882.071;1183961.803;carCST_container;100;0;24
+kerzers;KE;Kerzers;2581494.745;1202675.599;carCST_container;100;0;24
+lyss;LY;Lyss;2590055.922;1213745.691;carCST_container;100;0;24
+biel/bienne;BB;Biel/Bienne;2585446.657;1220662.289;carCST_container;100;0;24
+schonbuhl;SC;Schonbuhl;2604644.731;1207726.506;carCST_container;100;0;24
+bern-weyermannshaus;BW;Bern Weyermannshaus;2597456.124;1199610.524;carCST_container;100;0;24
+bern-wankdorf;BE;Bern Wankdorf;2601971.386;1201273.535;carCST_container;100;0;24
+muri-gumligen;MG;Muri-Gumligen;2604556.746;1198219.545;carCST_container;100;0;24
+munsingen;MU;Munsingen;2609584.829;1191561.714;carCST_container;100;0;24
+heimberg-steffisburg;HS;Heimberg-Steffisburg;2612742.005;1181464.025;carCST_container;100;0;24
+gwatt;GW;Gwatt;2614094.468;1174660.709;carCST_container;100;0;24
+solothurn-zuchwil;SZ;Solothurn-Zuchwil;2609043.504;1228074.012;carCST_container;100;0;24
+niederbipp;NI;Niederbipp;2619076.078;1235665.519;carCST_container;100;0;24
+neuendorf;NE;Neuendorf;2627054.964;1238655.738;carCST_container;100;0;24
+harkingen;HA;Harkingen;2628763.643;1239675.84;carCST_container;100;0;24
+rickenbach-wangen;RW;Rickenbach-Wangen;2631511.896;1243407.818;carCST_container;100;0;24
+dulliken;DU;Dulliken;2638254.79;1244386.982;carCST_container;100;0;24
+sissach;SI;Sissach;2628050.832;1257134.787;carCST_container;100;0;24
+liestal;LI;Liestal;2622218.345;1259580.598;carCST_container;100;0;24
+pratteln-west;PW;Pratteln West;2619083.952;1263094.927;carCST_container;100;0;24
+basel-wolf;BA;Basel Wolf;2611286.038;1267664.688;carCST_container;100;0;24
+basel-gateway-nord;BG;Basel Gateway Nord;2612226.159;1269929.355;carCST_container;100;0;24
+oftringen-zofingen;OZ;Oftringen-Zofingen;2636387.664;1240342.135;carCST_container;100;0;24
+dagmersellen;DA;Dagmersellen;2641718.406;1229246.369;carCST_container;100;0;24
+sursee;SE;Sursee;2650984.133;1224720.509;carCST_container;100;0;24
+rothenburg;RO;Rothenburg;2663242.552;1216735.83;carCST_container;100;0;24
+emmenbrucke;EM;Emmenbrucke;2663361.44;1215662.116;carCST_container;100;0;24
+luzern-allmend;LA;Luzern Allmend;2666157.417;1211382.044;carCST_container;100;0;24
+suhr;SU;Suhr;2648355.962;1246808.508;carCST_container;100;0;24
+schafisheim;SM;Schafisheim;2653173.897;1247625.424;carCST_container;100;0;24
+limmatstadt;LT;Limmatstadt;2669956.378;1253260.421;carCST_container;100;0;24
+urdorf;UR;Urdorf;2674152.343;1248894.511;carCST_container;100;0;24
+zurich-aussersihl;ZA;Zurich Aussersihl;2682244.594;1247363.362;carCST_container;100;0;24
+zurich-nord;ZN;Zurich Nord;2683532.211;1252037.31;carCST_container;100;0;24
+zurich-flughafen;ZF;Zurich Flughafen;2683872.387;1257142.285;carCST_container;100;0;24
+wangen-dubendorf;WD;Wangen-Dubendorf;2690722.918;1251578.693;carCST_container;100;0;24
+winterthur;WI;Winterthur;2696824.498;1261688.505;carCST_container;100;0;24
+winterthur-hegi;WH;Winterthur Hegi;2700570.152;1262369.133;carCST_container;100;0;24
+frauenfeld;FD;Frauenfeld;2709900.173;1268009.083;carCST_container;100;0;24
+wil;WL;Wil;2721246.347;1258239.811;carCST_container;100;0;24
+uzwil-oberburen;UO;Uzwil-Oberburen;2728485.259;1256348.165;carCST_container;100;0;24
+gossaucst;GO;Gossaucst;2736601.029;1253214.39;carCST_container;100;0;24
+st.-gallen-st.-fiden;SS;St. Gallen St. Fiden;2746821.473;1255239.664;carCST_container;100;0;24
+val-ombre;RVO;Val Ombre;2496893.82;1119755.938;carCST_container;100;0;24
+leman;RLE;Leman;2534029.34;1155392.875;carCST_container;100;0;24
+broye;RBR;Broye;2555271.925;1187577.037;carCST_container;100;0;24
+lyss-ort;RLO;Lyss Ort;2590080.666;1213342.136;carCST_container;100;0;24
+bern;RBE;Bern;2600463.212;1199699.06;carCST_container;100;0;24
+dulliken-sud;RDS;Dulliken Sud;2638265.475;1244391.979;carCST_container;100;0;24
+mayenfels;RMA;Mayenfels;2618378.58;1262803.587;carCST_container;100;0;24
+heitersberg;RHE;Heitersberg;2670075.47;1249480.006;carCST_container;100;0;24
+aegert;RAE;Aegert;2689260.967;1251950.796;carCST_container;100;0;24

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -61,11 +62,15 @@ public class RunGenerateCargoSupply {
 		final String onlyCarNetwork = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getNetwork();
 		final String networkChangeEventsFile = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getNetworkChangeEvents();
 		final String inputScheduleXLSX = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getSchedule();
+		final String inputSchedulecstXLSX = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getSchedulecst();
 		final String inputTerminalsFile = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getTerminals();
 		final String inputDistancesCSV = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getDistances();
+		final String inputHubsFile = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getHubs();
+		final String inputDistancescstCSV = project.getDirectory().getOriginalDataPath() + "/" + project.getMatsimInput().getSupply().getDistancescst();
 		
 	    final String sheetName = project.getMatsimInput().getSupply().getSheet();
 		final int cargoTrainCapacityTEU = project.getMatsimInput().getSupply().getTrainCapacity();
+		final int cstVehicleCapacity = project.getMatsimInput().getSupply().getCSTVehicleCapacity();
 		final double distanceTerminalCraneLinks = project.getMatsimInput().getSupply().getCraneLinkLength();
 		final double craneTravelTime = project.getMatsimInput().getSupply().getCraneTravelTime();
 		final int simulatedDays = project.getMatsimInput().getSimulatedDays();
@@ -101,42 +106,83 @@ public class RunGenerateCargoSupply {
         
 		GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, distanceTerminalCraneLinks, craneTravelTime, simulatedDays);
 		
-        // first read and add the terminals		
+        // first read and add the terminals	and hubs	
 		Map<String,Terminal> terminals = new TerminalsFileReader(inputTerminalsFile).getName2terminal();
 		for (Terminal terminal : terminals.values()) {
 			supply.addTerminalAndConnectToRoadNetwork(terminal);
 		}
 		
-		// then read the schedule xlsx and add the transit lines, routes and departures	
-		List<RouteInfo> routeInfos = new CargoScheduleReader(inputScheduleXLSX, sheetName, terminals, arrivalDepartureOffsetFirstStop).getRouteInfos();
-		Map<String, Integer> relation2distance = new TerminalDistanceReader().getTerminalDistances(inputDistancesCSV);
+		Map<String,Hub> hubs = new HubsFileReader(inputHubsFile).getName2hub();
+		for (Hub hub : hubs.values()) {
+			supply.addHubAndConnectToRoadNetwork(hub);
+		}
 		
-		int routeCounter = 0;
-		for (RouteInfo routeInfo : routeInfos) {
-	    	log.info("Route info: " + routeInfo.toString());
-	    	
-	    	String transitLine = routeInfo.getLine();
-	    	String transitRoute = routeInfo.getRoute();
-			List<RouteStopInfo> routeStopInfos = routeInfo.getRouteStopInfos();
-	    	
-			supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, cargoTrainCapacityTEU, relation2distance);
+		// then read the schedule xlsx and add the transit lines, routes and departures	
+		List<RouteInfo> terminalRouteInfos = new CargoScheduleReader(inputScheduleXLSX, sheetName, terminals, arrivalDepartureOffsetFirstStop).getRouteInfos();
+        Map<String, Double> terminalDistances = new TerminalDistanceReader().getTerminalDistances(inputDistancesCSV);
+
+        List<RouteInfo> hubRouteInfos = new CstScheduleReader(inputSchedulecstXLSX, sheetName, hubs, arrivalDepartureOffsetFirstStop).getRouteInfos();
+        Map<String, Double> hubDistances = new HubDistanceReader().getHubDistances(inputDistancescstCSV);
+
+        
+        // Combine terminal and hub distances into one map
+        Map<String, Double> relevantDistances = new HashMap<>();
+        relevantDistances.putAll(terminalDistances);
+        relevantDistances.putAll(hubDistances);
+        
+        // Combine the lists of route infos
+        List<RouteInfo> allRouteInfos = new ArrayList<>();
+        allRouteInfos.addAll(terminalRouteInfos);
+        allRouteInfos.addAll(hubRouteInfos);
+
+		
+		//int routeCounter = 0;
+		//for (RouteInfo routeInfo : routeInfos) {
+	    //	log.info("Route info: " + routeInfo.toString());
+	    //	
+	    //	String transitLine = routeInfo.getLine();
+	    //	String transitRoute = routeInfo.getRoute();
+		//	List<RouteStopInfo> routeStopInfos = routeInfo.getRouteStopInfos();
+	    //	
+		//	supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, cargoTrainCapacityTEU, relation2distance);
+		//	
+		//	routeCounter++;
+	    //}
+		
+		// Process all RouteInfo objects (handles terminals and hubs)
+        int routeCounter = 0;
+        for (RouteInfo routeInfo : allRouteInfos) {
+            log.info("Route info: " + routeInfo.toString());
+
+            String transitLine = routeInfo.getLine();
+            String transitRoute = routeInfo.getRoute();
+            List<RouteStopInfo> routeStopInfos = routeInfo.getRouteStopInfos();
+            
+            String routeType = routeStopInfos.get(0).getRouteType().toString(); //routeType from first stop
+            int vehicleCapacity = routeType.equalsIgnoreCase("cst_hub") ? cstVehicleCapacity : cargoTrainCapacityTEU;
+
+            supply.addCargoConnection(routeCounter, transitLine, transitRoute, routeStopInfos, vehicleCapacity, relevantDistances);
+
+            routeCounter++;
+        }
 			
-			routeCounter++;
-	    }
-			
+        
+      
+	   
 		// see if we have to adjust the network
 		if (project.getMatsimInput().getSupply().isNetworkNightHGVRestriction()) {
 			log.info("Creating network change events to account for the night ban of HGV.");
 			supply.addHGVnightRestriction();
 		}
 		
-		// Allow rail access/egress mode wherever the car mode is allowed.
+		// Allow rail/cst access/egress mode wherever the car mode is allowed.
 		for (Link link : scenario.getNetwork().getLinks().values()) {
 			if (link.getAllowedModes().contains("car")) {
 				Set<String> modes = new HashSet<>();
 				for (String mode : link.getAllowedModes()) {
 					modes.add(mode);
 					modes.add(KVModes.CAR_KV_CONTAINER);
+					modes.add(KVModes.CAR_KV_CST);
 				}
 				link.setAllowedModes(modes);
 			}

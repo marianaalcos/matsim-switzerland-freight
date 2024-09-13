@@ -44,6 +44,8 @@ import org.matsim.vehicles.Vehicles;
 import org.matsim.vehicles.VehiclesFactory;
 
 
+
+
 /**
  * 
  * A preparation class which generates the cargo supply.
@@ -62,14 +64,18 @@ public class GenerateCargoSupply {
 	private final double numberOfLanesTerminalConnectionLinks = 100.;
 	private final double largeLinkCapacity = 3600.;
 	private final double linksPerTerminal = 3.;
+	private final double xCoordGapHubInOut = 100.;
 
 	private final int simulatedDays;
 	private final double distanceEachTerminalLink;
 	private final double speedEachTerminalLink;
+	private final double distanceEachHubLink;
+	private final double speedEachHubLink;
 	
 	private final Scenario scenario;
 	private final Network carOnlyNetwork;
 	private final Map<String, Terminal> terminals = new HashMap<>();	
+	private final Map<String, Hub> hubs = new HashMap<>();	
 	private final TransitSchedule schedule;
 	private final Vehicles vehicles;
 	private final Network network;
@@ -86,6 +92,8 @@ public class GenerateCargoSupply {
 	 * @param craneTravelTime the free speed travel time to pass the terminal's crane links
 	 * @param simulatedDays the number of simulated days, e.g. three days in order to use the second day as the representative day
 	 */
+	
+	// Constructor to initialize the cargo supply generation
 	public GenerateCargoSupply(Scenario scenario, Network originalCarNetwork, double distanceTerminalCraneLinks, double craneTravelTime, int simulatedDays) {
 		this.scenario = scenario;
 		this.carOnlyNetwork = originalCarNetwork;
@@ -94,6 +102,10 @@ public class GenerateCargoSupply {
 		// compute distance and speed for each terminal link
 		this.distanceEachTerminalLink = distanceTerminalCraneLinks / linksPerTerminal;
 		this.speedEachTerminalLink = distanceEachTerminalLink / (craneTravelTime / linksPerTerminal );
+		
+		// compute distance and speed for each hub link
+		this.distanceEachHubLink = 100.0; //meter
+		this.speedEachHubLink = 8.33; // m/s
 		
 		schedule = scenario.getTransitSchedule();
         vehicles = scenario.getTransitVehicles();
@@ -128,7 +140,7 @@ public class GenerateCargoSupply {
         
         return link;
 	}
-    
+	 // Method to retrieve the nearest node in the network based on coordinates
     private static Node getNearestNode(Network network, final Coord coord) {
         Node nearestNode = NetworkUtils.getNearestNode((network),coord);
         if ( nearestNode == null ) {
@@ -159,6 +171,7 @@ public class GenerateCargoSupply {
 	 * 
 	 * @param terminal
 	 */
+    // Method to add a terminal and connect it to the road network (rail link)
 	public void addTerminalAndConnectToRoadNetwork(Terminal terminal) {
 		
         // create the terminal link: (t_IN)<#####>(t_OUT)
@@ -180,6 +193,9 @@ public class GenerateCargoSupply {
         
        	TransitStopFacility stop = sf.createTransitStopFacility(Id.create(terminal.getName(), TransitStopFacility.class), terminal.getCoord(), false);
     	stop.setLinkId(terminalLink.getId());
+    	
+    	// Add the type attribute
+        stop.getAttributes().putAttribute("type", "terminal");
     	
     	if (terminal.getMode2terminalCapacity().size() > 1) {
     		log.warn("There are several modes defined for terminal " + terminal.getName() + ". "
@@ -216,7 +232,73 @@ public class GenerateCargoSupply {
         }
                 
 	}
-	
+	/**
+	 * 
+	 * Creates the CST hub (transit stop + access/egress links) and connects the hub to the road network (cst link)
+	 * 
+	 * @param hub
+	 */
+    // Method to add a hub and connect it to the road network
+	public void addHubAndConnectToRoadNetwork(Hub hub) {
+		
+        // create the hub link: (t_IN)<cst>(t_OUT), tIn is placed slightly to the left of tOut using xCoordGapHubInOut
+   
+		Node tIn = nf.createNode(Id.create(hub.getName() + "_IN", Node.class), new Coord(hub.getCoord().getX() - xCoordGapHubInOut , hub.getCoord().getY()));
+        Node tOut = nf.createNode(Id.create(hub.getName() + "_OUT", Node.class), hub.getCoord());
+        network.addNode(tIn);
+        network.addNode(tOut);
+        
+       
+        Set<String> modesHubLink = new HashSet<>();
+        modesHubLink.add("cst");  // A set of modes (modesHubLink) is created, starting with "cst".
+        for (String kvMode : hub.getMode2hubCapacity().keySet()) { // retrieves the set of keys from the Mode2hubCapacity map of the hub object, each key is a mode
+        	modesHubLink.add(kvMode); // populate the modesHubLink set with all the transport modes that are supported by the hub
+        }
+        // add a link (hubLink) between 'tin' and 'tOut' with the specified attributes that were declared in the beginning of the script
+        Link hubLink = addLink(hub.getName(), distanceEachHubLink, tIn, tOut, modesHubLink, largeLinkCapacity, speedEachHubLink, numberOfLanesCarRailLink);
+        
+        // create transit stop and put it on the link        
+       	TransitStopFacility stop = sf.createTransitStopFacility(Id.create(hub.getName(), TransitStopFacility.class), hub.getCoord(), false);
+    	stop.setLinkId(hubLink.getId());
+    	
+    	// Add the type attribute
+        stop.getAttributes().putAttribute("type", "cst_hub");
+    	
+    	if (hub.getMode2hubCapacity().size() > 1) {
+    		log.warn("There are several modes defined for hub " + hub.getName() + ". "
+    				+ " Should be revised once we need this functionality. For now, we are using the minimum capacity for the train-stack queue.");
+    	}
+    	
+    	// use the minimum capacity given for that hub
+    	double hubCapacity = Double.MAX_VALUE;
+    	for (Double capacity : hub.getMode2hubCapacity().values()) {
+    		if (capacity < hubCapacity) {
+    			hubCapacity = capacity;
+    		}
+    	}
+    	
+    	// the capacity is given in containers per hour, and here we need the time consumption per container
+    	stop.getAttributes().putAttribute("accessTime", 3600./hubCapacity);
+    	stop.getAttributes().putAttribute("egressTime", 3600./hubCapacity);
+    	
+    	// define access / egress modes for intermodal router
+    	for (String kvMode : hub.getMode2hubCapacity().keySet()) {
+        	stop.getAttributes().putAttribute(carAccessibleAttributePrefix + kvMode, 1);
+        }
+    	
+        schedule.addStopFacility(stop);
+        
+        // store hub information
+        hub.setHubLink(hubLink);
+        hub.setStop(stop);
+        
+        // connect the hub link to road network using a link queue as crane
+        
+        for (String kvMode : hub.getMode2hubCapacity().keySet()) {
+            connectToRoadNetwork(hub.getName(), hubLink, hub.getMode2hubCapacity().get(kvMode), hub.getMode2operatingTimes().get(kvMode).getFirst(), hub.getMode2operatingTimes().get(kvMode).getSecond(), kvMode);
+        }
+                
+	}	
 	/**
 	 * 
 	 * Creates the links shown below to connect a terminal to the road network.
@@ -250,68 +332,66 @@ public class GenerateCargoSupply {
 	 * @param to
 	 * @param carModeKV
 	 */
-	private void connectToRoadNetwork(String name, Link railHubLink, Double containersPerHour, double from, double to, String carModeKV) {
 	
-		// crane link XA1->XB1
-		
-        LineSegment ls = new LineSegment(railHubLink.getFromNode().getCoord().getX(), railHubLink.getFromNode().getCoord().getY(), railHubLink.getToNode().getCoord().getX(), railHubLink.getToNode().getCoord().getY()); 
-        
-    	Coordinate hubXB1Coordinate = ls.pointAlongOffset(1, -1 * railCraneGap);
-    	Coordinate hubXA1Coordinate = ls.pointAlongOffset(0, -1 * railCraneGap);
-    	Coord hubXB1Coord = new Coord(hubXB1Coordinate.x, hubXB1Coordinate.y);
-    	Coord hubXA1Coord = new Coord(hubXA1Coordinate.x, hubXA1Coordinate.y);	
+	private void connectToRoadNetwork(String name, Link railHubLink, Double containersPerHour, double from, double to, String carModeKV) {
 
-    	Node xB1 = nf.createNode(Id.create(railHubLink.getToNode().getId().toString() + "1_" + carModeKV, Node.class), hubXB1Coord);
-    	network.addNode(xB1);
-    	Node xA1 = nf.createNode(Id.create(railHubLink.getFromNode().getId().toString() + "1_" + carModeKV, Node.class), hubXA1Coord);
-    	network.addNode(xA1);
-    	
-    	Link craneLink = addLink(name, distanceEachTerminalLink, xA1, xB1, new HashSet<>(Arrays.asList(carModeKV)), containersPerHour, speedEachTerminalLink, numberOfLanesTerminalLink);
-    	
-    	for (int day = 0; day < simulatedDays; day++) {
-    		
-    		double daySecondsToAdd = day * 24 * 3600.;
-    		
-    		if (from > 0.) {
-        		
-        		{
-    	    		// 0 till service start
-    	    		NetworkChangeEvent networkChangeStart = new NetworkChangeEvent(0. + daySecondsToAdd);
-    	    		networkChangeStart.addLink(craneLink);
-    	    		networkChangeStart.setFlowCapacityChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, 0.));
-    	    		networkChangeStart.setLanesChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, 0.));
-    				this.networkChangeEvents.add(networkChangeStart);
-    				
-    				// at service start time: set back to original values
-    				NetworkChangeEvent networkChangeSetBack = new NetworkChangeEvent(from + daySecondsToAdd);
-    				networkChangeSetBack.addLink(craneLink);
-    				networkChangeSetBack.setFlowCapacityChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, craneLink.getCapacity() / 3600.));
-    				networkChangeSetBack.setLanesChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, craneLink.getNumberOfLanes()));
-    				this.networkChangeEvents.add(networkChangeSetBack);
-        		}
-        	}
-        	
-        	if (to < 24 * 3600.) {
-        		// service end time
-        		NetworkChangeEvent networkChangeStart = new NetworkChangeEvent(to + daySecondsToAdd);
-        		networkChangeStart.addLink(craneLink);
-        		networkChangeStart.setFlowCapacityChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, 0.));
-        		networkChangeStart.setLanesChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, 0.));
-    			this.networkChangeEvents.add(networkChangeStart);
-        	}
-    	}
-    	
-    	// connect parallel links    	
-    	addLink(name, distanceEachTerminalLink, railHubLink.getToNode(), xA1, new HashSet<>(Arrays.asList(carModeKV)), largeLinkCapacity, speedEachTerminalLink, numberOfLanesTerminalConnectionLinks);
-    	addLink(name, distanceEachTerminalLink, xB1, railHubLink.getFromNode(), new HashSet<>(Arrays.asList(carModeKV)), largeLinkCapacity, speedEachTerminalLink, numberOfLanesTerminalConnectionLinks);
-        
-    	// connect to original car only road network
-    	
-        Node nearestNodeXA2 = getNearestNode(carOnlyNetwork, xA1.getCoord()); 
-        addLink(name, NetworkUtils.getEuclideanDistance(nearestNodeXA2.getCoord(), xA1.getCoord()), nearestNodeXA2, xA1, new HashSet<>(Arrays.asList(carModeKV)), largeLinkCapacity, 13.8889, numberOfLanesTerminalConnectionLinks);            
-        
-        Node nearestNodeXB2 = getNearestNode(carOnlyNetwork, xB1.getCoord()); 
-        addLink(name, NetworkUtils.getEuclideanDistance(xB1.getCoord(), nearestNodeXB2.getCoord()), xB1, nearestNodeXB2, new HashSet<>(Arrays.asList(carModeKV)), largeLinkCapacity, 13.8889, numberOfLanesTerminalConnectionLinks);            
+		
+		// Determine if the carModeKV indicates a CSTHub
+	    boolean isCSTHub = carModeKV.contains("carCST_container");
+	    
+		double distance = isCSTHub ? distanceEachHubLink : distanceEachTerminalLink;
+	    // If isCSTHub is true, then distance is set to distanceEachHubLink, else distanceEachTerminalLink
+	    // crane link XA1->XB1
+	    LineSegment ls = new LineSegment(railHubLink.getFromNode().getCoord().getX(), railHubLink.getFromNode().getCoord().getY(), railHubLink.getToNode().getCoord().getX(), railHubLink.getToNode().getCoord().getY()); 
+
+	    Coordinate hubXB1Coordinate = ls.pointAlongOffset(1, -1 * railCraneGap);
+	    Coordinate hubXA1Coordinate = ls.pointAlongOffset(0, -1 * railCraneGap);
+	    Coord hubXB1Coord = new Coord(hubXB1Coordinate.x, hubXB1Coordinate.y);
+	    Coord hubXA1Coord = new Coord(hubXA1Coordinate.x, hubXA1Coordinate.y);  
+	    
+	    Node xB1 = nf.createNode(Id.create(railHubLink.getToNode().getId().toString() + "1_" + carModeKV, Node.class), hubXB1Coord);
+	    network.addNode(xB1);
+	    Node xA1 = nf.createNode(Id.create(railHubLink.getFromNode().getId().toString() + "1_" + carModeKV, Node.class), hubXA1Coord);
+	    network.addNode(xA1);
+	    
+	    Link craneLink = addLink(name, distance, xA1, xB1, new HashSet<>(Arrays.asList(carModeKV)), containersPerHour, speedEachTerminalLink, numberOfLanesTerminalLink);
+	    
+	    for (int day = 0; day < simulatedDays; day++) {
+	        double daySecondsToAdd = day * 24 * 3600.;
+	        
+	        if (from > 0.) {
+	            {
+	                NetworkChangeEvent networkChangeStart = new NetworkChangeEvent(0. + daySecondsToAdd);
+	                networkChangeStart.addLink(craneLink);
+	                networkChangeStart.setFlowCapacityChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, 0.));
+	                networkChangeStart.setLanesChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, 0.));
+	                this.networkChangeEvents.add(networkChangeStart);
+	                
+	                NetworkChangeEvent networkChangeSetBack = new NetworkChangeEvent(from + daySecondsToAdd);
+	                networkChangeSetBack.addLink(craneLink);
+	                networkChangeSetBack.setFlowCapacityChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, craneLink.getCapacity() / 3600.));
+	                networkChangeSetBack.setLanesChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, craneLink.getNumberOfLanes()));
+	                this.networkChangeEvents.add(networkChangeSetBack);
+	            }
+	        }
+	        
+	        if (to < 24 * 3600.) {
+	            NetworkChangeEvent networkChangeStart = new NetworkChangeEvent(to + daySecondsToAdd);
+	            networkChangeStart.addLink(craneLink);
+	            networkChangeStart.setFlowCapacityChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, 0.));
+	            networkChangeStart.setLanesChange(new ChangeValue(ChangeType.ABSOLUTE_IN_SI_UNITS, 0.));
+	            this.networkChangeEvents.add(networkChangeStart);
+	        }
+	    }
+	    
+	    addLink(name, distance, railHubLink.getToNode(), xA1, new HashSet<>(Arrays.asList(carModeKV)), largeLinkCapacity, speedEachTerminalLink, numberOfLanesTerminalConnectionLinks);
+	    addLink(name, distance, xB1, railHubLink.getFromNode(), new HashSet<>(Arrays.asList(carModeKV)), largeLinkCapacity, speedEachTerminalLink, numberOfLanesTerminalConnectionLinks);
+	    
+	    Node nearestNodeXA2 = getNearestNode(carOnlyNetwork, xA1.getCoord()); 
+	    addLink(name, NetworkUtils.getEuclideanDistance(nearestNodeXA2.getCoord(), xA1.getCoord()), nearestNodeXA2, xA1, new HashSet<>(Arrays.asList(carModeKV)), largeLinkCapacity, 13.8889, numberOfLanesTerminalConnectionLinks);            
+	    
+	    Node nearestNodeXB2 = getNearestNode(carOnlyNetwork, xB1.getCoord()); 
+	    addLink(name, NetworkUtils.getEuclideanDistance(xB1.getCoord(), nearestNodeXB2.getCoord()), xB1, nearestNodeXB2, new HashSet<>(Arrays.asList(carModeKV)), largeLinkCapacity, 13.8889, numberOfLanesTerminalConnectionLinks);            
 	}
 
 	/**
@@ -323,9 +403,9 @@ public class GenerateCargoSupply {
 	 * @param transitRoute name of the transit route, used to create IDs
 	 * @param routeInfos a correctly sorted list which contains the route stop infos
 	 * @param vehicleCapacity train capacity in number of containers that fit into the train
-	 * @param relation2distance (optional) a map which contains the distances between the terminals; if null the euclidean distance will be used
+	 * @param combinedDistances (optional) a map which contains the distances between the terminals; if null the euclidean distance will be used
 	 */
-	public TransitLine addCargoConnection(int routeCounter, String transitLine, String transitRoute, List<RouteStopInfo> routeInfos, int vehicleCapacity, Map<String, Integer> relation2distance) {
+	public TransitLine addCargoConnection(int routeCounter, String transitLine, String transitRoute, List<RouteStopInfo> routeInfos, int vehicleCapacity, Map<String, Double> combinedDistances) {
 		
 		if (routeInfos.size() < 2) throw new RuntimeException("At least two route stops required. Aborting...");
 		
@@ -333,22 +413,26 @@ public class GenerateCargoSupply {
 		
 		List<Id<Link>> railLinks = new ArrayList<>();     
 		RouteStopInfo previousStop = null;
-		for (RouteStopInfo stop : routeInfos) {
+		for (RouteStopInfo stop : routeInfos) { //iterates over each RouteStopInfo object in the list routeInfos 
 			log.info("Stop: " + stop.getTransitStop().getId());
 			if (previousStop == null) {
 				// add first terminal
 				railLinks.add(stop.getLink().getId());
 			} else {
 				// not the first terminal
-				// add connecting link
-				Link connectingLink = addLink(transitLine + "_" + transitRoute + "_" + routeCounter,
-						getDistance(relation2distance, previousStop, stop),
-						previousStop.getLink().getToNode(),
-						stop.getLink().getFromNode(),
-						new HashSet<>(Arrays.asList("rail")),
-						largeLinkCapacity,
-						13.8889,
-						1);
+				// determine the mode based on the routeType
+				String mode = (stop.getRouteType().toString().equalsIgnoreCase("cst_hub") ) ? "cst" : "rail";
+				double speed = (stop.getRouteType().toString().equalsIgnoreCase("cst_hub")) ? 8.3334 : 13.8889;
+	            int lanes = (stop.getRouteType().toString().equalsIgnoreCase("cst_hub")) ? 2 : 1;
+		        // add connecting link
+	            Link connectingLink = addLink(transitLine + "_" + transitRoute + "_" + routeCounter,
+		                    getDistance(combinedDistances, previousStop, stop),
+		                    previousStop.getLink().getToNode(),
+		                    stop.getLink().getFromNode(),
+		                    new HashSet<>(Arrays.asList(mode)),
+		                    largeLinkCapacity,
+		                    speed,
+		                    lanes);
 				railLinks.add(connectingLink.getId());
 				// add terminal
 				railLinks.add(stop.getLink().getId());
@@ -406,16 +490,29 @@ public class GenerateCargoSupply {
 			stopCounter++;
 		}
 		
-		VehicleType vehType = addVehicleType("cargoTrain_" + transitLine + "_" + transitRoute + "_" + routeCounter, vehicleCapacity);
+		
+	    // Determine the vehicle type based on RouteType of the first stop
+		String routeType = routeInfos.get(0).getRouteType();
+		String vehicleType = routeType.equalsIgnoreCase("cst_hub") ? "cstVehicle" : "cargoTrain";
+	   
+
+		// VehicleType vehType = addVehicleType("cargoTrain_" + transitLine + "_" + transitRoute + "_" + routeCounter, vehicleCapacity);
+        VehicleType vehType = addVehicleType(transitLine + "_" + transitRoute + "_" + routeCounter, vehicleCapacity, vehicleType);
         
 		NetworkRoute networkRoute = RouteUtils.createLinkNetworkRouteImpl(railLinks.get(0), railLinks.subList(1, railLinks.size() - 1), railLinks.get(railLinks.size() - 1));
-        TransitRoute route = sf.createTransitRoute(Id.create(transitLine + "_" + transitRoute + "_" + routeCounter, TransitRoute.class), networkRoute, stops, "rail");
-    	
+        
+        // Determine the TransitRoute mode based on the route type
+		String mode = routeType.equalsIgnoreCase("cst_hub") ? "cst" : "rail";
+	       
+        // TransitRoute route = sf.createTransitRoute(Id.create(transitLine + "_" + transitRoute + "_" + routeCounter, TransitRoute.class), networkRoute, stops, "rail");
+        TransitRoute route = sf.createTransitRoute(Id.create(transitLine + "_" + transitRoute + "_" + routeCounter, TransitRoute.class), networkRoute, stops, mode);
+        
+        
     	// generate departures for all days
 		for (int day = 0; day < simulatedDays; day++) {
 			
 			// create a new vehicle for each day
-			Vehicle veh = vf.createVehicle(Id.create("cargoTrain_" + transitLine + "_" + transitRoute + "_" + routeCounter + "_" + day, Vehicle.class), vehType);
+			Vehicle veh = vf.createVehicle(Id.create(transitLine + "_" + transitRoute + "_" + routeCounter + "_" + day, Vehicle.class), vehType);
 	        vehicles.addVehicle(veh);
 			
 			double routeDepartureDay = day * 24 * 3600 + firstTrainStartTime;
@@ -439,7 +536,7 @@ public class GenerateCargoSupply {
         		
 	}
 	
-	private double getDistance(Map<String, Integer> relation2distance, RouteStopInfo previousStop, RouteStopInfo stop) {
+	private double getDistance(Map<String, Double> relation2distance, RouteStopInfo previousStop, RouteStopInfo stop) {
 		if (relation2distance == null) {
 			return NetworkUtils.getEuclideanDistance(previousStop.getTransitStop().getCoord(), stop.getTransitStop().getCoord());
 		} else {
@@ -454,11 +551,16 @@ public class GenerateCargoSupply {
 		}
 	}
 	
-	private VehicleType addVehicleType(String name, int vehicleCapacity) {
-		VehicleType vehType = vf.createVehicleType(Id.create("cargoTrain_" + name, VehicleType.class));
+	private VehicleType addVehicleType(String name, int vehicleCapacity, String vehicleType) {
+		//VehicleType vehType = vf.createVehicleType(Id.create("cargoTrain_" + name, VehicleType.class));
+		VehicleType vehType = vf.createVehicleType(Id.create(name, VehicleType.class));
         VehicleCapacity vehCapacity = vehType.getCapacity();
         vehCapacity.setSeats(vehicleCapacity);
-        VehicleUtils.setDoorOperationMode(vehType, DoorOperationMode.serial);
+        VehicleUtils.setDoorOperationMode(vehType, DoorOperationMode.serial);        
+        
+        // Add the type attribute to distinguish between "cargoTrain" and "cstVehicle"
+        vehType.getAttributes().putAttribute("vehicleType", vehicleType);
+        
         vehicles.addVehicleType(vehType);
 		return vehType;
 	}
@@ -468,6 +570,10 @@ public class GenerateCargoSupply {
 	 */
 	public Map<String, Terminal> getTerminals() {
 		return this.terminals;
+	}
+	
+	public Map<String, Hub> getHubs() {
+		return this.hubs;
 	}
 
 	/**
