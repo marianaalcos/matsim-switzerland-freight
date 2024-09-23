@@ -136,7 +136,7 @@
 			<param name="marginalUtilityOfDistance_util_m" value="0.0"/>
 			<param name="marginalUtilityOfTraveling_util_hr" value="0.0"/>
 			<param name="mode" value="carCST_container"/>
-			<param name="monetaryDistanceRate" value="-0.0070"/>
+			<param name="monetaryDistanceRate" value="-0.0035"/>
 		</parameterset>
 		<parameterset type="modeParams">
 			<param name="constant" value="0.0"/>
@@ -261,7 +261,7 @@
 		<!-- Optional input file containing additional attributes for transit lines, stored as ObjectAttributes. -->
 		<param name="transitLinesAttributesFile" value="null" />
 		<!-- Comma-separated list of transportation modes that are handled as transit. Defaults to 'pt'. -->
-		<param name="transitModes" value="cst, rail" />
+		<param name="transitModes" value="pt" />
 		<!-- Input file containing the transit schedule to be simulated. -->
 		<param name="transitScheduleFile" value="../03_matsim_input/v001/cargoTransitSchedule.xml.gz" />
 		<!-- Optional input file containing additional attributes for transit stop facilities, stored as ObjectAttributes. -->
@@ -302,7 +302,6 @@
 		<param name="useIntermodalAccessEgress" value="true" />
 		<param name="useModeMappingForPassengers" value="false" />
 		<param name="useRangeQuery" value="false" />
-		<param name="transitModes" value="rail, cst" />
 		<parameterset type="intermodalAccessEgress" >
 			<param name="initialSearchRadius" value="20000.0" />
 			<param name="linkIdAttribute" value="null" />

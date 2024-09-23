@@ -114,7 +114,7 @@ public class AddCargoSupplyTest {
 	        		);
 
 	        // first add the terminals
-			GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, 600., 216., 3);
+			GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, 600., 216., 3, 40, 1);
 			for (Terminal terminal : terminals.values()) {
 				supply.addTerminalAndConnectToRoadNetwork(terminal);
 			}
@@ -147,7 +147,7 @@ public class AddCargoSupplyTest {
 				routeInfos.add(stop2);
 				routeInfos.add(stop3);
 				
-				TransitLine line = supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, 40, null);
+				TransitLine line = supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, null);
 				
 				for (TransitRoute route : line.getRoutes().values()) {
 					System.out.println("Line: " + line.getId() + " Route: " + route.getId());
@@ -215,7 +215,7 @@ public class AddCargoSupplyTest {
 	        		);
 
 	        // first add the terminals
-			GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, 600., 216., 3);
+			GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, 600., 216., 3 , 40, 1);
 			for (Terminal terminal : terminals.values()) {
 				supply.addTerminalAndConnectToRoadNetwork(terminal);
 			}
@@ -248,7 +248,7 @@ public class AddCargoSupplyTest {
 				routeInfos.add(stop2);
 				routeInfos.add(stop3);
 				
-				supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, 40, null);
+				supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, null);
 			}
 			
 			{
@@ -277,7 +277,7 @@ public class AddCargoSupplyTest {
 				routeInfos.add(stop2);
 				routeInfos.add(stop3);
 				
-				supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, 40, null);
+				supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, null);
 			}
 			
 			{
@@ -306,7 +306,7 @@ public class AddCargoSupplyTest {
 				routeInfos.add(stop2);
 				routeInfos.add(stop3);
 				
-				supply.addCargoConnection(1, transitLine, transitRoute, routeInfos, 40, null);
+				supply.addCargoConnection(1, transitLine, transitRoute, routeInfos,  null);
 			}
 												
 			String outputDir = utils.getOutputDirectory();
@@ -386,7 +386,7 @@ public class AddCargoSupplyTest {
 	        Map<String, Terminal> terminals = new TerminalsFileReader(utils.getClassInputDirectory() + "terminals.csv").getName2terminal();
 
 	        // first add the terminals
-			GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, 600., 216., 3);
+			GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, 600., 216., 3, 40, 1);
 			for (Terminal terminal : terminals.values()) {
 				supply.addTerminalAndConnectToRoadNetwork(terminal);
 			}
@@ -419,7 +419,7 @@ public class AddCargoSupplyTest {
 				routeInfos.add(stop2);
 				routeInfos.add(stop3);
 				
-				supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, 40, null);
+				supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, null);
 			}
 			
 			{
@@ -448,7 +448,7 @@ public class AddCargoSupplyTest {
 				routeInfos.add(stop2);
 				routeInfos.add(stop3);
 				
-				supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, 40, null);
+				supply.addCargoConnection(0, transitLine, transitRoute, routeInfos,null);
 			}
 			
 			{
@@ -477,7 +477,7 @@ public class AddCargoSupplyTest {
 				routeInfos.add(stop2);
 				routeInfos.add(stop3);
 				
-				supply.addCargoConnection(1, transitLine, transitRoute, routeInfos, 40, null);
+				supply.addCargoConnection(1, transitLine, transitRoute, routeInfos, null);
 			}
 												
 			String outputDir = utils.getOutputDirectory();

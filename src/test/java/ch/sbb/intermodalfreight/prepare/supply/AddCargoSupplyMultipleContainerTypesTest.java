@@ -164,7 +164,7 @@ public class AddCargoSupplyMultipleContainerTypesTest {
         Network originalCarNetwork = ScenarioUtils.loadScenario(config).getNetwork();
 
         // first add the terminals
-		GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, 600., 216., 3);
+		GenerateCargoSupply supply = new GenerateCargoSupply(scenario, originalCarNetwork, 600., 216., 3, 40, 1);
 		for (Terminal terminal : terminals.values()) {
 			supply.addTerminalAndConnectToRoadNetwork(terminal);
 		}
@@ -198,7 +198,7 @@ public class AddCargoSupplyMultipleContainerTypesTest {
 			routeInfos.add(stop2);
 			routeInfos.add(stop3);
 			
-			supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, 40, null);
+			supply.addCargoConnection(0, transitLine, transitRoute, routeInfos, null);
 		}
 		
 		{
@@ -227,7 +227,8 @@ public class AddCargoSupplyMultipleContainerTypesTest {
 			routeInfos.add(stop2);
 			routeInfos.add(stop3);
 			
-			supply.addCargoConnection(1, transitLine, transitRoute, routeInfos, 40, null);
+			supply.addCargoConnection(1, transitLine, transitRoute, routeInfos, null);
+			
 		}
 										
 		String outputDir = utils.getOutputDirectory();
